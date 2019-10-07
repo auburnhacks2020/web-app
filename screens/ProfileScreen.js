@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
 
-export default function FAQScreen() {
+export default function ProfileScreen() {
   return (
-    <View style={styles.container}>
-      <Text>FAQs</Text>
+    <View style={styles.container}> 
+      <Text>Profile</Text>
     </View>
   );
 }
 
-FAQScreen.navigationOptions = {
-  title: 'FAQs',
+ProfileScreen.navigationOptions = {
+  title: 'Profile',
 };
 
 const styles = StyleSheet.create({

@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 
 export default function SocialScreen() {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>Social Media</Text>
     </View>
   );
@@ -15,8 +15,8 @@ SocialScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-  },
+		flex: 1,
+		paddingTop: Platform.OS === 'ios' ? 15 : 0,
+		backgroundColor: '#f7f7f7',
+	}
 });

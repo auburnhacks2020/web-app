@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, View } from 'react-native';
 import {
 	createStackNavigator,
 	createBottomTabNavigator
@@ -10,12 +10,39 @@ import {
 	AboutScreen,
 	SponsorsScreen,
 	FAQScreen,
-	SocialScreen
+	SocialScreen,
+	ProfileScreen
 } from '../screens';
 
+import { ProfileButton } from '../components';
+
 const config = Platform.select({
-	web: { headerMode: 'screen' },
-	default: {}
+	web: {
+		headerMode: 'none',
+		defaultNavigationOptions: {
+			title: 'Home',
+			headerStyle: {
+				backgroundColor: '#f4511e'
+			},
+			headerTintColor: '#fff',
+			headerTitleStyle: {
+				fontWeight: 'bold'
+			}
+		}
+	},
+	default: {
+		headerMode: 'none',
+		defaultNavigationOptions: {
+			title: 'Home',
+			headerStyle: {
+				backgroundColor: '#f4511e'
+			},
+			headerTintColor: '#fff',
+			headerTitleStyle: {
+				fontWeight: 'bold'
+			}
+		}
+	}
 });
 
 const AboutStack = createStackNavigator(
@@ -98,12 +125,40 @@ SocialStack.navigationOptions = {
 
 SocialStack.path = '';
 
-const tabNavigator = createBottomTabNavigator({
-	AboutStack,
-	SponsorStack,
-  FAQStack,
-  SocialStack
-});
+const ProfileStack = createStackNavigator(
+	{
+		profile: ProfileScreen
+	},
+	config
+);
+
+ProfileStack.navigationOptions = {
+	tabBarLabel: 'Profile',
+	tabBarButtonComponent: props => <ProfileButton {...props} />
+};
+
+ProfileStack.path = '';
+
+const tabNavigator = createBottomTabNavigator(
+	{
+		AboutStack,
+		SponsorStack,
+		ProfileStack,
+		FAQStack,
+		SocialStack
+	},
+	{
+		tabBarOptions: {
+			showLabel: false,
+			activeTintColor: '#F8F8F8',
+			inactiveTintColor: '#586589',
+			style: {
+				backgroundColor: '#171F33',
+				borderTopWidth: 0,
+			}
+		}
+	}
+);
 
 tabNavigator.path = '';
 

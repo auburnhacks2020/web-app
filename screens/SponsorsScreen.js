@@ -1,22 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Platform } from 'react-native';
 
 export default function SponsorsScreen() {
-  return (
-    <View>
-      <Text>Sponsors</Text>
-    </View>
-  );
+	return (
+		<View style={styles.container}>
+			<Text>Sponsors</Text>
+		</View>
+	);
 }
 
 SponsorsScreen.navigationOptions = {
-  title: 'Sponsors',
+	title: 'Sponsors'
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 15,
-    backgroundColor: '#fff',
-  },
+	container: {
+		flex: 1,
+		paddingTop: Platform.OS === 'ios' ? 15 : 0,
+		backgroundColor: '#f7f7f7'
+	}
 });
