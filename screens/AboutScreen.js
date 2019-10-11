@@ -1,12 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { View, ScrollView, Image, Text, StyleSheet, Platform } from 'react-native';
+import { Headline } from "react-native-paper";
+import Header from "../components/Header";
 
 export default function AboutScreen() {
 	return (
-		<View style={styles.container}>
-			<Text>About Us</Text>
-		</View>
-	);
+    <ScrollView style={styles.container}>
+      <Header />
+	  <Headline style={styles.headline}>About</Headline>
+    </ScrollView>
+  );
 }
 
 AboutScreen.navigationOptions = {
@@ -14,9 +17,15 @@ AboutScreen.navigationOptions = {
 };
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		paddingTop: Platform.OS === 'ios' ? 15 : 0,
-		backgroundColor: '#f7f7f7',
-	}
+  container: {
+    flex: 1,
+    paddingTop: 50,
+    backgroundColor: "#03244d"
+  },
+  headline: {
+    color: "#dd550c",
+	fontSize: 36,
+	fontWeight: 700,
+	alignSelf: 'center'
+  }
 });
