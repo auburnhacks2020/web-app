@@ -1,17 +1,16 @@
 import React from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
-import { heading } from '../constants/Fonts'
 
 export default function AboutScreen() {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.heading}>About Us</Text>
+			<Text>About Us</Text>
 		</View>
 	);
 }
 
 AboutScreen.navigationOptions = {
-	title: 'About Us'
+	// title: 'About Us'
 };
 
 const styles = StyleSheet.create({
@@ -19,8 +18,5 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingTop: Platform.OS === 'ios' ? 15 : 0,
 		backgroundColor: '#f7f7f7',
-	},
-	heading: {
-		fontFamily: heading
 	}
 });

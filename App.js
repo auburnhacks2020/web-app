@@ -36,7 +36,7 @@ async function loadResourcesAsync() {
       'roboto-mono': require('./assets/fonts/Roboto_Mono/RobotoMono-Regular.ttf'),
       'roboto-mono-bold': require('./assets/fonts/Roboto_Mono/RobotoMono-Bold.ttf'),
       'montserrat': require('./assets/fonts/Montserrat/Montserrat-Regular.ttf')
-    }),
+    }), 
   ]);
 }
 
