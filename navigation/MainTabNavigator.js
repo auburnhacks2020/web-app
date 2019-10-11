@@ -22,7 +22,7 @@ const config = Platform.select({
 		defaultNavigationOptions: {
 			title: 'Home',
 			headerStyle: {
-				backgroundColor: '#f4511e'
+				backgroundColor: '#171F33'
 			},
 			headerTintColor: '#fff',
 			headerTitleStyle: {
@@ -31,11 +31,10 @@ const config = Platform.select({
 		}
 	},
 	default: {
-		headerMode: 'none',
 		defaultNavigationOptions: {
 			title: 'Home',
 			headerStyle: {
-				backgroundColor: '#f4511e'
+				backgroundColor: '#171F33'
 			},
 			headerTintColor: '#fff',
 			headerTitleStyle: {
@@ -149,7 +148,7 @@ const tabNavigator = createBottomTabNavigator(
 	},
 	{
 		tabBarOptions: {
-			showLabel: false,
+			// showLabel: false,
 			activeTintColor: '#F8F8F8',
 			inactiveTintColor: '#586589',
 			style: {
