@@ -11,7 +11,7 @@ export default function AboutScreen() {
 }
 
 AboutScreen.navigationOptions = {
-	title: 'About Us'
+	// title: 'About Us'
 };
 
 const styles = StyleSheet.create({

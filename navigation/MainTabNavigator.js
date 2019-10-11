@@ -5,7 +5,7 @@ import {
 	createBottomTabNavigator
 } from 'react-navigation';
 
-import TabBarIcon from '../components/TabBarIcon';
+import { TabBarIcon, AppHeader } from '../components';
 import {
 	AboutScreen,
 	SponsorsScreen,
@@ -15,12 +15,13 @@ import {
 } from '../screens';
 
 import { ProfileButton } from '../components';
+import Fonts from '../constants/Fonts';
 
 const config = Platform.select({
 	web: {
-		headerMode: 'none',
+		// headerMode: 'none',
 		defaultNavigationOptions: {
-			title: 'Home',
+			headerTitle: <AppHeader />,
 			headerStyle: {
 				backgroundColor: '#171F33'
 			},
@@ -37,9 +38,7 @@ const config = Platform.select({
 				backgroundColor: '#171F33'
 			},
 			headerTintColor: '#fff',
-			headerTitleStyle: {
-				fontWeight: 'bold'
-			}
+			headerTitle: <AppHeader />,
 		}
 	}
 });
@@ -154,6 +153,9 @@ const tabNavigator = createBottomTabNavigator(
 			style: {
 				backgroundColor: '#171F33',
 				borderTopWidth: 0,
+			},
+			labelStyle: {
+				fontFamily: Fonts.robotoMono
 			}
 		}
 	}
