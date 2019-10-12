@@ -17,7 +17,6 @@ export default function Header(props) {
 
 const styles = StyleSheet.create({
   head: {
-    backgroundColor: "#03244d",
     paddingTop: 20
   },
   headline: {
