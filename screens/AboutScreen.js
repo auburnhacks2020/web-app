@@ -1,12 +1,11 @@
 import React from 'react';
 import { View, ScrollView, Image, Text, StyleSheet, Platform } from 'react-native';
-
-import Header from "../components/Header";
+import { Header } from "../components";
 
 export default function AboutScreen() {
 	return (
     <ScrollView style={styles.container}>
-      <Header title="About"/>
+      <Header title="About" />
     </ScrollView>
   );
 }
@@ -18,7 +17,10 @@ AboutScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 50,
-    backgroundColor: "#03244d"
+    backgroundColor: "#03244d",
   },
+  row: {
+    flex: 2,
+    width: '100%',
+  }
 });

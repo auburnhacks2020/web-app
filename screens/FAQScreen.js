@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Platform } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, Platform } from 'react-native';
+import { Header } from "../components";
 
 export default function FAQScreen() {
   return (
-    <View style={styles.container}>
-      <Text>FAQs</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <Header title="FAQ's" />
+    </ScrollView>
   );
 }
 

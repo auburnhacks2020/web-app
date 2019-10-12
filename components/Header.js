@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Image, Text, StyleSheet, Platform } from "react-native";
 import { Headline } from "react-native-paper";
+import { fonts } from '../constants';
 
 export default function Header(props) {
     return (
@@ -16,10 +17,8 @@ export default function Header(props) {
 
 const styles = StyleSheet.create({
   head: {
-    alignSelf: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: "auto"
+    backgroundColor: "#03244d",
+    paddingTop: 20
   },
   headline: {
     color: "#dd550c",
@@ -27,6 +26,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     alignSelf: "center",
     marginTop: 20,
-    padding: 20
+    padding: 20,
+    fontFamily: heading
   }
 });
