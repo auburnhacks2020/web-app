@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform } from 'react-native';
 import {
 	createStackNavigator,
 	createBottomTabNavigator
@@ -20,6 +20,7 @@ import Fonts from '../constants/Fonts';
 const config = Platform.select({
 	web: {
 		// headerMode: 'none',
+		headerLayoutPreset: 'center',
 		defaultNavigationOptions: {
 			headerTitle: <AppHeader />,
 			headerStyle: {
@@ -32,6 +33,7 @@ const config = Platform.select({
 		}
 	},
 	default: {
+		headerLayoutPreset: 'center',
 		defaultNavigationOptions: {
 			title: 'Home',
 			headerStyle: {
@@ -39,6 +41,7 @@ const config = Platform.select({
 			},
 			headerTintColor: '#fff',
 			headerTitle: <AppHeader />,
+			headerLayoutPreset: 'center'
 		}
 	}
 });
