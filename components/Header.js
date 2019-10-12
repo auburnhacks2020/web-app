@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 20,
     padding: 20,
-    fontFamily: heading
+    fontFamily: fonts.heading
   }
 });
