@@ -1,13 +1,12 @@
 import React from 'react';
 import { View, ScrollView, Image, Text, StyleSheet, Platform } from 'react-native';
-import { Headline } from "react-native-paper";
+
 import Header from "../components/Header";
 
 export default function AboutScreen() {
 	return (
     <ScrollView style={styles.container}>
-      <Header />
-	  <Headline style={styles.headline}>About</Headline>
+      <Header title="About"/>
     </ScrollView>
   );
 }
@@ -22,10 +21,4 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     backgroundColor: "#03244d"
   },
-  headline: {
-    color: "#dd550c",
-	fontSize: 36,
-	fontWeight: 700,
-	alignSelf: 'center'
-  }
 });
