@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, ScrollView, Image, Text, StyleSheet, Platform } from 'react-native';
+
 import Header from "../components/Header";
 
 export default function AboutScreen() {
@@ -20,10 +21,4 @@ const styles = StyleSheet.create({
     paddingTop: 50,
     backgroundColor: "#03244d"
   },
-  headline: {
-    color: "#dd550c",
-	fontSize: 36,
-	fontWeight: "700",
-	alignSelf: 'center'
-  }
 });
