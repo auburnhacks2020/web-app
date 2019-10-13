@@ -1,23 +1,36 @@
 import React from "react";
-import { View, Image, Text, StyleSheet, Platform } from "react-native";
-import { Headline } from "react-native-paper";
+import { View, SafeAreaView, Image, Text, StyleSheet, Platform } from "react-native";
+import { Headline, Subheading } from "react-native-paper";
 import { fonts } from '../constants';
 
 export default function Header(props) {
     return (
-      <View style={styles.head}>
-        <Image
-          style={{ width: 200, height: 200, alignSelf: "center" }}
-          source={require("../assets/logos/AuburnHacks-1.png")}
-        />
+      <SafeAreaView style={styles.head}>
+        <View style={styles.logos}>
+          <View />
+          <Image
+            style={{width: 150, height: 150}}
+            source={require("../assets/logos/AuburnHacks-1.png")}
+          />
+          <View />
+          <Image
+            style={{width: 200, height: 150}}
+            source={require("../assets/images/glass.png")}
+          />
+        </View>
         <Headline style={styles.headline}>{props.title}</Headline>
-      </View>
+        <Subheading style={styles.sub}>February 8-9, 2020</Subheading>
+      </SafeAreaView>
     );
 }
 
 const styles = StyleSheet.create({
   head: {
-    paddingTop: 20
+    paddingTop: 20,
+    marginBottom: 20,
+    marginTop: 15,
+    borderBottomWidth: 1,
+    borderBottomColor: "#f8f8f8",
   },
   headline: {
     color: "#dd550c",
@@ -26,6 +39,19 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 20,
     padding: 20,
-    fontFamily: fonts.heading
-  }
+    fontFamily: fonts.text
+  },
+  sub: {
+    fontFamily: fonts.text,
+    fontSize: 30,
+    color: '#f8f8f8',
+    padding: 20,
+    margin: 10,
+    alignSelf: 'center',
+  },
+  logos: {
+    flex: 1,
+    flexDirection: "row",
+    alignSelf: 'center',
+  },
 });
