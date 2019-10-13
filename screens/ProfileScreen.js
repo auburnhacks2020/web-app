@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ScrollView, Text, StyleSheet, Platform } from 'react-native';
+import { ScrollView, StyleSheet, Platform } from 'react-native';
 import { Header } from '../components';
 
 export default function ProfileScreen() {
