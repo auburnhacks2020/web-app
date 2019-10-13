@@ -3,7 +3,7 @@ import { View, ScrollView, Linking, Image, Text, StyleSheet, Platform } from 're
 import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 import { Header } from "../components";
 import { layout, stylesheet } from '../constants';
-import { Constants, WebBrowser } from "expo";
+import * as WebBrowser from "expo-web-browser";
 
 export default function AboutScreen() {
 	return (
@@ -34,7 +34,11 @@ export default function AboutScreen() {
             <Button
               mode="contained"
               style={stylesheet.btn}
-              onPress={() => WebBrowser.openBrowserAsync("https://expo.io")}
+              onPress={() =>
+                WebBrowser.openBrowserAsync(
+                  "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
+                )
+              }
               onClick={() =>
                 Linking.openURL(
                   "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
@@ -66,7 +70,9 @@ export default function AboutScreen() {
               mode="contained"
               style={stylesheet.btn}
               onPress={() =>
-                Linking.openURL("https://goo.gl/maps/78Cz5ZjryrVKVYvD8")
+                WebBrowser.openBrowserAsync(
+                  "https://goo.gl/maps/78Cz5ZjryrVKVYvD8"
+                )
               }
               onClick={() =>
                 Linking.openURL("https://goo.gl/maps/78Cz5ZjryrVKVYvD8")
@@ -101,7 +107,7 @@ export default function AboutScreen() {
               mode="contained"
               style={stylesheet.btn}
               onPress={() =>
-                Linking.openURL(
+                WebBrowser.openBrowserAsync(
                   "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
                 )
               }
