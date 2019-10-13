@@ -16,8 +16,8 @@ ProfileScreen.navigationOptions = {
 
 const styles = StyleSheet.create({
   container: {
-		flex: 1,
-		paddingTop: Platform.OS === 'ios' ? 15 : 0,
-		backgroundColor: '#f7f7f7',
-	}
+    flex: 1,
+    paddingTop: Platform.OS === "ios" ? 15 : 0,
+    backgroundColor: "#03244d"
+  }
 });
