@@ -21,14 +21,22 @@ export default {
   },
   par: {
     fontFamily: text,
-    fontSize: 17
+    fontSize: 17,
+    paddingTop: 10,
   },
   btn: {
       backgroundColor: '#03244d'
   },
   cardbtn: {
+    backgroundColor: '#03244d',
+    alignSelf: 'flex-end',
+  },
+  cardAction: {
     flex: 1,
     justifyContent: 'flex-end',
+  },
+  cardContent: {
+    paddingTop: 10
   },
   robotoMono,
   heading,
