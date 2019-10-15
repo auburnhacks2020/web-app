@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
     fontSize: 48,
     fontWeight: "700",
     alignSelf: "center",
-    marginTop: 20,
-    marginBottom: 20,
-    padding: 10,
+    marginTop: 15,
+    marginBottom: 15,
+    padding: 15,
     fontFamily: fonts.text,
     borderBottomWidth: 1,
     borderBottomColor: "#f8f8f8"
