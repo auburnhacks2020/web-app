@@ -1,23 +1,25 @@
 import React from "react";
 import { View, SafeAreaView, Image, ImageBackground, Text, StyleSheet, Platform } from "react-native";
-import { Headline, Subheading } from "react-native-paper";
+import { Headline, Subheading, Surface } from "react-native-paper";
 import { fonts } from '../constants';
 
 export default function Header(props) {
     return (
       <SafeAreaView>
-        <ImageBackground
-          source={require("../assets/images/background.png")}
-          style={{ flex: 1, width: null, height: null, padding: 20}}
-        >
-          <View style={styles.logos}>
-            <Image
-              style={{ width: 315, height: 250}}
-              source={require("../assets/images/binarylogo1.0.png")}
-            />
-            <Subheading style={styles.sub}>February 8-9, 2020</Subheading>
-          </View>
-        </ImageBackground>
+        <Surface style={styles.surface}>
+          <ImageBackground
+            source={require("../assets/images/background.png")}
+            style={{ flex: 1, width: null, height: null, padding: 20 }}
+          >
+            <View style={styles.logos}>
+              <Image
+                style={{ width: 315, height: 250 }}
+                source={require("../assets/images/binarylogo1.0.png")}
+              />
+              <Subheading style={styles.sub}>February 8-9, 2020</Subheading>
+            </View>
+          </ImageBackground>
+        </Surface>
         <Headline style={styles.headline}>{props.title}</Headline>
       </SafeAreaView>
     );
@@ -34,7 +36,8 @@ const styles = StyleSheet.create({
     padding: 15,
     fontFamily: fonts.text,
     borderBottomWidth: 1,
-    borderBottomColor: "#f8f8f8"
+    borderBottomColor: "#f8f8f8",
+    elevation: 3,
   },
   sub: {
     fontFamily: fonts.text,
@@ -51,5 +54,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     width: null,
     height: null,
+  },
+  surface: {
+    elevation: 6,
   }
 });
