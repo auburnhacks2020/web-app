@@ -3,9 +3,11 @@ import { View, ScrollView, Text, StyleSheet, Platform } from "react-native";
 import { Header } from "../components";
 import { layout, stylesheet } from "../constants";
 import { Card, Button, Modal, Portal, Provider } from "react-native-paper";
+import Collapsible from "react-native-collapsible";
 
 export default function FAQScreen(props) {
-  const [visible, setVisible] = useState(0);
+  const [visible, setVisible] = useState(false);
+  let currentA;
   let questions = [
     {
       id: 1,
@@ -69,11 +71,21 @@ export default function FAQScreen(props) {
                 }
               >
                 <Card.Title title={q.question} />
+                <Collapsible key={q.id} collapsed={!visible}>
+                  <Card.Content>
+                  <Text style={stylesheet.par}>
+                    {q.answer}
+                  </Text>
+                  </Card.Content>
+                </Collapsible>
                 <Card.Actions style={stylesheet.cardAction}>
                   <Button
                     mode="contained"
                     style={stylesheet.cardbtn}
-                    onPress={() => setVisible(true)}
+                    onPress={() => {
+                      currentA = q.answer;
+                      setVisible(!visible);
+                    }}
                   >
                     Answer
                   </Button>
@@ -83,7 +95,7 @@ export default function FAQScreen(props) {
           </View>
         </ScrollView>
         <Modal visible={visible} onDismiss={() => setVisible(false)}>
-          <Text style={{color: '#fff'}}>test</Text>
+          <Text style={stylesheet.par}>{currentA}</Text>
         </Modal>
       </Portal>
     </Provider>
