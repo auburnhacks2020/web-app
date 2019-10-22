@@ -6,8 +6,8 @@ import { Card, Button, Modal, Portal, Provider } from "react-native-paper";
 import Collapsible from "react-native-collapsible";
 
 export default function FAQScreen(props) {
-  const [visible, setVisible] = useState(false);
-  let currentA;
+  const [visible, setVisible] = useState(0);
+  const [answer, setAnswer] = useState(0);
   let questions = [
     {
       id: 1,
@@ -71,19 +71,19 @@ export default function FAQScreen(props) {
                 }
               >
                 <Card.Title title={q.question} />
-                <Collapsible key={q.id} collapsed={!visible}>
+                {/* <Collapsible key={q.id} collapsed={!visible}>
                   <Card.Content>
                   <Text style={stylesheet.par}>
                     {q.answer}
                   </Text>
                   </Card.Content>
-                </Collapsible>
+                </Collapsible> */}
                 <Card.Actions style={stylesheet.cardAction}>
                   <Button
                     mode="contained"
                     style={stylesheet.cardbtn}
                     onPress={() => {
-                      currentA = q.answer;
+                      setAnswer(q.answer);
                       setVisible(!visible);
                     }}
                   >
@@ -95,7 +95,7 @@ export default function FAQScreen(props) {
           </View>
         </ScrollView>
         <Modal visible={visible} onDismiss={() => setVisible(false)}>
-          <Text style={stylesheet.par}>{currentA}</Text>
+          <Text style={stylesheet.modalpar}>{answer}</Text>
         </Modal>
       </Portal>
     </Provider>
