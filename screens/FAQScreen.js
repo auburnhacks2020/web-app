@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, ScrollView, Text, StyleSheet, Platform } from "react-native";
 import { Header } from "../components";
 import { layout, stylesheet } from "../constants";
-import { Card, Button, Modal, Portal, Provider } from "react-native-paper";
+import { Card, Button, Modal, Portal, Provider, Paragraph } from "react-native-paper";
 import Collapsible from "react-native-collapsible";
 
 export default function FAQScreen(props) {
@@ -71,13 +71,6 @@ export default function FAQScreen(props) {
                 }
               >
                 <Card.Title title={q.question} />
-                {/* <Collapsible key={q.id} collapsed={!visible}>
-                  <Card.Content>
-                  <Text style={stylesheet.par}>
-                    {q.answer}
-                  </Text>
-                  </Card.Content>
-                </Collapsible> */}
                 <Card.Actions style={stylesheet.cardAction}>
                   <Button
                     mode="contained"
@@ -95,7 +88,13 @@ export default function FAQScreen(props) {
           </View>
         </ScrollView>
         <Modal visible={visible} onDismiss={() => setVisible(false)}>
-          <Text style={stylesheet.modalpar}>{answer}</Text>
+            <Card style={{margin: 40}}>
+              <Card.Content>
+                <Paragraph>
+                  {answer}
+                </Paragraph>
+              </Card.Content>
+            </Card>
         </Modal>
       </Portal>
     </Provider>

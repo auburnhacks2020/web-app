@@ -22,15 +22,16 @@ export default {
   par: {
     fontFamily: text,
     fontSize: 17,
-    paddingTop: 10
+    paddingTop: 10,
+    fontWeight: "400"
   },
   modalpar: {
     fontFamily: text,
-    fontWeight: '500',
+    fontWeight: "500",
     fontSize: 17,
     padding: 20,
-    color: '#ffffff',
-    alignSelf: 'center',
+    color: "#ffffff",
+    alignSelf: "center"
   },
   btn: {
     backgroundColor: "#03244d"
@@ -45,6 +46,9 @@ export default {
   },
   cardContent: {
     paddingTop: 10
+  },
+  links: {
+    color: "#f68026"
   },
   robotoMono,
   heading,
