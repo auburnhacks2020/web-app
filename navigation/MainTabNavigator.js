@@ -47,10 +47,10 @@ const config = Platform.select({
 });
 
 const AboutStack = createStackNavigator(
-	{
-		About: AboutScreen
-	},
-	config
+  {
+    About: AboutScreen
+  },
+  config
 );
 
 AboutStack.navigationOptions = {
@@ -67,13 +67,14 @@ AboutStack.navigationOptions = {
 	)
 };
 
-AboutStack.path = '';
+AboutStack.path = '/about';
 
 const SponsorStack = createStackNavigator(
-	{
-		Sponsors: SponsorsScreen
-	},
-	config
+  {
+    Sponsors: SponsorsScreen,
+    social: SocialScreen
+  },
+  config
 );
 
 SponsorStack.navigationOptions = {
@@ -86,7 +87,7 @@ SponsorStack.navigationOptions = {
 	)
 };
 
-SponsorStack.path = '';
+SponsorStack.path = '/sponsors';
 
 const FAQStack = createStackNavigator(
 	{
@@ -105,7 +106,7 @@ FAQStack.navigationOptions = {
 	)
 };
 
-FAQStack.path = '';
+FAQStack.path = '/faqs';
 
 const SocialStack = createStackNavigator(
 	{
@@ -124,7 +125,7 @@ SocialStack.navigationOptions = {
 	)
 };
 
-SocialStack.path = '';
+SocialStack.path = '/social';
 
 const ProfileStack = createStackNavigator(
 	{
@@ -138,7 +139,7 @@ ProfileStack.navigationOptions = {
 	tabBarButtonComponent: props => <ProfileButton {...props} />
 };
 
-ProfileStack.path = '';
+ProfileStack.path = '/profile';
 
 const tabNavigator = createBottomTabNavigator(
 	{
