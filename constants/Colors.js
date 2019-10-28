@@ -1,4 +1,4 @@
-const tintColor = '#DD550C';
+const tintColor = "#DD550C";
 
 export default {
   tintColor,
@@ -11,5 +11,6 @@ export default {
   warningText: "#666804",
   noticeBackground: tintColor,
   white: "#fff",
+  black: "#000",
   background: "#03244d"
-};
+}

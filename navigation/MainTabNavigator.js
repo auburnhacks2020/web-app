@@ -19,7 +19,6 @@ import Fonts from '../constants/Fonts';
 
 const config = Platform.select({
 	web: {
-		// headerMode: 'none',
 		headerLayoutPreset: 'center',
 		defaultNavigationOptions: {
 			headerTitle: <AppHeader />,
@@ -60,8 +59,8 @@ AboutStack.navigationOptions = {
 			focused={focused}
 			name={
 				Platform.OS === 'ios'
-					? `ios-information-circle${focused ? '' : '-outline'}`
-					: 'md-information-circle'
+					? 'ios-paw'
+					: 'md-paw'
 			}
 		/>
 	)
@@ -81,7 +80,7 @@ SponsorStack.navigationOptions = {
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon
 			focused={focused}
-			name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+			name={Platform.OS === 'ios' ? 'ios-people' : 'md-people'}
 		/>
 	)
 };
@@ -100,7 +99,7 @@ FAQStack.navigationOptions = {
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon
 			focused={focused}
-			name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+			name={Platform.OS === 'ios' ? 'ios-help' : 'md-help'}
 		/>
 	)
 };
@@ -119,7 +118,7 @@ SocialStack.navigationOptions = {
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon
 			focused={focused}
-			name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+			name={Platform.OS === 'ios' ? 'ios-thumbs-up' : 'md-thumbs-up'}
 		/>
 	)
 };

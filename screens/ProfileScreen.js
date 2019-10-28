@@ -4,8 +4,10 @@ import { Header } from "../components";
 import { TextInput } from "react-native-paper";
 
 export default function ProfileScreen() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setField] = useState({
+    username: '',
+    password: ''
+  });
 
   return (
     <ScrollView style={styles.container}>
@@ -13,12 +15,12 @@ export default function ProfileScreen() {
       <View style={styles.loginForm}>
         <TextInput
           label="Username"
-          value={username}
+          value={form.username}
           onChange={value => setUsername(value)}
         />
         <TextInput
           label="Password"
-          value={password}
+          value={form.password}
           onChange={value => setPassword(value)}
         />
       </View>
@@ -33,11 +35,10 @@ ProfileScreen.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: Platform.OS === "ios" ? 15 : 0,
-    backgroundColor: "#f7f7f7"
+    backgroundColor: "#03244d"
   },
   loginForm: {
     display: 'flex',
-
+    margin: 10
   }
 });
