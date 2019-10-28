@@ -4,12 +4,13 @@ import {
   ScrollView,
   Text,
   StyleSheet,
-  Platform,
-  Linking
+  Platform
 } from "react-native";
 import { Header } from "../components";
 import { layout, stylesheet } from "../constants";
 import { Paragraph } from "react-native-paper";
+import * as WebBrowser from "expo-web-browser";
+
 
 
 export default function SponsorsScreen() {
@@ -24,7 +25,7 @@ export default function SponsorsScreen() {
           If you would like to sponsor our event, reach out to us at{" "}
           <Text
             style={stylesheet.links}
-            onPress={() => Linking.openURL("mailto:staff@auburnhacks.com")}
+            onPress={() => WebBrowser.openBrowserAsync("mailto:staff@auburnhacks.com")}
           >
             staff@auburnhacks.com!
           </Text>
@@ -32,7 +33,7 @@ export default function SponsorsScreen() {
           <Text
             style={stylesheet.links}
             onPress={() =>
-              Linking.openURL(
+              WebBrowser.openBrowserAsync(
                 "http://www.auburnhacks.com/assets/documents/prospectus.pdf"
               )
             }

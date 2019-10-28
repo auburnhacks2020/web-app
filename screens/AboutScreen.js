@@ -2,7 +2,6 @@ import React from "react";
 import {
   View,
   ScrollView,
-  Linking,
   Image,
   Text,
   StyleSheet,
@@ -47,11 +46,6 @@ export default function AboutScreen() {
                   "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
                 )
               }
-              onClick={() =>
-                Linking.openURL(
-                  "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
-                )
-              }
             >
               Read More
             </Button>
@@ -72,9 +66,6 @@ export default function AboutScreen() {
                   "https://goo.gl/maps/78Cz5ZjryrVKVYvD8"
                 )
               }
-              onClick={() =>
-                Linking.openURL("https://goo.gl/maps/78Cz5ZjryrVKVYvD8")
-              }
             />
             <Paragraph>
               The Hackathon this year will be held at Auburns brand new
@@ -91,9 +82,6 @@ export default function AboutScreen() {
                 WebBrowser.openBrowserAsync(
                   "https://goo.gl/maps/78Cz5ZjryrVKVYvD8"
                 )
-              }
-              onClick={() =>
-                Linking.openURL("https://goo.gl/maps/78Cz5ZjryrVKVYvD8")
               }
             >
               Directions
@@ -126,11 +114,6 @@ export default function AboutScreen() {
               style={stylesheet.cardbtn}
               onPress={() =>
                 WebBrowser.openBrowserAsync(
-                  "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
-                )
-              }
-              onClick={() =>
-                Linking.openURL(
                   "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
                 )
               }
