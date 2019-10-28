@@ -148,8 +148,10 @@ const tabNavigator = createBottomTabNavigator(
 		SocialStack
 	},
 	{
+		initialRouteName: 'ProfileStack',
 		tabBarOptions: {
 			// showLabel: false,
+			
 			activeTintColor: '#F8F8F8',
 			inactiveTintColor: '#586589',
 			style: {
