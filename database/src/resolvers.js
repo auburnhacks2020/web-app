@@ -30,7 +30,7 @@ const resolvers = {
 			const passwordMatch = await bcrypt.compare(password, user.password);
 
 			if (!passwordMatch) {
-				throw new Error('Invalid Login');
+				throw new Error('Invalid Password');
 			}
 
 			const token = jwt.sign(
