@@ -9,7 +9,7 @@ export default function Header(props) {
         <Surface style={styles.surface}>
           <ImageBackground
             source={require("../assets/images/background.png")}
-            style={{ flex: 1, width: null, height: null, padding: 20 }}
+            style={{ flex: 1, width: null, height: null, padding: 0 }}
           >
             <View style={styles.logos}>
               <Image
@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.text,
     borderBottomWidth: 1,
     borderBottomColor: "#f8f8f8",
-    elevation: 3,
   },
   sub: {
     fontFamily: fonts.text,

@@ -8,7 +8,7 @@ import {
   StyleSheet,
   Platform
 } from "react-native";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
+import { Button, Card, Paragraph } from "react-native-paper";
 import { Header } from "../components";
 import { layout, stylesheet } from "../constants";
 import * as WebBrowser from "expo-web-browser";
@@ -27,7 +27,7 @@ export default function AboutScreen() {
         >
           <Card.Content>
             <Card.Cover source={require("../assets/images/dreaming.jpg")} />
-            <Text style={stylesheet.par}>
+            <Paragraph>
               We are Auburn University’s programming event organized by
               students, for students. With this hackathon, Auburn University's
               Computer Science & Software Engineering strives to promote
@@ -36,7 +36,7 @@ export default function AboutScreen() {
               aim to bring out the best and brightest students, not just from
               Auburn University but from other universities all over the United
               States.
-            </Text>
+            </Paragraph>
           </Card.Content>
           <Card.Actions style={stylesheet.cardAction}>
             <Button
@@ -76,12 +76,12 @@ export default function AboutScreen() {
                 Linking.openURL("https://goo.gl/maps/78Cz5ZjryrVKVYvD8")
               }
             />
-            <Text style={stylesheet.par}>
+            <Paragraph>
               The Hackathon this year will be held at Auburns brand new
               Brown-Kopel Engineering Student Achievment Center. Come check out
               the new building while you bring your creative ideas to life at
               AuburnHacks.
-            </Text>
+            </Paragraph>
           </Card.Content>
           <Card.Actions style={stylesheet.cardAction}>
             <Button
@@ -109,7 +109,7 @@ export default function AboutScreen() {
         >
           <Card.Content>
             <Card.Cover source={require("../assets/images/aboutCard.jpg")} />
-            <Text style={stylesheet.par}>
+            <Paragraph>
               We are Auburn University’s programming event organized by
               students, for students. With this hackathon, Auburn University's
               Computer Science & Software Engineering strives to promote
@@ -118,7 +118,7 @@ export default function AboutScreen() {
               aim to bring out the best and brightest students, not just from
               Auburn University but from other universities all over the United
               States.
-            </Text>
+            </Paragraph>
           </Card.Content>
           <Card.Actions style={stylesheet.cardAction}>
             <Button
