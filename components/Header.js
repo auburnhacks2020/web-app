@@ -5,7 +5,7 @@ import { fonts } from '../constants';
 
 export default function Header(props) {
     return (
-      <SafeAreaView>
+      <View style={styles.container}>
         <Surface style={styles.surface}>
           <ImageBackground
             source={require("../assets/images/background.png")}
@@ -21,11 +21,14 @@ export default function Header(props) {
           </ImageBackground>
         </Surface>
         <Headline style={styles.headline}>{props.title}</Headline>
-      </SafeAreaView>
+      </View>
     );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   headline: {
     color: "#dd550c",
     fontSize: 48,
