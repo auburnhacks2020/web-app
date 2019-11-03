@@ -5,9 +5,15 @@ import { StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Asset } from "expo-asset";
 import { Provider as PaperProvider } from "react-native-paper";
-
 import AppNavigator from "./navigation/AppNavigator";
-import { defaultTheme, darkTheme } from './constants/theme'
+import { defaultTheme, darkTheme } from "./constants/theme";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from '@apollo/react-hooks';
+
+
+const client = new ApolloClient({
+  uri: "http://localhost:8383"
+});
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -22,11 +28,13 @@ export default function App(props) {
     );
   } else {
     return (
-      <View style={styles.container}>
+      <ApolloProvider client={client}>
         <PaperProvider theme={defaultTheme}>
-          <AppNavigator />
+          <View style={styles.container}>
+            <AppNavigator />
+          </View>
         </PaperProvider>
-      </View>
+      </ApolloProvider>
     );
   }
 }
