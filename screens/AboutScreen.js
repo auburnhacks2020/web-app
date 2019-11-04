@@ -110,7 +110,7 @@ export default function AboutScreen(props) {
               style={stylesheet.cardbtn}
               onPress={() => props.navigation.navigate('SocialStack')}
             >
-              Read More
+              Follow Us!
             </Button>
           </Card.Actions>
         </Card>
