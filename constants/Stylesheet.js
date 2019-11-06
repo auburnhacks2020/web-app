@@ -42,7 +42,8 @@ export default {
   },
   cardAction: {
     flex: 1,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    padding: 10
   },
   cardContent: {
     paddingTop: 10

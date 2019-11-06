@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import { View, ScrollView, Text, StyleSheet, Platform } from "react-native";
+import { View, ScrollView, Animated, Text, StyleSheet, Platform } from "react-native";
 import { Header } from "../components";
 import { layout, stylesheet } from "../constants";
 import { Card, Button, Modal, Portal, Provider, Paragraph, Headline } from "react-native-paper";
-import Collapsible from "react-native-collapsible";
-
 export default function FAQScreen(props) {
   const [visible, setVisible] = useState(0);
   const [answer, setAnswer] = useState(0);
@@ -79,7 +77,7 @@ export default function FAQScreen(props) {
                     onPress={() => {
                       setQuest(q.question);
                       setAnswer(q.answer);
-                      setVisible(!visible);
+                      setVisible(true);
                     }}
                   >
                     Answer
@@ -89,15 +87,33 @@ export default function FAQScreen(props) {
             ))}
           </View>
         </ScrollView>
-        <Modal visible={visible} onDismiss={() => setVisible(false)}>
-            <Card style={layout.isBrowser ? {width: '50%', alignSelf: 'center'} : {width: '90%', alignSelf: 'center'}}>
+        <Modal
+          animationType="slide"
+          dismissable={true}
+          visible={visible}
+          onDismiss={() => setVisible(false)}
+        >
+          <Card
+            style={
+              layout.isBrowser
+                ? { width: "50%", alignSelf: "center" }
+                : { width: "90%", alignSelf: "center" }
+            }
+          >
             <Card.Title title={quest} />
-              <Card.Content>
-                <Paragraph>
-                  {answer}
-                </Paragraph>
-              </Card.Content>
-            </Card>
+            <Card.Content>
+              <Paragraph>{answer}</Paragraph>
+            </Card.Content>
+            <Card.Actions style={{justifyContent: "flex-end", padding:20}}>
+              <Button
+                mode="contained"
+                style={{backgroundColor: "#03244d",alignSelf: "flex-end"}}
+                onPress={() => setVisible(false)}
+              >
+                Close
+              </Button>
+            </Card.Actions>
+          </Card>
         </Modal>
       </Portal>
     </Provider>
