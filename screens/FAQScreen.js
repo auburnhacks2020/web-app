@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { View, ScrollView, Text, StyleSheet, Platform } from "react-native";
 import { Header } from "../components";
 import { layout, stylesheet } from "../constants";
-import { Card, Button, Modal, Portal, Provider, Paragraph } from "react-native-paper";
+import { Card, Button, Modal, Portal, Provider, Paragraph, Headline } from "react-native-paper";
 import Collapsible from "react-native-collapsible";
 
 export default function FAQScreen(props) {
   const [visible, setVisible] = useState(0);
   const [answer, setAnswer] = useState(0);
+  const [quest, setQuest] = useState(0);
   let questions = [
     {
       id: 1,
@@ -76,6 +77,7 @@ export default function FAQScreen(props) {
                     mode="contained"
                     style={stylesheet.cardbtn}
                     onPress={() => {
+                      setQuest(q.question);
                       setAnswer(q.answer);
                       setVisible(!visible);
                     }}
@@ -88,7 +90,8 @@ export default function FAQScreen(props) {
           </View>
         </ScrollView>
         <Modal visible={visible} onDismiss={() => setVisible(false)}>
-            <Card style={{margin: 40}}>
+            <Card style={layout.isBrowser ? {width: '50%', alignSelf: 'center'} : {width: '90%', alignSelf: 'center'}}>
+            <Card.Title title={quest} />
               <Card.Content>
                 <Paragraph>
                   {answer}

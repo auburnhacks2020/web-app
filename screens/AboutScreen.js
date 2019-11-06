@@ -1,8 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   ScrollView,
-  Linking,
   Image,
   Text,
   StyleSheet,
@@ -13,7 +12,7 @@ import { Header } from "../components";
 import { layout, stylesheet } from "../constants";
 import * as WebBrowser from "expo-web-browser";
 
-export default function AboutScreen() {
+export default function AboutScreen(props) {
   return (
     <ScrollView style={stylesheet.container}>
       <Header title="About" />
@@ -47,11 +46,6 @@ export default function AboutScreen() {
                   "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
                 )
               }
-              onClick={() =>
-                Linking.openURL(
-                  "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
-                )
-              }
             >
               Read More
             </Button>
@@ -72,9 +66,6 @@ export default function AboutScreen() {
                   "https://goo.gl/maps/78Cz5ZjryrVKVYvD8"
                 )
               }
-              onClick={() =>
-                Linking.openURL("https://goo.gl/maps/78Cz5ZjryrVKVYvD8")
-              }
             />
             <Paragraph>
               The Hackathon this year will be held at Auburns brand new
@@ -92,9 +83,6 @@ export default function AboutScreen() {
                   "https://goo.gl/maps/78Cz5ZjryrVKVYvD8"
                 )
               }
-              onClick={() =>
-                Linking.openURL("https://goo.gl/maps/78Cz5ZjryrVKVYvD8")
-              }
             >
               Directions
             </Button>
@@ -108,32 +96,19 @@ export default function AboutScreen() {
           }
         >
           <Card.Content>
-            <Card.Cover source={require("../assets/images/aboutCard.jpg")} />
+            <Card.Cover
+              source={require("../assets/images/bcard2.jpg")}
+            />
             <Paragraph>
-              We are Auburn University’s programming event organized by
-              students, for students. With this hackathon, Auburn University's
-              Computer Science & Software Engineering strives to promote
-              technical innovation and highlight students’ skills and abilities.
-              Partnering with Major League Hacking (MLH) for the first time, we
-              aim to bring out the best and brightest students, not just from
-              Auburn University but from other universities all over the United
-              States.
+              Stay up to date with the latest announcments and updates about the event
+              by following us on social media!
             </Paragraph>
           </Card.Content>
           <Card.Actions style={stylesheet.cardAction}>
             <Button
               mode="contained"
               style={stylesheet.cardbtn}
-              onPress={() =>
-                WebBrowser.openBrowserAsync(
-                  "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
-                )
-              }
-              onClick={() =>
-                Linking.openURL(
-                  "https://eng.auburn.edu/news/2019/02/auburnhacks.html"
-                )
-              }
+              onPress={() => props.navigation.navigate('SocialStack')}
             >
               Read More
             </Button>
