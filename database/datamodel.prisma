@@ -1,5 +1,17 @@
 type User {
   id: ID! @unique @id
-  username: String! @unique
+  email: String! @unique
   password: String!
+  firstName: String
+  lastName: String
+  emailVerified: Boolean! @default(value: false)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  role: ROLE! @default(value: PARTICIPANT)
+}
+
+enum ROLE {
+  ADMIN
+  SPONSOR
+  PARTICIPANT
 }

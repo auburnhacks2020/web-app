@@ -1,23 +1,34 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Platform } from 'react-native';
-import { Header } from '../components';
+import { View, StyleSheet } from 'react-native';
+import { Text, withTheme, Appbar } from 'react-native-paper';
+import { onSignOut } from "../auth";
 
-export default function ProfileScreen() {
-  return (
-    <ScrollView style={styles.container}>
-      <Header title="Profile" />
-    </ScrollView>
-  );
-}
+const ProfileScreen = props => {
+	const { colors } = props.theme;
 
-ProfileScreen.navigationOptions = {
-  title: 'Profile',
+	return (
+		<View
+			style={StyleSheet.flatten([
+				styles.container,
+				{ backgroundColor: colors.background }
+			])}>
+			<Text>Welcome Future Hacker!</Text>
+		</View>
+	);
+};
+
+ProfileScreen.navigationOptions = ({ navigation }) => {
+    return {
+        headerRight: <Appbar.Action color='white' icon='dots-vertical' onPress={() => onSignOut().then(() => navigation.navigate('signIn'))}/>
+    };
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: Platform.OS === "ios" ? 15 : 0,
-    backgroundColor: "#03244d"
-  }
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
+	}
 });
+
+export default withTheme(ProfileScreen);
