@@ -7,7 +7,7 @@ type User {
   emailVerified: Boolean! @default(value: false)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  role: Role! @default(value: PARTICIPANT)
+  role: ROLE! @default(value: PARTICIPANT)
 }
 
 enum ROLE {

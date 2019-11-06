@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform } from 'react-native';
 import {
 	createStackNavigator,
+	createSwitchNavigator,
 	createBottomTabNavigator
 } from 'react-navigation';
 
@@ -11,11 +12,14 @@ import {
 	SponsorsScreen,
 	FAQScreen,
 	SocialScreen,
-	ProfileScreen
+	CountdownScreen,
+	LoginScreen,
+	ProfileScreen,
+	AuthLoadingScreen
 } from '../screens';
 
 import { ProfileButton } from '../components';
-import Fonts from '../constants/Fonts';
+import Fonts from '../constants/Fonts';;
 
 const config = Platform.select({
 	web: {
@@ -57,11 +61,7 @@ AboutStack.navigationOptions = {
 	tabBarIcon: ({ focused }) => (
 		<TabBarIcon
 			focused={focused}
-			name={
-				Platform.OS === 'ios'
-					? 'ios-paw'
-					: 'md-paw'
-			}
+			name={Platform.OS === 'ios' ? 'ios-paw' : 'md-paw'}
 		/>
 	)
 };
@@ -125,25 +125,55 @@ SocialStack.navigationOptions = {
 
 SocialStack.path = '';
 
-const ProfileStack = createStackNavigator(
-	{
-		profile: ProfileScreen
-	},
-	config
-);
+const createProfileStack = () => {
+	let ProfileStack = createSwitchNavigator(
+		{
+			authLoading: AuthLoadingScreen,
+			signIn: createStackNavigator(
+				{
+					countdown: CountdownScreen,
+					login: LoginScreen
+				},
+				{...config,
+					defaultNavigationOptions: {
+					...config.defaultNavigationOptions,
+					headerBackTitle: null
+				}}
+			),
+			profile: createStackNavigator(
+				{
+					ProfileScreen
+				},
+				config
+			)
+		},
+		{
+			defaultNavigationOptions: {
+				title: 'Home',
+				headerStyle: {
+					backgroundColor: '#171F33'
+				},
+				headerTintColor: '#fff',
+				headerTitle: <AppHeader />,
+				headerLayoutPreset: 'center'
+			}
+		}
+	);
 
-ProfileStack.navigationOptions = {
-	tabBarLabel: 'Profile',
-	tabBarButtonComponent: props => <ProfileButton {...props} />
+	ProfileStack.navigationOptions = {
+		tabBarButtonComponent: props => <ProfileButton {...props} />
+	};
+
+	ProfileStack.path = '';
+
+	return ProfileStack;
 };
-
-ProfileStack.path = '';
 
 const tabNavigator = createBottomTabNavigator(
 	{
 		AboutStack,
 		SponsorStack,
-		ProfileStack,
+		ProfileStack: createProfileStack(),
 		FAQStack,
 		SocialStack
 	},
@@ -151,12 +181,12 @@ const tabNavigator = createBottomTabNavigator(
 		initialRouteName: 'ProfileStack',
 		tabBarOptions: {
 			// showLabel: false,
-			
+
 			activeTintColor: '#F8F8F8',
 			inactiveTintColor: '#586589',
 			style: {
 				backgroundColor: '#171F33',
-				borderTopWidth: 0,
+				borderTopWidth: 0
 			},
 			labelStyle: {
 				fontFamily: Fonts.robotoMono

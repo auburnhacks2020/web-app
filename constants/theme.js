@@ -5,11 +5,11 @@ import colors from './Colors';
 const fontConfig = {
 	default: {
 		regular: {
-			fontFamily: 'sans-serif',
+			fontFamily: 'montserrat',
 			fontWeight: 'normal'
 		},
 		medium: {
-			fontFamily: 'sans-serif-medium',
+			fontFamily: 'roboto-mono',
 			fontWeight: 'normal'
 		},
 		light: {
