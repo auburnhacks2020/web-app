@@ -1,11 +1,19 @@
-import { AppLoading } from 'expo';
-import * as Font from 'expo-font';
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { AppLoading } from "expo";
+import * as Font from "expo-font";
+import React, { useState } from "react";
+import { StyleSheet, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 import { Asset } from "expo-asset";
+import { Provider as PaperProvider } from "react-native-paper";
+import AppNavigator from "./navigation/AppNavigator";
+import { defaultTheme, darkTheme } from "./constants/theme";
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from '@apollo/react-hooks';
 
-import AppNavigator from './navigation/AppNavigator';
+
+const client = new ApolloClient({
+  uri: "http://192.168.1.8:8383"
+});
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -20,9 +28,13 @@ export default function App(props) {
     );
   } else {
     return (
-      <View style={styles.container}>
-        <AppNavigator />
-      </View>
+      <ApolloProvider client={client}>
+        <PaperProvider theme={defaultTheme}>
+          <View style={styles.container}>
+            <AppNavigator />
+          </View>
+        </PaperProvider>
+      </ApolloProvider>
     );
   }
 }
@@ -34,11 +46,13 @@ async function loadResourcesAsync() {
       ...Ionicons.font,
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
-      'roboto-mono': require('./assets/fonts/Roboto_Mono/RobotoMono-Regular.ttf'),
-      'roboto-mono-bold': require('./assets/fonts/Roboto_Mono/RobotoMono-Bold.ttf'),
-      'montserrat': require('./assets/fonts/Montserrat/Montserrat-Regular.ttf')
+      "roboto-mono": require("./assets/fonts/Roboto_Mono/RobotoMono-Regular.ttf"),
+      "roboto-mono-bold": require("./assets/fonts/Roboto_Mono/RobotoMono-Bold.ttf"),
+      montserrat: require("./assets/fonts/Montserrat/Montserrat-Regular.ttf")
     }),
-    Asset.fromModule(require("./assets/logos/AuburnHacks-1.png")).downloadAsync(),
+    Asset.fromModule(
+      require("./assets/logos/AuburnHacks-1.png")
+    ).downloadAsync()
   ]);
 }
 

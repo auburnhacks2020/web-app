@@ -17,7 +17,7 @@ export default {
     padding: 20,
     alignSelf: "center",
     borderRadius: 5,
-    marginBottom: 40
+    marginBottom: 50
   },
   par: {
     fontFamily: text,
@@ -49,6 +49,9 @@ export default {
   },
   links: {
     color: "#f68026"
+  },
+  centerText: {
+    textAlign: 'center'
   },
   robotoMono,
   heading,
