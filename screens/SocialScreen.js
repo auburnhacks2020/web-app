@@ -20,6 +20,34 @@ export default function SocialScreen() {
             )
           }
         />
+        <Ionicons
+          name="logo-facebook"
+          size={70}
+          style={stylesheet.links}
+          onPress={() =>
+            WebBrowser.openBrowserAsync(
+              "https://www.facebook.com/AuburnHacks/"
+            )
+          }
+        />
+        <Ionicons
+          name="logo-twitter"
+          size={70}
+          style={stylesheet.links}
+          onPress={() =>
+            WebBrowser.openBrowserAsync("https://twitter.com/AuburnHacks")
+          }
+        />
+        <Ionicons
+          name="logo-linkedin"
+          size={70}
+          style={stylesheet.links}
+          onPress={() =>
+            WebBrowser.openBrowserAsync(
+              "https://www.linkedin.com/company/auburnhacks/"
+            )
+          }
+        />
       </View>
     </ScrollView>
   );
