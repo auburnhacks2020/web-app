@@ -19,7 +19,8 @@ import {
 } from '../screens';
 
 import { ProfileButton } from '../components';
-import Fonts from '../constants/Fonts';;
+import Fonts from '../constants/Fonts';import RegisterScreen from '../screens/RegisterScreen';
+;
 
 const config = Platform.select({
 	web: {
@@ -132,6 +133,7 @@ const createProfileStack = () => {
 			signIn: createStackNavigator(
 				{
 					countdown: CountdownScreen,
+					register: RegisterScreen,
 					login: LoginScreen
 				},
 				{...config,

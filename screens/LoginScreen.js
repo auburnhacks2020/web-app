@@ -59,6 +59,7 @@ const LoginScreen = props => {
 		else setInvalidPassword(false);
 	};
 
+	let passwordInput = null;
 	return (
 		<View
 			style={StyleSheet.flatten([
@@ -75,8 +76,8 @@ const LoginScreen = props => {
 					onChangeText={text => setEmail(text)}
 					onSubmitEditing={() => {
 						passwordInput.focus();
-                    }}
-                    blurOnSubmit={false}
+					}}
+					blurOnSubmit={false}
 					style={styles.textInput}
 					error={invalidLogin}
 				/>
@@ -92,16 +93,13 @@ const LoginScreen = props => {
 					style={styles.textInput}
 					error={invalidPassword}
 				/>
-				{loginResult.loading ? (
-					<ActivityIndicator size='large' color={colors.primary} />
-				) : (
-					<Button
-						style={styles.button}
-						mode='contained'
-						onPress={() => loginUser()}>
-						Login
-					</Button>
-				)}
+				<Button
+					style={styles.button}
+					mode='contained'
+					onPress={loginUser}
+					loading={loginResult.loading}>
+					Login
+				</Button>
 				{/* <Text>{JSON.stringify(data)}</Text> */}
 			</View>
 		</View>
@@ -123,9 +121,8 @@ const styles = StyleSheet.create({
 		marginBottom: 10
 	},
 	button: {
-		width: 90,
 		marginTop: 5,
-		alignSelf: 'flex-end'
+		alignSelf: 'flex-end',
 	}
 });
 

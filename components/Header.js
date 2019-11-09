@@ -16,7 +16,7 @@ export default function Header(props) {
 			<Surface style={styles.surface}>
 				<ImageBackground
 					source={require('../assets/images/background.png')}
-					style={{ height: 300 }}>
+					style={{ width: null }}>
 					<View style={styles.logos}>
 						<Image
 							style={{ width: 315, height: 250 }}

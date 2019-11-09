@@ -1,7 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { sendVerifyEmail } = require('../utils');
 
-const resolvers = {
+module.exports = {
 	Query: {
 		currentUser: (parent, args, { user, prisma }) => {
 			// this if statement is our authentication check
@@ -12,12 +13,24 @@ const resolvers = {
 		}
 	},
 	Mutation: {
-		register: async (parent, { email, password }, ctx, info) => {
+		register: async (parent, { registrationForm }, ctx, info) => {
+			const { firstName, lastName, email, password } = registrationForm;
+			// check for email in database
+			const emailTaken = await ctx.prisma.user({ email });
+			if (emailTaken) {
+				throw new Error('Email Taken');
+			}
+
+			const sent = await sendVerifyEmail();
+			// hash password and create user
 			const hashedPassword = await bcrypt.hash(password, 10);
 			const user = await ctx.prisma.createUser({
+				firstName,
+				lastName,
 				email,
 				password: hashedPassword
 			});
+
 			return user;
 		},
 		login: async (parent, { email, password }, ctx, info) => {
@@ -50,5 +63,3 @@ const resolvers = {
 		}
 	}
 };
-
-module.exports = resolvers;

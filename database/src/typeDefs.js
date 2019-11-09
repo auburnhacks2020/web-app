@@ -8,20 +8,27 @@ const typeDefs = gql`
 		lastName: String
 		emailVerified: Boolean!
 		role: ROLE!
-  }
-  
-  enum ROLE {
-    ADMIN
-    SPONSOR
-    PARTICIPANT
-  }
+	}
+
+	enum ROLE {
+		ADMIN
+		SPONSOR
+		PARTICIPANT
+	}
+
+	input RegistrationForm {
+		firstName: String!
+		lastName: String!
+		email: String!
+		password: String!
+	}
 
 	type Query {
 		currentUser: User!
 	}
 
 	type Mutation {
-		register(email: String!, password: String!): User!
+		register(registrationForm: RegistrationForm!): User!
 		login(email: String!, password: String!): LoginResponse!
 	}
 

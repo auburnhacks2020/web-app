@@ -9,7 +9,7 @@ const CountdownScreen = props => {
 	const registrationOpenDate = new Date('2019/12/1');
 	const today = new Date();
 
-	return (
+	return ( 
 		<View
 			style={StyleSheet.flatten([
 				styles.container,
@@ -46,7 +46,7 @@ const CountdownScreen = props => {
 				<Button
 					style={styles.button}
 					mode='contained'
-					onPress={() => props.navigation.navigate('login')}>
+					onPress={() => props.navigation.navigate('register')}>
 					sign up or sign in
 				</Button>
 			</View>
