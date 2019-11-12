@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import {
   View,
   ScrollView,
-  Image,
-  Text,
-  StyleSheet,
   Platform
 } from "react-native";
 import { Button, Card, Paragraph } from "react-native-paper";
