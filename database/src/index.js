@@ -37,4 +37,7 @@ server
 	.listen({
 		port: 8383
 	})
-	.then(info => console.log(`Server started on http://localhost:${info.port}`));
+	.then(info => {
+		console.log(`Server started on ${info.url}`);
+		console.log('cwd: ' + process.cwd());
+	});
