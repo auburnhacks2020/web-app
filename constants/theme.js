@@ -24,35 +24,35 @@ const fontConfig = {
 };
 
 const defaultTheme = {
-	dark: false,
-	roundness: 4,
-	colors: {
-		primary: '#DD550C',
-		accent: '#03dac4',
-		background: '#03244d',
-		surface: '#fff',
-		error: '#B00020',
-		text: '#fff',
-		onBackground: '#000000',
-		onSurface: '#000000',
-		disabled: color(colors.black)
-			.alpha(0.26)
-			.rgb()
-			.string(),
-		placeholder: color(colors.white)
-			.alpha(0.54)
-			.rgb()
-			.string(),
-		backdrop: color(colors.black)
-			.alpha(0.5)
-			.rgb()
-			.string(),
-		notification: 'pink'
-	},
-	fonts: configureFonts(fontConfig),
-	animation: {
-		scale: 1.0
-	}
+  dark: false,
+  roundness: 4,
+  colors: {
+    primary: "#DD550C",
+    accent: "#03dac4",
+    background: "#03244d",
+    surface: "#181818",
+    error: "#B00020",
+    text: "#fff",
+    onBackground: "#000000",
+    onSurface: "#000000",
+    disabled: color(colors.black)
+      .alpha(0.26)
+      .rgb()
+      .string(),
+    placeholder: color(colors.white)
+      .alpha(0.54)
+      .rgb()
+      .string(),
+    backdrop: color(colors.black)
+      .alpha(0.5)
+      .rgb()
+      .string(),
+    notification: "pink"
+  },
+  fonts: configureFonts(fontConfig),
+  animation: {
+    scale: 1.0
+  }
 };
 
 const darkTheme = {
