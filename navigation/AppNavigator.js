@@ -1,11 +1,19 @@
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
-
+import React from 'react';
+import { Platform } from 'react-native';
+import { createAppContainer } from 'react-navigation';
+import { createBrowserApp } from '@react-navigation/web';
+import { Linking } from 'expo';
 import MainTabNavigator from './MainTabNavigator';
 
-export default createAppContainer(
-  createSwitchNavigator({
-    // You could add another route here for authentication.
-    // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-    Main: MainTabNavigator,
-  })
-);
+const AppContainer =
+	Platform.OS == 'web'
+		? createBrowserApp(MainTabNavigator)
+		: createAppContainer(MainTabNavigator);
+
+const prefix = Linking.makeUrl('/');
+
+console.log(prefix);
+
+const App = () => <AppContainer uriPrefix={prefix} />;
+
+export default App;

@@ -13,18 +13,18 @@ module.exports = {
 		}
 	},
 	Mutation: {
-		register: async (parent, { registrationForm }, ctx, info) => {
+		register: async (parent, { registrationForm }, { prisma }, info) => {
 			const { firstName, lastName, email, password } = registrationForm;
 			// check for email in database
-			const emailTaken = await ctx.prisma.user({ email });
-			if (emailTaken) {
+			const oldUser = await prisma.user({ email });
+			if (oldUser) {
 				throw new Error('Email Taken');
 			}
 
-			const sent = await sendVerifyEmail();
+			await sendVerifyEmail(email, firstName);
 			// hash password and create user
 			const hashedPassword = await bcrypt.hash(password, 10);
-			const user = await ctx.prisma.createUser({
+			const user = await prisma.createUser({
 				firstName,
 				lastName,
 				email,
@@ -60,6 +60,32 @@ module.exports = {
 				token,
 				user
 			};
+		},
+		verifyUser: async (parent, { email, password, token }, ctx, info) => {
+			const user = await ctx.prisma.user({ email });
+
+			if (!user) {
+				throw new Error('Invalid Login');
+			}
+
+			const passwordMatch = await bcrypt.compare(password, user.password);
+
+			if (!passwordMatch) throw new Error('Invalid Password');
+
+			const valid = jwt.verify(token, process.env.EMAIL_SECRET);
+
+			if (valid) {
+				await ctx.prisma.updateUser({
+					data: { emailVerified: true },
+					where: { email }
+				});
+
+				return {
+					verified: true
+				};
+			} else {
+				throw new Error('Invalid Token');
+			}
 		}
 	}
 };

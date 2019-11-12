@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { Text, TextInput, Button, withTheme } from 'react-native-paper';
 
 import { gql } from 'apollo-boost';
@@ -8,8 +8,8 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { onSignIn } from '../auth';
 
 const REGISTER = gql`
-	mutation register($email: String!, $password: String!) {
-		register(email: $email, password: $password) {
+	mutation register($registrationForm: RegistrationForm!) {
+		register(registrationForm: $registrationForm) {
 			id
 			email
 			firstName
@@ -61,7 +61,6 @@ const RegisterScreen = props => {
 				updateInvalidInputs(key, false);
 			}
 		}
-		console.log(isValid);
 		return isValid;
 	};
 
@@ -75,16 +74,14 @@ const RegisterScreen = props => {
 	};
 
 	const registerUser = async () => {
-		console.log(invalidInputs);
 		if (!validForm()) {
-			const err = new Error('');
+			const err = new Error('Invalid form');
 			err.break = true;
 			return err;
 		}
 		try {
-			const res = await register({ variables: { email, password } });
-			onSignIn(res.data.login.token);
-			props.navigation.navigate('profile');
+			const res = await register({ variables: { registrationForm: form } });
+			props.navigation.navigate('login', { token: '0' });
 		} catch (err) {
 			evalErrors(err);
 		}
@@ -93,7 +90,6 @@ const RegisterScreen = props => {
 	let lastNameInput,
 		emailInput,
 		passwordInput = null;
-	console.log(form);
 	return (
 		<View
 			style={StyleSheet.flatten([
@@ -136,7 +132,6 @@ const RegisterScreen = props => {
 					}}
 					mode='outlined'
 					label='Email'
-					autoCompleteType='email'
 					keyboardType='email-address'
 					value={form.email}
 					onChangeText={val => updateField('email', val)}
@@ -171,7 +166,7 @@ const RegisterScreen = props => {
 					<Text style={styles.loginText}>Already have an account?</Text>
 					<Button
 						style={styles.signInButton}
-						onPress={() => props.navigation.navigate('login')}>
+						onPress={() => props.navigation.navigate('login', { token: '1' })}>
 						Login here
 					</Button>
 				</View>

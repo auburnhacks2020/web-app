@@ -90,6 +90,7 @@ const LoginScreen = props => {
 					label='Password'
 					value={password}
 					onChangeText={text => setPassword(text)}
+					onSubmitEditing={loginUser}
 					style={styles.textInput}
 					error={invalidPassword}
 				/>

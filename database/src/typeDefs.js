@@ -30,11 +30,16 @@ const typeDefs = gql`
 	type Mutation {
 		register(registrationForm: RegistrationForm!): User!
 		login(email: String!, password: String!): LoginResponse!
+		verifyUser(email: String!, password: String!, token: String!): VerifyResponse!
 	}
 
 	type LoginResponse {
 		token: String
 		user: User
+	}
+
+	type VerifyResponse {
+		verified: Boolean!
 	}
 `;
 
