@@ -13,7 +13,7 @@ export default {
     flexWrap: "wrap",
     justifyContent: "space-between",
     width: "90%",
-    backgroundColor: "#f8f8f8",
+    backgroundColor: "#000",
     padding: 20,
     alignSelf: "center",
     borderRadius: 5,
@@ -26,12 +26,9 @@ export default {
     fontWeight: "400"
   },
   modalpar: {
-    fontFamily: text,
-    fontWeight: "500",
+    fontWeight: "300",
     fontSize: 17,
-    padding: 20,
     color: "#ffffff",
-    alignSelf: "center"
   },
   btn: {
     backgroundColor: "#03244d"

@@ -65,11 +65,19 @@ export default function FAQScreen(props) {
                 key={q.id}
                 style={
                   layout.isBrowser
-                    ? { width: "30%", marginBottom: 20 }
-                    : { width: "100%", marginBottom: 20 }
+                    ? {
+                        width: "30%",
+                        marginBottom: 20,
+                        backgroundColor: "#181818"
+                      }
+                    : {
+                        width: "100%",
+                        marginBottom: 20,
+                        backgroundColor: "#181818"
+                      }
                 }
               >
-                <Card.Title title={q.question} />
+                <Card.Title title={q.question} titleStyle={{ color: "#fff" }} />
                 <Card.Actions style={stylesheet.cardAction}>
                   <Button
                     mode="contained"
@@ -96,18 +104,26 @@ export default function FAQScreen(props) {
           <Card
             style={
               layout.isBrowser
-                ? { width: "50%", alignSelf: "center" }
-                : { width: "90%", alignSelf: "center" }
+                ? {
+                    width: "50%",
+                    alignSelf: "center",
+                    backgroundColor: "#181818"
+                  }
+                : {
+                    width: "90%",
+                    alignSelf: "center",
+                    backgroundColor: "#181818"
+                  }
             }
           >
-            <Card.Title title={quest} />
+            <Card.Title title={quest} titleStyle={{ color: "#fff" }} />
             <Card.Content>
-              <Paragraph>{answer}</Paragraph>
+              <Paragraph style={stylesheet.modalpar}>{answer}</Paragraph>
             </Card.Content>
-            <Card.Actions style={{justifyContent: "flex-end", padding:20}}>
+            <Card.Actions style={{ justifyContent: "flex-end", padding: 20 }}>
               <Button
                 mode="contained"
-                style={{backgroundColor: "#03244d",alignSelf: "flex-end"}}
+                style={{ backgroundColor: "#03244d", alignSelf: "flex-end" }}
                 onPress={() => setVisible(false)}
               >
                 Close
