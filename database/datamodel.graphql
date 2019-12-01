@@ -1,0 +1,51 @@
+type User {
+  id: ID! @unique @id
+  email: String! @unique
+  password: String!
+  firstName: String
+  lastName: String
+  application: Application
+  emailVerified: Boolean! @default(value: false)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  role: ROLE! @default(value: PARTICIPANT)
+}
+
+type Application {
+  id: ID! @id
+  createdAt: DateTime! @createdAt
+  studentId: String
+  dateOfBirth: String
+  phoneNumber: String
+  gender: String
+  race: String
+  languages: [String]
+  dietaryRestrictions: [String]
+  specialAccommodations: [String]
+  shirtSize: String
+  needTravel: Boolean
+  emailOptIn: Boolean
+  acceptCodeOfConduct: Boolean
+  sponsorData: SponsorData
+  sendToSponsors: Boolean
+}
+
+type SponsorData {
+  major: String
+  educationLevel: String
+  school: String
+  interests: [String]
+  experience: Int
+  hackathonAwards: [String]
+  skills: [String]
+  gpa: Float
+  aboutYou: String
+  biggestChallenge: String
+  resume: String
+}
+
+enum ROLE {
+  ADMIN
+  SPONSOR
+  PARTICIPANT
+}
