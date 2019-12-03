@@ -9,6 +9,14 @@ var models = [
     embedded: false
   },
   {
+    name: "Application",
+    embedded: false
+  },
+  {
+    name: "SponsorData",
+    embedded: false
+  },
+  {
     name: "ROLE",
     embedded: false
   }

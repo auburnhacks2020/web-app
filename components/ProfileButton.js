@@ -3,36 +3,43 @@ import { View, Platform, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ActiveTabGradient from './ActiveTabGradient';
 import { Button, withTheme } from 'react-native-paper';
+import { Colors } from '../constants';
+
 const SIZE = Platform.OS === 'web' ? 80 : 70;
 
 const styles = StyleSheet.create({
-	container: { flex: 1, alignItems: 'center', justifyContent: 'center'},
+	container: { flex: 1, alignItems: 'center', justifyContent: 'center' },
 	button: {
 		position: 'absolute',
 		zIndex: 3,
 		elevation: 3,
-		top: -SIZE / 2.5,
+		top: -SIZE / 2,
 		shadowRadius: 10,
 		borderRadius: SIZE / 2,
 		width: SIZE,
-    height: SIZE,
+		backgroundColor: '#171F33',
+		height: SIZE
 	}
 });
 
-const ProfileButton = ({ onPress, theme }) => {
-	const [focused, setFocused] = useState(false);
+const ProfileButton = props => {
+	const { routeName, onPress, theme } = props;
 	const { colors } = theme;
 
-	const onClick = () => {
-		onPress();
-		setFocused(!focused);
-	};
+	console.log(routeName);
 	return (
 		<View style={styles.container}>
-			<ActiveTabGradient />
-				<Button mode='outlined' style={styles.button} onPress={onPress}>
-					<Ionicons name='md-person' size={SIZE / 1.5} />
-				</Button>
+			<Button mode='outlined' style={styles.button} onPress={onPress}>
+				<Ionicons
+					name='md-person'
+					size={SIZE / 1.5}
+					color={
+						routeName === 'ProfileStack'
+							? Colors.tabIconSelected
+							: Colors.tabIconDefault
+					}
+				/>
+			</Button>
 		</View>
 	);
 };

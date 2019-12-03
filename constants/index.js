@@ -1,10 +1,10 @@
-import colors from './Colors';
+import Colors from './Colors';
 import fonts from './Fonts';
 import layout from './Layout';
 import stylesheet from './Stylesheet';
 
 export {
-    colors,
+    Colors,
     fonts,
     layout,
     stylesheet

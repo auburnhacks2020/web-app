@@ -14,14 +14,15 @@ type User {
 type Application {
   id: ID! @id
   createdAt: DateTime! @createdAt
+  complete: Boolean! @default(value: false)
   studentId: String
   dateOfBirth: String
   phoneNumber: String
   gender: String
   race: String
-  languages: [String]
-  dietaryRestrictions: [String]
-  specialAccommodations: [String]
+  languages: [String] @scalarList(strategy: RELATION)
+  dietaryRestrictions: [String] @scalarList(strategy: RELATION)
+  specialAccommodations: [String] @scalarList(strategy: RELATION)
   shirtSize: String
   needTravel: Boolean
   emailOptIn: Boolean
@@ -31,13 +32,14 @@ type Application {
 }
 
 type SponsorData {
+  id: ID! @id
   major: String
   educationLevel: String
   school: String
-  interests: [String]
+  interests: [String] @scalarList(strategy: RELATION)
   experience: Int
-  hackathonAwards: [String]
-  skills: [String]
+  hackathonAwards: [String] @scalarList(strategy: RELATION)
+  skills: [String] @scalarList(strategy: RELATION)
   gpa: Float
   aboutYou: String
   biggestChallenge: String
