@@ -71,8 +71,10 @@ AboutStack.navigationOptions = {
 
 const SponsorStack = createStackNavigator(
 	{
-		sponsors: SponsorsScreen,
-		social: SocialScreen
+		sponsors: {
+			screen: SponsorsScreen,
+			path: ''
+		}
 	},
 	config
 );
@@ -87,7 +89,7 @@ SponsorStack.navigationOptions = {
 	)
 };
 
-SponsorStack.path = '';
+SponsorStack.path = '/sponsors';
 
 const FAQStack = createStackNavigator(
 	{
@@ -171,21 +173,20 @@ const createProfileStack = () => {
 			)
 		},
 		{
-			navigationOptions: ({navigation}) => ({
-        tabBarButtonComponent: (props) => (
-          <ProfileButton routeName={navigation.state.routeName} {...props} />
-        ),
-        title: 'Home',
+			navigationOptions: ({ navigation }) => ({
+				tabBarButtonComponent: props => (
+					<ProfileButton routeName={navigation.state.routeName} {...props} />
+				),
+				title: 'Home',
 				headerStyle: {
 					backgroundColor: '#171F33'
 				},
 				headerTintColor: '#fff',
 				headerTitle: <AppHeader />,
 				headerLayoutPreset: 'center'
-      })
+			})
 		}
 	);
-
 
 	ProfileStack.path = '';
 
@@ -198,7 +199,10 @@ const tabNavigator = createBottomTabNavigator(
 			screen: AboutStack,
 			path: 'about'
 		},
-		SponsorStack,
+		SponsorStack: {
+			screen: SponsorStack,
+			path: 'sponsors'
+		},
 		ProfileStack: {
 			screen: createProfileStack(),
 			path: 'profile'
