@@ -54,7 +54,6 @@ const LoginScreen = props => {
 
 	console.log(token);
 	const loginUser = async () => {
-		let verified = false;
 		if (token === '0') {
 			return;
 		} else if (token === '1') {
@@ -62,6 +61,7 @@ const LoginScreen = props => {
 				const res = await login({ variables: { email, password } });
 				verified = res.data.login.emailVerified;
 				onSignIn(res.data.login.token);
+				props.navigation.navigate('profile')
 			} catch (err) {
 				evalErrors(err);
 			}
