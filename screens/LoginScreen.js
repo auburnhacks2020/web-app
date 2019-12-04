@@ -34,6 +34,7 @@ const LOGIN = gql`
 			user {
 				id
 				email
+				emailVerified
 			}
 		}
 	}
@@ -48,18 +49,34 @@ const LoginScreen = props => {
 
 	// const { loading, error, data } = useQuery(CURRENT_USER);
 	const [login, loginResult] = useMutation(LOGIN);
+	const [verify, verifyResult] = useMutation(VERIFY);
 	const { colors } = props.theme;
 
+	console.log(token);
 	const loginUser = async () => {
-		if (token === 0 || token === 1) return;
-		try {
-			const res = await login({ variables: { email, password } });
-			onSignIn(res.data.login.token);
-			props.navigation.navigate('profile');
-		} catch (err) {
-			evalErrors(err);
+		let verified = false;
+		if (token === '0') {
+			return;
+		} else if (token === '1') {
+			try {
+				const res = await login({ variables: { email, password } });
+				verified = res.data.login.emailVerified;
+				onSignIn(res.data.login.token);
+			} catch (err) {
+				evalErrors(err);
+			}
+		} else {
+			try {
+				const res = await verify({ variables: { email, password, token } });
+				verified = res.data.verifyUser.verified;
+				console.log(res);
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	};
+
+	const verifyUser = async () => {};
 
 	const evalErrors = err => {
 		console.log(err);
@@ -109,7 +126,7 @@ const LoginScreen = props => {
 					style={styles.button}
 					mode='contained'
 					onPress={loginUser}
-					loading={loginResult.loading}>
+					loading={loginResult.loading || verifyResult.loading}>
 					Login
 				</Button>
 				{/* <Text>{JSON.stringify(data)}</Text> */}

@@ -81,7 +81,8 @@ module.exports = {
 				});
 
 				return {
-					verified: true
+					verified: true,
+					user
 				};
 			} else {
 				throw new Error('Invalid Token');

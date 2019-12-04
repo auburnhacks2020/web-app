@@ -39,7 +39,8 @@ const typeDefs = gql`
 	}
 
 	type VerifyResponse {
-		verified: Boolean!
+		verified: Boolean
+		user: User
 	}
 `;
 

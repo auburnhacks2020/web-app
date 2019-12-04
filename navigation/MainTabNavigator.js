@@ -91,7 +91,10 @@ SponsorStack.path = '';
 
 const FAQStack = createStackNavigator(
 	{
-		FAQs: FAQScreen
+		FAQs: {
+			screen: FAQScreen,
+			path: ''
+		}
 	},
 	config
 );
