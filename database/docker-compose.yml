@@ -25,14 +25,3 @@ services:
             port: 3306
             user: ${DB_USER}
             password: ${DB_PASSWORD}
-            migrations: true
-
-#   mysql:
-#     image: mysql:5.7
-#     restart: always
-#     environment:
-#       MYSQL_ROOT_PASSWORD: prisma
-#     volumes:
-#       - mysql:/var/lib/mysql
-# volumes:
-#   mysql:

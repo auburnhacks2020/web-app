@@ -1,0 +1,6 @@
+node_modules
+datamodel.prisma
+docker-compose.yml
+prisma.yml
+README.md
+yarn.lock

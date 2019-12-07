@@ -19,6 +19,14 @@ const CURRENT_USER = gql`
 	}
 `;
 
+const VERIFY = gql`
+	mutation verfiyUser($email: String!, $password: String!, $token: String!) {
+		verfiyUser(email: $email, password: $password, token: $token) {
+			verified
+		}
+	}
+`;
+
 const LOGIN = gql`
 	mutation login($email: String!, $password: String!) {
 		login(email: $email, password: $password) {
@@ -36,12 +44,14 @@ const LoginScreen = props => {
 	const [password, setPassword] = useState('');
 	const [invalidPassword, setInvalidPassword] = useState(false);
 	const [invalidLogin, setinvalidLogin] = useState(false);
+	const token = props.navigation.getParam('token');
 
 	// const { loading, error, data } = useQuery(CURRENT_USER);
 	const [login, loginResult] = useMutation(LOGIN);
 	const { colors } = props.theme;
 
 	const loginUser = async () => {
+		if (token === 0 || token === 1) return;
 		try {
 			const res = await login({ variables: { email, password } });
 			onSignIn(res.data.login.token);
@@ -52,6 +62,7 @@ const LoginScreen = props => {
 	};
 
 	const evalErrors = err => {
+		console.log(err);
 		if (err.message === 'GraphQL error: Invalid Login') setinvalidLogin(true);
 		else setinvalidLogin(false);
 		if (err.message === 'GraphQL error: Invalid Password')
@@ -123,7 +134,7 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		marginTop: 5,
-		alignSelf: 'flex-end',
+		alignSelf: 'flex-end'
 	}
 });
 
