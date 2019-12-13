@@ -9,12 +9,17 @@ module.exports = {
 		// 		throw new Error('Not Authenticated');
 		// 	}
 		// 	return prisma.user({ id: user.id });
-		// }
+        // }
+        getApplication: (parent, args, {user, prisma}) => {
+            
+        }
 	},
 	Mutation: {
-		register: async (parent, { registrationForm }, { prisma }, info) => {
-		
-		},
-		
+		// register: async (parent, { registrationForm }, { prisma }, info) => {
+		// 	const { firstName, lastName, email, password } = registrationForm;
+		// 	// check for email in database
+		// 	const oldUser = await prisma.user({ email });
+		// 	return user;
+		//
 	}
 };
