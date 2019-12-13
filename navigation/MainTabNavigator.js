@@ -165,12 +165,18 @@ const createProfileStack = () => {
 				),
 				path: ''
 			},
-			profile: createStackNavigator(
-				{
-					ProfileScreen
-				},
-				config
-			)
+			profile: {
+				screen: createStackNavigator(
+					{
+						ProfileScreen: {
+							screen: ProfileScreen,
+							path: ''
+						}
+					},
+					config
+				),
+				path: ''
+			}
 		},
 		{
 			navigationOptions: ({ navigation }) => ({

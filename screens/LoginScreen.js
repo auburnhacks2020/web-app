@@ -5,7 +5,7 @@ import {
 	StyleSheet,
 	AsyncStorage
 } from 'react-native';
-import { TextInput, Button, withTheme } from 'react-native-paper';
+import { TextInput, Text, Button, withTheme, Subheading } from 'react-native-paper';
 
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -45,38 +45,54 @@ const LoginScreen = props => {
 	const [password, setPassword] = useState('');
 	const [invalidPassword, setInvalidPassword] = useState(false);
 	const [invalidLogin, setinvalidLogin] = useState(false);
+	const [[verified, loginAttempted], setVerifiedUser] = useState([
+		false,
+		false
+	]);
 	const token = props.navigation.getParam('token');
 
 	// const { loading, error, data } = useQuery(CURRENT_USER);
 	const [login, loginResult] = useMutation(LOGIN);
 	const [verify, verifyResult] = useMutation(VERIFY);
-	const { colors } = props.theme;
+	const { colors,  } = props.theme;
 
-	console.log(token);
 	const loginUser = async () => {
+		let verifiedUser = false;
+		let loginAttempt = false;
+		let res = {};
+
 		if (token === '0') {
-			return;
+			return [false, false];
 		} else if (token === '1') {
 			try {
-				const res = await login({ variables: { email, password } });
-				verified = res.data.login.emailVerified;
+				res = await login({ variables: { email, password } });
+				loginAttempt = true;
+				verifiedUser = res.data.login.emailVerified;
 				onSignIn(res.data.login.token);
-				props.navigation.navigate('profile')
 			} catch (err) {
 				evalErrors(err);
 			}
 		} else {
 			try {
-				const res = await verify({ variables: { email, password, token } });
-				verified = res.data.verifyUser.verified;
-				console.log(res);
+				const response = await verify({
+					variables: { email, password, token }
+				});
+				verified = response.data.verifyUser.verified;
+				if (verifiedUser)
+					console.log(response);
 			} catch (err) {
 				console.log(err);
 			}
 		}
-	};
+		if (verified) {
+			props.navigation.navigate('profile');
+			return true;
+		}
 
-	const verifyUser = async () => {};
+		returnrorocketdog1
+		
+		;
+	};
 
 	const evalErrors = err => {
 		console.log(err);
@@ -95,6 +111,7 @@ const LoginScreen = props => {
 				{ backgroundColor: colors.background }
 			])}>
 			<View style={styles.loginForm}>
+				{verified && loginAttempted ? <Subheading style={{color: colors.error, marginBottom: 5}}>Please Verify Your Email!</Subheading> : null}
 				<TextInput
 					mode='outlined'
 					label='Email'
@@ -125,7 +142,9 @@ const LoginScreen = props => {
 				<Button
 					style={styles.button}
 					mode='contained'
-					onPress={loginUser}
+					onPress={() => {
+						setVerifiedUser(loginUser());
+					}}
 					loading={loginResult.loading || verifyResult.loading}>
 					Login
 				</Button>
