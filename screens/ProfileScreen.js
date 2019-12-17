@@ -1,7 +1,8 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Text, withTheme, Appbar } from 'react-native-paper';
+import { Text, withTheme, Headline, Button,  } from 'react-native-paper';
 import { onSignOut } from "../auth";
+import { stylesheet } from '../constants';
 
 const ProfileScreen = props => {
 	const { colors } = props.theme;
@@ -12,15 +13,23 @@ const ProfileScreen = props => {
 				styles.container,
 				{ backgroundColor: colors.background }
 			])}>
-			<Text>Welcome Future Hacker!</Text>
+			<Headline style={{textAlign:'center', fontWeight:'700'}}>
+			Welcome Future Hacker!{"\n"}
+			Thanks for registering for AuburnHacks!{"\n"}
+			Follow us on social media for news and updates about the event!
+
+			</Headline>
+			<Button style={stylesheet.btn2} onPress={() => {props.navigation.navigate('SocialStack')}}>
+			Follow Us!
+			</Button>
 		</View>
 	);
 };
 
 ProfileScreen.navigationOptions = ({ navigation }) => {
-    return {
-        headerRight: <Appbar.Action color='white' icon='dots-vertical' onPress={() => onSignOut().then(() => navigation.navigate('signIn'))}/>
-    };
+    // return {
+    //     // headerLeft: <Appbar.Action style={{width:null}} color='white' icon='dots-vertical' onPress={() => onSignOut().then(() => navigation.navigate('signIn'))}/>
+    // };
 };
 
 const styles = StyleSheet.create({
