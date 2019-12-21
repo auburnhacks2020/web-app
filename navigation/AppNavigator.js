@@ -12,8 +12,6 @@ const AppContainer =
 
 const prefix = Linking.makeUrl('/');
 
-console.log(prefix);
-
 const App = () => <AppContainer uriPrefix={prefix} />;
 
 export default App;
