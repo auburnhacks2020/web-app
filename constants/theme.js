@@ -9,7 +9,7 @@ const fontConfig = {
 			fontWeight: 'normal'
 		},
 		medium: {
-			fontFamily: 'roboto-mono',
+			fontFamily: 'roboto-mono-bold',
 			fontWeight: 'normal'
 		},
 		light: {

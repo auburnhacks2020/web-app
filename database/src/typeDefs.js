@@ -31,6 +31,11 @@ const typeDefs = gql`
 		register(registrationForm: RegistrationForm!): User!
 		login(email: String!, password: String!): LoginResponse!
 		verifyUser(email: String!, password: String!, token: String!): VerifyResponse!
+		sendVerification(email: String!): EmailSentResponse!
+	}
+
+	type EmailSentResponse {
+		sent: Boolean
 	}
 
 	type LoginResponse {
@@ -39,7 +44,8 @@ const typeDefs = gql`
 	}
 
 	type VerifyResponse {
-		verified: Boolean!
+		verified: Boolean
+		user: User
 	}
 `;
 

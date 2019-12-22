@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-
 module.exports = {
 	Query: {
 		// currentUser: (parent, args, { user, prisma }) => {
