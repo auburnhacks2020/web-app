@@ -33,6 +33,20 @@ module.exports = {
 
 			return user;
 		},
+		sendVerification: async (parent, { email }, ctx, info ) => {
+			if (email === '') {
+				throw new Error('Invalid Email')
+			}
+			const user = await ctx.prisma.user({ email });
+			
+			if (!user) {
+				throw new Error('Invalid Login');
+			}
+
+			sendVerifyEmail(email, user.firstName)
+
+			return true;
+		},
 		login: async (parent, { email, password }, ctx, info) => {
 			const user = await ctx.prisma.user({ email });
 
@@ -51,7 +65,7 @@ module.exports = {
 					id: user.id,
 					email: user.email
 				},
-				process.env.DB_SECRET,
+				process.env.LOGIN_SECRET,
 				{
 					expiresIn: '30d' // token will expire in 30days
 				}
