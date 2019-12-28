@@ -1,4 +1,3 @@
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -9,10 +8,7 @@ module.exports = {
 		// 		throw new Error('Not Authenticated');
 		// 	}
 		// 	return prisma.user({ id: user.id });
-        // }
-        getApplication: (parent, args, {user, prisma}) => {
-            
-        }
+		// }
 	},
 	Mutation: {
 		// register: async (parent, { registrationForm }, { prisma }, info) => {
@@ -20,6 +16,46 @@ module.exports = {
 		// 	// check for email in database
 		// 	const oldUser = await prisma.user({ email });
 		// 	return user;
-		//
+
+		submitApplication: async (
+			parent,
+			{ applicationForm },
+			{ user, prisma },
+			info
+		) => {
+			if (!user) {
+				throw new Error('Not Authenticated');
+			}
+
+			const app = await prisma.createApplication(applicationForm);
+			const updatedUser = await prisma.updateUser({
+				data: { application: app.id },
+				where: { id: user.id }
+			});
+
+			return {
+				submitted: true
+			};
+		},
+		updateApplication: async (
+			parent,
+			{ applicationForm },
+			{ user, prisma },
+			info
+		) => {
+			if (!user) {
+				throw new Error('Not Authenticated');
+			}
+
+			const appId = await prisma.user({ id: user.id }).application;
+			const app = await prisma.updateApplication({
+				data: { applicationForm },
+				where: { id: appId }
+			});
+
+			return {
+				updated: true
+			};
+		}
 	}
 };

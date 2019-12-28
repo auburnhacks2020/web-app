@@ -192,8 +192,6 @@ export type ApplicationOrderByInput =
   | "id_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
-  | "complete_ASC"
-  | "complete_DESC"
   | "studentId_ASC"
   | "studentId_DESC"
   | "dateOfBirth_ASC"
@@ -248,6 +246,8 @@ export type UserOrderByInput =
   | "firstName_DESC"
   | "lastName_ASC"
   | "lastName_DESC"
+  | "appComplete_ASC"
+  | "appComplete_DESC"
   | "emailVerified_ASC"
   | "emailVerified_DESC"
   | "createdAt_ASC"
@@ -259,81 +259,129 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface SponsorDataCreateInput {
-  id?: Maybe<ID_Input>;
-  major?: Maybe<String>;
-  educationLevel?: Maybe<String>;
-  school?: Maybe<String>;
-  interests?: Maybe<SponsorDataCreateinterestsInput>;
-  experience?: Maybe<Int>;
-  hackathonAwards?: Maybe<SponsorDataCreatehackathonAwardsInput>;
-  skills?: Maybe<SponsorDataCreateskillsInput>;
-  gpa?: Maybe<Float>;
-  aboutYou?: Maybe<String>;
-  biggestChallenge?: Maybe<String>;
-  resume?: Maybe<String>;
-}
-
 export type ApplicationWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface ApplicationUpdateManyMutationInput {
-  complete?: Maybe<Boolean>;
+export interface ApplicationWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
   studentId?: Maybe<String>;
+  studentId_not?: Maybe<String>;
+  studentId_in?: Maybe<String[] | String>;
+  studentId_not_in?: Maybe<String[] | String>;
+  studentId_lt?: Maybe<String>;
+  studentId_lte?: Maybe<String>;
+  studentId_gt?: Maybe<String>;
+  studentId_gte?: Maybe<String>;
+  studentId_contains?: Maybe<String>;
+  studentId_not_contains?: Maybe<String>;
+  studentId_starts_with?: Maybe<String>;
+  studentId_not_starts_with?: Maybe<String>;
+  studentId_ends_with?: Maybe<String>;
+  studentId_not_ends_with?: Maybe<String>;
   dateOfBirth?: Maybe<String>;
+  dateOfBirth_not?: Maybe<String>;
+  dateOfBirth_in?: Maybe<String[] | String>;
+  dateOfBirth_not_in?: Maybe<String[] | String>;
+  dateOfBirth_lt?: Maybe<String>;
+  dateOfBirth_lte?: Maybe<String>;
+  dateOfBirth_gt?: Maybe<String>;
+  dateOfBirth_gte?: Maybe<String>;
+  dateOfBirth_contains?: Maybe<String>;
+  dateOfBirth_not_contains?: Maybe<String>;
+  dateOfBirth_starts_with?: Maybe<String>;
+  dateOfBirth_not_starts_with?: Maybe<String>;
+  dateOfBirth_ends_with?: Maybe<String>;
+  dateOfBirth_not_ends_with?: Maybe<String>;
   phoneNumber?: Maybe<String>;
+  phoneNumber_not?: Maybe<String>;
+  phoneNumber_in?: Maybe<String[] | String>;
+  phoneNumber_not_in?: Maybe<String[] | String>;
+  phoneNumber_lt?: Maybe<String>;
+  phoneNumber_lte?: Maybe<String>;
+  phoneNumber_gt?: Maybe<String>;
+  phoneNumber_gte?: Maybe<String>;
+  phoneNumber_contains?: Maybe<String>;
+  phoneNumber_not_contains?: Maybe<String>;
+  phoneNumber_starts_with?: Maybe<String>;
+  phoneNumber_not_starts_with?: Maybe<String>;
+  phoneNumber_ends_with?: Maybe<String>;
+  phoneNumber_not_ends_with?: Maybe<String>;
   gender?: Maybe<String>;
+  gender_not?: Maybe<String>;
+  gender_in?: Maybe<String[] | String>;
+  gender_not_in?: Maybe<String[] | String>;
+  gender_lt?: Maybe<String>;
+  gender_lte?: Maybe<String>;
+  gender_gt?: Maybe<String>;
+  gender_gte?: Maybe<String>;
+  gender_contains?: Maybe<String>;
+  gender_not_contains?: Maybe<String>;
+  gender_starts_with?: Maybe<String>;
+  gender_not_starts_with?: Maybe<String>;
+  gender_ends_with?: Maybe<String>;
+  gender_not_ends_with?: Maybe<String>;
   race?: Maybe<String>;
-  languages?: Maybe<ApplicationUpdatelanguagesInput>;
-  dietaryRestrictions?: Maybe<ApplicationUpdatedietaryRestrictionsInput>;
-  specialAccommodations?: Maybe<ApplicationUpdatespecialAccommodationsInput>;
+  race_not?: Maybe<String>;
+  race_in?: Maybe<String[] | String>;
+  race_not_in?: Maybe<String[] | String>;
+  race_lt?: Maybe<String>;
+  race_lte?: Maybe<String>;
+  race_gt?: Maybe<String>;
+  race_gte?: Maybe<String>;
+  race_contains?: Maybe<String>;
+  race_not_contains?: Maybe<String>;
+  race_starts_with?: Maybe<String>;
+  race_not_starts_with?: Maybe<String>;
+  race_ends_with?: Maybe<String>;
+  race_not_ends_with?: Maybe<String>;
   shirtSize?: Maybe<String>;
+  shirtSize_not?: Maybe<String>;
+  shirtSize_in?: Maybe<String[] | String>;
+  shirtSize_not_in?: Maybe<String[] | String>;
+  shirtSize_lt?: Maybe<String>;
+  shirtSize_lte?: Maybe<String>;
+  shirtSize_gt?: Maybe<String>;
+  shirtSize_gte?: Maybe<String>;
+  shirtSize_contains?: Maybe<String>;
+  shirtSize_not_contains?: Maybe<String>;
+  shirtSize_starts_with?: Maybe<String>;
+  shirtSize_not_starts_with?: Maybe<String>;
+  shirtSize_ends_with?: Maybe<String>;
+  shirtSize_not_ends_with?: Maybe<String>;
   needTravel?: Maybe<Boolean>;
+  needTravel_not?: Maybe<Boolean>;
   emailOptIn?: Maybe<Boolean>;
+  emailOptIn_not?: Maybe<Boolean>;
   acceptCodeOfConduct?: Maybe<Boolean>;
+  acceptCodeOfConduct_not?: Maybe<Boolean>;
+  sponsorData?: Maybe<SponsorDataWhereInput>;
   sendToSponsors?: Maybe<Boolean>;
-}
-
-export interface SponsorDataUpdateDataInput {
-  major?: Maybe<String>;
-  educationLevel?: Maybe<String>;
-  school?: Maybe<String>;
-  interests?: Maybe<SponsorDataUpdateinterestsInput>;
-  experience?: Maybe<Int>;
-  hackathonAwards?: Maybe<SponsorDataUpdatehackathonAwardsInput>;
-  skills?: Maybe<SponsorDataUpdateskillsInput>;
-  gpa?: Maybe<Float>;
-  aboutYou?: Maybe<String>;
-  biggestChallenge?: Maybe<String>;
-  resume?: Maybe<String>;
-}
-
-export interface SponsorDataUpsertNestedInput {
-  update: SponsorDataUpdateDataInput;
-  create: SponsorDataCreateInput;
-}
-
-export interface ApplicationUpdateInput {
-  complete?: Maybe<Boolean>;
-  studentId?: Maybe<String>;
-  dateOfBirth?: Maybe<String>;
-  phoneNumber?: Maybe<String>;
-  gender?: Maybe<String>;
-  race?: Maybe<String>;
-  languages?: Maybe<ApplicationUpdatelanguagesInput>;
-  dietaryRestrictions?: Maybe<ApplicationUpdatedietaryRestrictionsInput>;
-  specialAccommodations?: Maybe<ApplicationUpdatespecialAccommodationsInput>;
-  shirtSize?: Maybe<String>;
-  needTravel?: Maybe<Boolean>;
-  emailOptIn?: Maybe<Boolean>;
-  acceptCodeOfConduct?: Maybe<Boolean>;
-  sponsorData?: Maybe<SponsorDataUpdateOneInput>;
-  sendToSponsors?: Maybe<Boolean>;
-}
-
-export interface SponsorDataUpdateskillsInput {
-  set?: Maybe<String[] | String>;
+  sendToSponsors_not?: Maybe<Boolean>;
+  AND?: Maybe<ApplicationWhereInput[] | ApplicationWhereInput>;
+  OR?: Maybe<ApplicationWhereInput[] | ApplicationWhereInput>;
+  NOT?: Maybe<ApplicationWhereInput[] | ApplicationWhereInput>;
 }
 
 export interface SponsorDataWhereInput {
@@ -456,96 +504,14 @@ export interface SponsorDataWhereInput {
   NOT?: Maybe<SponsorDataWhereInput[] | SponsorDataWhereInput>;
 }
 
-export interface SponsorDataSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<SponsorDataWhereInput>;
-  AND?: Maybe<
-    SponsorDataSubscriptionWhereInput[] | SponsorDataSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    SponsorDataSubscriptionWhereInput[] | SponsorDataSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    SponsorDataSubscriptionWhereInput[] | SponsorDataSubscriptionWhereInput
-  >;
-}
-
-export interface UserUpdateManyMutationInput {
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  emailVerified?: Maybe<Boolean>;
-  role?: Maybe<ROLE>;
-}
-
-export interface ApplicationCreateInput {
-  id?: Maybe<ID_Input>;
-  complete?: Maybe<Boolean>;
-  studentId?: Maybe<String>;
-  dateOfBirth?: Maybe<String>;
-  phoneNumber?: Maybe<String>;
-  gender?: Maybe<String>;
-  race?: Maybe<String>;
-  languages?: Maybe<ApplicationCreatelanguagesInput>;
-  dietaryRestrictions?: Maybe<ApplicationCreatedietaryRestrictionsInput>;
-  specialAccommodations?: Maybe<ApplicationCreatespecialAccommodationsInput>;
-  shirtSize?: Maybe<String>;
-  needTravel?: Maybe<Boolean>;
-  emailOptIn?: Maybe<Boolean>;
-  acceptCodeOfConduct?: Maybe<Boolean>;
-  sponsorData?: Maybe<SponsorDataCreateOneInput>;
-  sendToSponsors?: Maybe<Boolean>;
-}
-
 export type SponsorDataWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface ApplicationCreatelanguagesInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface ApplicationUpdateOneInput {
-  create?: Maybe<ApplicationCreateInput>;
-  update?: Maybe<ApplicationUpdateDataInput>;
-  upsert?: Maybe<ApplicationUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<ApplicationWhereUniqueInput>;
-}
-
-export interface ApplicationCreatedietaryRestrictionsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface ApplicationCreateOneInput {
-  create?: Maybe<ApplicationCreateInput>;
-  connect?: Maybe<ApplicationWhereUniqueInput>;
-}
-
-export interface ApplicationCreatespecialAccommodationsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  email: String;
-  password: String;
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  application?: Maybe<ApplicationCreateOneInput>;
-  emailVerified?: Maybe<Boolean>;
-  role?: Maybe<ROLE>;
-}
-
-export interface SponsorDataCreateOneInput {
-  create?: Maybe<SponsorDataCreateInput>;
-  connect?: Maybe<SponsorDataWhereUniqueInput>;
-}
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  email?: Maybe<String>;
+}>;
 
 export interface UserWhereInput {
   id?: Maybe<ID_Input>;
@@ -619,6 +585,8 @@ export interface UserWhereInput {
   lastName_ends_with?: Maybe<String>;
   lastName_not_ends_with?: Maybe<String>;
   application?: Maybe<ApplicationWhereInput>;
+  appComplete?: Maybe<Boolean>;
+  appComplete_not?: Maybe<Boolean>;
   emailVerified?: Maybe<Boolean>;
   emailVerified_not?: Maybe<Boolean>;
   createdAt?: Maybe<DateTimeInput>;
@@ -646,135 +614,248 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface SponsorDataUpdatehackathonAwardsInput {
+export interface ApplicationCreateInput {
+  id?: Maybe<ID_Input>;
+  studentId?: Maybe<String>;
+  dateOfBirth?: Maybe<String>;
+  phoneNumber?: Maybe<String>;
+  gender?: Maybe<String>;
+  race?: Maybe<String>;
+  languages?: Maybe<ApplicationCreatelanguagesInput>;
+  dietaryRestrictions?: Maybe<ApplicationCreatedietaryRestrictionsInput>;
+  specialAccommodations?: Maybe<ApplicationCreatespecialAccommodationsInput>;
+  shirtSize?: Maybe<String>;
+  needTravel?: Maybe<Boolean>;
+  emailOptIn?: Maybe<Boolean>;
+  acceptCodeOfConduct?: Maybe<Boolean>;
+  sponsorData?: Maybe<SponsorDataCreateOneInput>;
+  sendToSponsors?: Maybe<Boolean>;
+}
+
+export interface ApplicationCreatelanguagesInput {
   set?: Maybe<String[] | String>;
 }
 
-export interface ApplicationWhereInput {
+export interface ApplicationCreatedietaryRestrictionsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ApplicationCreatespecialAccommodationsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface SponsorDataCreateOneInput {
+  create?: Maybe<SponsorDataCreateInput>;
+  connect?: Maybe<SponsorDataWhereUniqueInput>;
+}
+
+export interface SponsorDataCreateInput {
   id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  complete?: Maybe<Boolean>;
-  complete_not?: Maybe<Boolean>;
-  studentId?: Maybe<String>;
-  studentId_not?: Maybe<String>;
-  studentId_in?: Maybe<String[] | String>;
-  studentId_not_in?: Maybe<String[] | String>;
-  studentId_lt?: Maybe<String>;
-  studentId_lte?: Maybe<String>;
-  studentId_gt?: Maybe<String>;
-  studentId_gte?: Maybe<String>;
-  studentId_contains?: Maybe<String>;
-  studentId_not_contains?: Maybe<String>;
-  studentId_starts_with?: Maybe<String>;
-  studentId_not_starts_with?: Maybe<String>;
-  studentId_ends_with?: Maybe<String>;
-  studentId_not_ends_with?: Maybe<String>;
-  dateOfBirth?: Maybe<String>;
-  dateOfBirth_not?: Maybe<String>;
-  dateOfBirth_in?: Maybe<String[] | String>;
-  dateOfBirth_not_in?: Maybe<String[] | String>;
-  dateOfBirth_lt?: Maybe<String>;
-  dateOfBirth_lte?: Maybe<String>;
-  dateOfBirth_gt?: Maybe<String>;
-  dateOfBirth_gte?: Maybe<String>;
-  dateOfBirth_contains?: Maybe<String>;
-  dateOfBirth_not_contains?: Maybe<String>;
-  dateOfBirth_starts_with?: Maybe<String>;
-  dateOfBirth_not_starts_with?: Maybe<String>;
-  dateOfBirth_ends_with?: Maybe<String>;
-  dateOfBirth_not_ends_with?: Maybe<String>;
-  phoneNumber?: Maybe<String>;
-  phoneNumber_not?: Maybe<String>;
-  phoneNumber_in?: Maybe<String[] | String>;
-  phoneNumber_not_in?: Maybe<String[] | String>;
-  phoneNumber_lt?: Maybe<String>;
-  phoneNumber_lte?: Maybe<String>;
-  phoneNumber_gt?: Maybe<String>;
-  phoneNumber_gte?: Maybe<String>;
-  phoneNumber_contains?: Maybe<String>;
-  phoneNumber_not_contains?: Maybe<String>;
-  phoneNumber_starts_with?: Maybe<String>;
-  phoneNumber_not_starts_with?: Maybe<String>;
-  phoneNumber_ends_with?: Maybe<String>;
-  phoneNumber_not_ends_with?: Maybe<String>;
-  gender?: Maybe<String>;
-  gender_not?: Maybe<String>;
-  gender_in?: Maybe<String[] | String>;
-  gender_not_in?: Maybe<String[] | String>;
-  gender_lt?: Maybe<String>;
-  gender_lte?: Maybe<String>;
-  gender_gt?: Maybe<String>;
-  gender_gte?: Maybe<String>;
-  gender_contains?: Maybe<String>;
-  gender_not_contains?: Maybe<String>;
-  gender_starts_with?: Maybe<String>;
-  gender_not_starts_with?: Maybe<String>;
-  gender_ends_with?: Maybe<String>;
-  gender_not_ends_with?: Maybe<String>;
-  race?: Maybe<String>;
-  race_not?: Maybe<String>;
-  race_in?: Maybe<String[] | String>;
-  race_not_in?: Maybe<String[] | String>;
-  race_lt?: Maybe<String>;
-  race_lte?: Maybe<String>;
-  race_gt?: Maybe<String>;
-  race_gte?: Maybe<String>;
-  race_contains?: Maybe<String>;
-  race_not_contains?: Maybe<String>;
-  race_starts_with?: Maybe<String>;
-  race_not_starts_with?: Maybe<String>;
-  race_ends_with?: Maybe<String>;
-  race_not_ends_with?: Maybe<String>;
-  shirtSize?: Maybe<String>;
-  shirtSize_not?: Maybe<String>;
-  shirtSize_in?: Maybe<String[] | String>;
-  shirtSize_not_in?: Maybe<String[] | String>;
-  shirtSize_lt?: Maybe<String>;
-  shirtSize_lte?: Maybe<String>;
-  shirtSize_gt?: Maybe<String>;
-  shirtSize_gte?: Maybe<String>;
-  shirtSize_contains?: Maybe<String>;
-  shirtSize_not_contains?: Maybe<String>;
-  shirtSize_starts_with?: Maybe<String>;
-  shirtSize_not_starts_with?: Maybe<String>;
-  shirtSize_ends_with?: Maybe<String>;
-  shirtSize_not_ends_with?: Maybe<String>;
-  needTravel?: Maybe<Boolean>;
-  needTravel_not?: Maybe<Boolean>;
-  emailOptIn?: Maybe<Boolean>;
-  emailOptIn_not?: Maybe<Boolean>;
-  acceptCodeOfConduct?: Maybe<Boolean>;
-  acceptCodeOfConduct_not?: Maybe<Boolean>;
-  sponsorData?: Maybe<SponsorDataWhereInput>;
-  sendToSponsors?: Maybe<Boolean>;
-  sendToSponsors_not?: Maybe<Boolean>;
-  AND?: Maybe<ApplicationWhereInput[] | ApplicationWhereInput>;
-  OR?: Maybe<ApplicationWhereInput[] | ApplicationWhereInput>;
-  NOT?: Maybe<ApplicationWhereInput[] | ApplicationWhereInput>;
+  major?: Maybe<String>;
+  educationLevel?: Maybe<String>;
+  school?: Maybe<String>;
+  interests?: Maybe<SponsorDataCreateinterestsInput>;
+  experience?: Maybe<Int>;
+  hackathonAwards?: Maybe<SponsorDataCreatehackathonAwardsInput>;
+  skills?: Maybe<SponsorDataCreateskillsInput>;
+  gpa?: Maybe<Float>;
+  aboutYou?: Maybe<String>;
+  biggestChallenge?: Maybe<String>;
+  resume?: Maybe<String>;
 }
 
 export interface SponsorDataCreateinterestsInput {
   set?: Maybe<String[] | String>;
+}
+
+export interface SponsorDataCreatehackathonAwardsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface SponsorDataCreateskillsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ApplicationUpdateInput {
+  studentId?: Maybe<String>;
+  dateOfBirth?: Maybe<String>;
+  phoneNumber?: Maybe<String>;
+  gender?: Maybe<String>;
+  race?: Maybe<String>;
+  languages?: Maybe<ApplicationUpdatelanguagesInput>;
+  dietaryRestrictions?: Maybe<ApplicationUpdatedietaryRestrictionsInput>;
+  specialAccommodations?: Maybe<ApplicationUpdatespecialAccommodationsInput>;
+  shirtSize?: Maybe<String>;
+  needTravel?: Maybe<Boolean>;
+  emailOptIn?: Maybe<Boolean>;
+  acceptCodeOfConduct?: Maybe<Boolean>;
+  sponsorData?: Maybe<SponsorDataUpdateOneInput>;
+  sendToSponsors?: Maybe<Boolean>;
+}
+
+export interface ApplicationUpdatelanguagesInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ApplicationUpdatedietaryRestrictionsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface ApplicationUpdatespecialAccommodationsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface SponsorDataUpdateOneInput {
+  create?: Maybe<SponsorDataCreateInput>;
+  update?: Maybe<SponsorDataUpdateDataInput>;
+  upsert?: Maybe<SponsorDataUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<SponsorDataWhereUniqueInput>;
+}
+
+export interface SponsorDataUpdateDataInput {
+  major?: Maybe<String>;
+  educationLevel?: Maybe<String>;
+  school?: Maybe<String>;
+  interests?: Maybe<SponsorDataUpdateinterestsInput>;
+  experience?: Maybe<Int>;
+  hackathonAwards?: Maybe<SponsorDataUpdatehackathonAwardsInput>;
+  skills?: Maybe<SponsorDataUpdateskillsInput>;
+  gpa?: Maybe<Float>;
+  aboutYou?: Maybe<String>;
+  biggestChallenge?: Maybe<String>;
+  resume?: Maybe<String>;
+}
+
+export interface SponsorDataUpdateinterestsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface SponsorDataUpdatehackathonAwardsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface SponsorDataUpdateskillsInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface SponsorDataUpsertNestedInput {
+  update: SponsorDataUpdateDataInput;
+  create: SponsorDataCreateInput;
+}
+
+export interface ApplicationUpdateManyMutationInput {
+  studentId?: Maybe<String>;
+  dateOfBirth?: Maybe<String>;
+  phoneNumber?: Maybe<String>;
+  gender?: Maybe<String>;
+  race?: Maybe<String>;
+  languages?: Maybe<ApplicationUpdatelanguagesInput>;
+  dietaryRestrictions?: Maybe<ApplicationUpdatedietaryRestrictionsInput>;
+  specialAccommodations?: Maybe<ApplicationUpdatespecialAccommodationsInput>;
+  shirtSize?: Maybe<String>;
+  needTravel?: Maybe<Boolean>;
+  emailOptIn?: Maybe<Boolean>;
+  acceptCodeOfConduct?: Maybe<Boolean>;
+  sendToSponsors?: Maybe<Boolean>;
+}
+
+export interface SponsorDataUpdateInput {
+  major?: Maybe<String>;
+  educationLevel?: Maybe<String>;
+  school?: Maybe<String>;
+  interests?: Maybe<SponsorDataUpdateinterestsInput>;
+  experience?: Maybe<Int>;
+  hackathonAwards?: Maybe<SponsorDataUpdatehackathonAwardsInput>;
+  skills?: Maybe<SponsorDataUpdateskillsInput>;
+  gpa?: Maybe<Float>;
+  aboutYou?: Maybe<String>;
+  biggestChallenge?: Maybe<String>;
+  resume?: Maybe<String>;
+}
+
+export interface SponsorDataUpdateManyMutationInput {
+  major?: Maybe<String>;
+  educationLevel?: Maybe<String>;
+  school?: Maybe<String>;
+  interests?: Maybe<SponsorDataUpdateinterestsInput>;
+  experience?: Maybe<Int>;
+  hackathonAwards?: Maybe<SponsorDataUpdatehackathonAwardsInput>;
+  skills?: Maybe<SponsorDataUpdateskillsInput>;
+  gpa?: Maybe<Float>;
+  aboutYou?: Maybe<String>;
+  biggestChallenge?: Maybe<String>;
+  resume?: Maybe<String>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  email: String;
+  password: String;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  application?: Maybe<ApplicationCreateOneInput>;
+  appComplete?: Maybe<Boolean>;
+  emailVerified?: Maybe<Boolean>;
+  role?: Maybe<ROLE>;
+}
+
+export interface ApplicationCreateOneInput {
+  create?: Maybe<ApplicationCreateInput>;
+  connect?: Maybe<ApplicationWhereUniqueInput>;
+}
+
+export interface UserUpdateInput {
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  application?: Maybe<ApplicationUpdateOneInput>;
+  appComplete?: Maybe<Boolean>;
+  emailVerified?: Maybe<Boolean>;
+  role?: Maybe<ROLE>;
+}
+
+export interface ApplicationUpdateOneInput {
+  create?: Maybe<ApplicationCreateInput>;
+  update?: Maybe<ApplicationUpdateDataInput>;
+  upsert?: Maybe<ApplicationUpsertNestedInput>;
+  delete?: Maybe<Boolean>;
+  disconnect?: Maybe<Boolean>;
+  connect?: Maybe<ApplicationWhereUniqueInput>;
+}
+
+export interface ApplicationUpdateDataInput {
+  studentId?: Maybe<String>;
+  dateOfBirth?: Maybe<String>;
+  phoneNumber?: Maybe<String>;
+  gender?: Maybe<String>;
+  race?: Maybe<String>;
+  languages?: Maybe<ApplicationUpdatelanguagesInput>;
+  dietaryRestrictions?: Maybe<ApplicationUpdatedietaryRestrictionsInput>;
+  specialAccommodations?: Maybe<ApplicationUpdatespecialAccommodationsInput>;
+  shirtSize?: Maybe<String>;
+  needTravel?: Maybe<Boolean>;
+  emailOptIn?: Maybe<Boolean>;
+  acceptCodeOfConduct?: Maybe<Boolean>;
+  sponsorData?: Maybe<SponsorDataUpdateOneInput>;
+  sendToSponsors?: Maybe<Boolean>;
+}
+
+export interface ApplicationUpsertNestedInput {
+  update: ApplicationUpdateDataInput;
+  create: ApplicationCreateInput;
+}
+
+export interface UserUpdateManyMutationInput {
+  email?: Maybe<String>;
+  password?: Maybe<String>;
+  firstName?: Maybe<String>;
+  lastName?: Maybe<String>;
+  appComplete?: Maybe<Boolean>;
+  emailVerified?: Maybe<Boolean>;
+  role?: Maybe<ROLE>;
 }
 
 export interface ApplicationSubscriptionWhereInput {
@@ -794,74 +875,21 @@ export interface ApplicationSubscriptionWhereInput {
   >;
 }
 
-export interface SponsorDataCreatehackathonAwardsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface ApplicationUpdateDataInput {
-  complete?: Maybe<Boolean>;
-  studentId?: Maybe<String>;
-  dateOfBirth?: Maybe<String>;
-  phoneNumber?: Maybe<String>;
-  gender?: Maybe<String>;
-  race?: Maybe<String>;
-  languages?: Maybe<ApplicationUpdatelanguagesInput>;
-  dietaryRestrictions?: Maybe<ApplicationUpdatedietaryRestrictionsInput>;
-  specialAccommodations?: Maybe<ApplicationUpdatespecialAccommodationsInput>;
-  shirtSize?: Maybe<String>;
-  needTravel?: Maybe<Boolean>;
-  emailOptIn?: Maybe<Boolean>;
-  acceptCodeOfConduct?: Maybe<Boolean>;
-  sponsorData?: Maybe<SponsorDataUpdateOneInput>;
-  sendToSponsors?: Maybe<Boolean>;
-}
-
-export interface SponsorDataCreateskillsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  email?: Maybe<String>;
-}>;
-
-export interface SponsorDataUpdateinterestsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface SponsorDataUpdateInput {
-  major?: Maybe<String>;
-  educationLevel?: Maybe<String>;
-  school?: Maybe<String>;
-  interests?: Maybe<SponsorDataUpdateinterestsInput>;
-  experience?: Maybe<Int>;
-  hackathonAwards?: Maybe<SponsorDataUpdatehackathonAwardsInput>;
-  skills?: Maybe<SponsorDataUpdateskillsInput>;
-  gpa?: Maybe<Float>;
-  aboutYou?: Maybe<String>;
-  biggestChallenge?: Maybe<String>;
-  resume?: Maybe<String>;
-}
-
-export interface SponsorDataUpdateOneInput {
-  create?: Maybe<SponsorDataCreateInput>;
-  update?: Maybe<SponsorDataUpdateDataInput>;
-  upsert?: Maybe<SponsorDataUpsertNestedInput>;
-  delete?: Maybe<Boolean>;
-  disconnect?: Maybe<Boolean>;
-  connect?: Maybe<SponsorDataWhereUniqueInput>;
-}
-
-export interface ApplicationUpdatespecialAccommodationsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface ApplicationUpdatedietaryRestrictionsInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface ApplicationUpdatelanguagesInput {
-  set?: Maybe<String[] | String>;
+export interface SponsorDataSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<SponsorDataWhereInput>;
+  AND?: Maybe<
+    SponsorDataSubscriptionWhereInput[] | SponsorDataSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    SponsorDataSubscriptionWhereInput[] | SponsorDataSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    SponsorDataSubscriptionWhereInput[] | SponsorDataSubscriptionWhereInput
+  >;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -875,212 +903,87 @@ export interface UserSubscriptionWhereInput {
   NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
-export interface SponsorDataUpdateManyMutationInput {
-  major?: Maybe<String>;
-  educationLevel?: Maybe<String>;
-  school?: Maybe<String>;
-  interests?: Maybe<SponsorDataUpdateinterestsInput>;
-  experience?: Maybe<Int>;
-  hackathonAwards?: Maybe<SponsorDataUpdatehackathonAwardsInput>;
-  skills?: Maybe<SponsorDataUpdateskillsInput>;
-  gpa?: Maybe<Float>;
-  aboutYou?: Maybe<String>;
-  biggestChallenge?: Maybe<String>;
-  resume?: Maybe<String>;
-}
-
-export interface UserUpdateInput {
-  email?: Maybe<String>;
-  password?: Maybe<String>;
-  firstName?: Maybe<String>;
-  lastName?: Maybe<String>;
-  application?: Maybe<ApplicationUpdateOneInput>;
-  emailVerified?: Maybe<Boolean>;
-  role?: Maybe<ROLE>;
-}
-
-export interface ApplicationUpsertNestedInput {
-  update: ApplicationUpdateDataInput;
-  create: ApplicationCreateInput;
-}
-
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface UserPreviousValues {
+export interface Application {
   id: ID_Output;
-  email: String;
-  password: String;
-  firstName?: String;
-  lastName?: String;
-  emailVerified: Boolean;
   createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-  role: ROLE;
+  studentId?: String;
+  dateOfBirth?: String;
+  phoneNumber?: String;
+  gender?: String;
+  race?: String;
+  languages: String[];
+  dietaryRestrictions: String[];
+  specialAccommodations: String[];
+  shirtSize?: String;
+  needTravel?: Boolean;
+  emailOptIn?: Boolean;
+  acceptCodeOfConduct?: Boolean;
+  sendToSponsors?: Boolean;
 }
 
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
-    Fragmentable {
+export interface ApplicationPromise extends Promise<Application>, Fragmentable {
   id: () => Promise<ID_Output>;
-  email: () => Promise<String>;
-  password: () => Promise<String>;
-  firstName: () => Promise<String>;
-  lastName: () => Promise<String>;
-  emailVerified: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-  role: () => Promise<ROLE>;
+  studentId: () => Promise<String>;
+  dateOfBirth: () => Promise<String>;
+  phoneNumber: () => Promise<String>;
+  gender: () => Promise<String>;
+  race: () => Promise<String>;
+  languages: () => Promise<String[]>;
+  dietaryRestrictions: () => Promise<String[]>;
+  specialAccommodations: () => Promise<String[]>;
+  shirtSize: () => Promise<String>;
+  needTravel: () => Promise<Boolean>;
+  emailOptIn: () => Promise<Boolean>;
+  acceptCodeOfConduct: () => Promise<Boolean>;
+  sponsorData: <T = SponsorDataPromise>() => T;
+  sendToSponsors: () => Promise<Boolean>;
 }
 
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
+export interface ApplicationSubscription
+  extends Promise<AsyncIterator<Application>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  email: () => Promise<AsyncIterator<String>>;
-  password: () => Promise<AsyncIterator<String>>;
-  firstName: () => Promise<AsyncIterator<String>>;
-  lastName: () => Promise<AsyncIterator<String>>;
-  emailVerified: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  role: () => Promise<AsyncIterator<ROLE>>;
+  studentId: () => Promise<AsyncIterator<String>>;
+  dateOfBirth: () => Promise<AsyncIterator<String>>;
+  phoneNumber: () => Promise<AsyncIterator<String>>;
+  gender: () => Promise<AsyncIterator<String>>;
+  race: () => Promise<AsyncIterator<String>>;
+  languages: () => Promise<AsyncIterator<String[]>>;
+  dietaryRestrictions: () => Promise<AsyncIterator<String[]>>;
+  specialAccommodations: () => Promise<AsyncIterator<String[]>>;
+  shirtSize: () => Promise<AsyncIterator<String>>;
+  needTravel: () => Promise<AsyncIterator<Boolean>>;
+  emailOptIn: () => Promise<AsyncIterator<Boolean>>;
+  acceptCodeOfConduct: () => Promise<AsyncIterator<Boolean>>;
+  sponsorData: <T = SponsorDataSubscription>() => T;
+  sendToSponsors: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface SponsorDataEdge {
-  node: SponsorData;
-  cursor: String;
-}
-
-export interface SponsorDataEdgePromise
-  extends Promise<SponsorDataEdge>,
+export interface ApplicationNullablePromise
+  extends Promise<Application | null>,
     Fragmentable {
-  node: <T = SponsorDataPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface SponsorDataEdgeSubscription
-  extends Promise<AsyncIterator<SponsorDataEdge>>,
-    Fragmentable {
-  node: <T = SponsorDataSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ApplicationConnection {
-  pageInfo: PageInfo;
-  edges: ApplicationEdge[];
-}
-
-export interface ApplicationConnectionPromise
-  extends Promise<ApplicationConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ApplicationEdge>>() => T;
-  aggregate: <T = AggregateApplicationPromise>() => T;
-}
-
-export interface ApplicationConnectionSubscription
-  extends Promise<AsyncIterator<ApplicationConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ApplicationEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateApplicationSubscription>() => T;
-}
-
-export interface SponsorDataConnection {
-  pageInfo: PageInfo;
-  edges: SponsorDataEdge[];
-}
-
-export interface SponsorDataConnectionPromise
-  extends Promise<SponsorDataConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<SponsorDataEdge>>() => T;
-  aggregate: <T = AggregateSponsorDataPromise>() => T;
-}
-
-export interface SponsorDataConnectionSubscription
-  extends Promise<AsyncIterator<SponsorDataConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<SponsorDataEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateSponsorDataSubscription>() => T;
-}
-
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface SponsorDataSubscriptionPayload {
-  mutation: MutationType;
-  node: SponsorData;
-  updatedFields: String[];
-  previousValues: SponsorDataPreviousValues;
-}
-
-export interface SponsorDataSubscriptionPayloadPromise
-  extends Promise<SponsorDataSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = SponsorDataPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = SponsorDataPreviousValuesPromise>() => T;
-}
-
-export interface SponsorDataSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<SponsorDataSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = SponsorDataSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = SponsorDataPreviousValuesSubscription>() => T;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface AggregateApplication {
-  count: Int;
-}
-
-export interface AggregateApplicationPromise
-  extends Promise<AggregateApplication>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateApplicationSubscription
-  extends Promise<AsyncIterator<AggregateApplication>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  id: () => Promise<ID_Output>;
+  createdAt: () => Promise<DateTimeOutput>;
+  studentId: () => Promise<String>;
+  dateOfBirth: () => Promise<String>;
+  phoneNumber: () => Promise<String>;
+  gender: () => Promise<String>;
+  race: () => Promise<String>;
+  languages: () => Promise<String[]>;
+  dietaryRestrictions: () => Promise<String[]>;
+  specialAccommodations: () => Promise<String[]>;
+  shirtSize: () => Promise<String>;
+  needTravel: () => Promise<Boolean>;
+  emailOptIn: () => Promise<Boolean>;
+  acceptCodeOfConduct: () => Promise<Boolean>;
+  sponsorData: <T = SponsorDataPromise>() => T;
+  sendToSponsors: () => Promise<Boolean>;
 }
 
 export interface SponsorData {
@@ -1147,6 +1050,50 @@ export interface SponsorDataNullablePromise
   resume: () => Promise<String>;
 }
 
+export interface ApplicationConnection {
+  pageInfo: PageInfo;
+  edges: ApplicationEdge[];
+}
+
+export interface ApplicationConnectionPromise
+  extends Promise<ApplicationConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ApplicationEdge>>() => T;
+  aggregate: <T = AggregateApplicationPromise>() => T;
+}
+
+export interface ApplicationConnectionSubscription
+  extends Promise<AsyncIterator<ApplicationConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ApplicationEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateApplicationSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
 export interface ApplicationEdge {
   node: Application;
   cursor: String;
@@ -1166,12 +1113,85 @@ export interface ApplicationEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
+export interface AggregateApplication {
+  count: Int;
+}
+
+export interface AggregateApplicationPromise
+  extends Promise<AggregateApplication>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateApplicationSubscription
+  extends Promise<AsyncIterator<AggregateApplication>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface SponsorDataConnection {
+  pageInfo: PageInfo;
+  edges: SponsorDataEdge[];
+}
+
+export interface SponsorDataConnectionPromise
+  extends Promise<SponsorDataConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<SponsorDataEdge>>() => T;
+  aggregate: <T = AggregateSponsorDataPromise>() => T;
+}
+
+export interface SponsorDataConnectionSubscription
+  extends Promise<AsyncIterator<SponsorDataConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SponsorDataEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSponsorDataSubscription>() => T;
+}
+
+export interface SponsorDataEdge {
+  node: SponsorData;
+  cursor: String;
+}
+
+export interface SponsorDataEdgePromise
+  extends Promise<SponsorDataEdge>,
+    Fragmentable {
+  node: <T = SponsorDataPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface SponsorDataEdgeSubscription
+  extends Promise<AsyncIterator<SponsorDataEdge>>,
+    Fragmentable {
+  node: <T = SponsorDataSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateSponsorData {
+  count: Int;
+}
+
+export interface AggregateSponsorDataPromise
+  extends Promise<AggregateSponsorData>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateSponsorDataSubscription
+  extends Promise<AsyncIterator<AggregateSponsorData>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface User {
   id: ID_Output;
   email: String;
   password: String;
   firstName?: String;
   lastName?: String;
+  appComplete: Boolean;
   emailVerified: Boolean;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
@@ -1185,6 +1205,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   firstName: () => Promise<String>;
   lastName: () => Promise<String>;
   application: <T = ApplicationPromise>() => T;
+  appComplete: () => Promise<Boolean>;
   emailVerified: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
@@ -1200,6 +1221,7 @@ export interface UserSubscription
   firstName: () => Promise<AsyncIterator<String>>;
   lastName: () => Promise<AsyncIterator<String>>;
   application: <T = ApplicationSubscription>() => T;
+  appComplete: () => Promise<AsyncIterator<Boolean>>;
   emailVerified: () => Promise<AsyncIterator<Boolean>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -1215,71 +1237,81 @@ export interface UserNullablePromise
   firstName: () => Promise<String>;
   lastName: () => Promise<String>;
   application: <T = ApplicationPromise>() => T;
+  appComplete: () => Promise<Boolean>;
   emailVerified: () => Promise<Boolean>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
   role: () => Promise<ROLE>;
 }
 
-export interface ApplicationPreviousValues {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  complete: Boolean;
-  studentId?: String;
-  dateOfBirth?: String;
-  phoneNumber?: String;
-  gender?: String;
-  race?: String;
-  languages: String[];
-  dietaryRestrictions: String[];
-  specialAccommodations: String[];
-  shirtSize?: String;
-  needTravel?: Boolean;
-  emailOptIn?: Boolean;
-  acceptCodeOfConduct?: Boolean;
-  sendToSponsors?: Boolean;
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
 }
 
-export interface ApplicationPreviousValuesPromise
-  extends Promise<ApplicationPreviousValues>,
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  complete: () => Promise<Boolean>;
-  studentId: () => Promise<String>;
-  dateOfBirth: () => Promise<String>;
-  phoneNumber: () => Promise<String>;
-  gender: () => Promise<String>;
-  race: () => Promise<String>;
-  languages: () => Promise<String[]>;
-  dietaryRestrictions: () => Promise<String[]>;
-  specialAccommodations: () => Promise<String[]>;
-  shirtSize: () => Promise<String>;
-  needTravel: () => Promise<Boolean>;
-  emailOptIn: () => Promise<Boolean>;
-  acceptCodeOfConduct: () => Promise<Boolean>;
-  sendToSponsors: () => Promise<Boolean>;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
 }
 
-export interface ApplicationPreviousValuesSubscription
-  extends Promise<AsyncIterator<ApplicationPreviousValues>>,
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
     Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  complete: () => Promise<AsyncIterator<Boolean>>;
-  studentId: () => Promise<AsyncIterator<String>>;
-  dateOfBirth: () => Promise<AsyncIterator<String>>;
-  phoneNumber: () => Promise<AsyncIterator<String>>;
-  gender: () => Promise<AsyncIterator<String>>;
-  race: () => Promise<AsyncIterator<String>>;
-  languages: () => Promise<AsyncIterator<String[]>>;
-  dietaryRestrictions: () => Promise<AsyncIterator<String[]>>;
-  specialAccommodations: () => Promise<AsyncIterator<String[]>>;
-  shirtSize: () => Promise<AsyncIterator<String>>;
-  needTravel: () => Promise<AsyncIterator<Boolean>>;
-  emailOptIn: () => Promise<AsyncIterator<Boolean>>;
-  acceptCodeOfConduct: () => Promise<AsyncIterator<Boolean>>;
-  sendToSponsors: () => Promise<AsyncIterator<Boolean>>;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
 }
 
 export interface ApplicationSubscriptionPayload {
@@ -1307,10 +1339,9 @@ export interface ApplicationSubscriptionPayloadSubscription
   previousValues: <T = ApplicationPreviousValuesSubscription>() => T;
 }
 
-export interface Application {
+export interface ApplicationPreviousValues {
   id: ID_Output;
   createdAt: DateTimeOutput;
-  complete: Boolean;
   studentId?: String;
   dateOfBirth?: String;
   phoneNumber?: String;
@@ -1326,10 +1357,11 @@ export interface Application {
   sendToSponsors?: Boolean;
 }
 
-export interface ApplicationPromise extends Promise<Application>, Fragmentable {
+export interface ApplicationPreviousValuesPromise
+  extends Promise<ApplicationPreviousValues>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
   createdAt: () => Promise<DateTimeOutput>;
-  complete: () => Promise<Boolean>;
   studentId: () => Promise<String>;
   dateOfBirth: () => Promise<String>;
   phoneNumber: () => Promise<String>;
@@ -1342,16 +1374,14 @@ export interface ApplicationPromise extends Promise<Application>, Fragmentable {
   needTravel: () => Promise<Boolean>;
   emailOptIn: () => Promise<Boolean>;
   acceptCodeOfConduct: () => Promise<Boolean>;
-  sponsorData: <T = SponsorDataPromise>() => T;
   sendToSponsors: () => Promise<Boolean>;
 }
 
-export interface ApplicationSubscription
-  extends Promise<AsyncIterator<Application>>,
+export interface ApplicationPreviousValuesSubscription
+  extends Promise<AsyncIterator<ApplicationPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  complete: () => Promise<AsyncIterator<Boolean>>;
   studentId: () => Promise<AsyncIterator<String>>;
   dateOfBirth: () => Promise<AsyncIterator<String>>;
   phoneNumber: () => Promise<AsyncIterator<String>>;
@@ -1364,69 +1394,32 @@ export interface ApplicationSubscription
   needTravel: () => Promise<AsyncIterator<Boolean>>;
   emailOptIn: () => Promise<AsyncIterator<Boolean>>;
   acceptCodeOfConduct: () => Promise<AsyncIterator<Boolean>>;
-  sponsorData: <T = SponsorDataSubscription>() => T;
   sendToSponsors: () => Promise<AsyncIterator<Boolean>>;
 }
 
-export interface ApplicationNullablePromise
-  extends Promise<Application | null>,
+export interface SponsorDataSubscriptionPayload {
+  mutation: MutationType;
+  node: SponsorData;
+  updatedFields: String[];
+  previousValues: SponsorDataPreviousValues;
+}
+
+export interface SponsorDataSubscriptionPayloadPromise
+  extends Promise<SponsorDataSubscriptionPayload>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  complete: () => Promise<Boolean>;
-  studentId: () => Promise<String>;
-  dateOfBirth: () => Promise<String>;
-  phoneNumber: () => Promise<String>;
-  gender: () => Promise<String>;
-  race: () => Promise<String>;
-  languages: () => Promise<String[]>;
-  dietaryRestrictions: () => Promise<String[]>;
-  specialAccommodations: () => Promise<String[]>;
-  shirtSize: () => Promise<String>;
-  needTravel: () => Promise<Boolean>;
-  emailOptIn: () => Promise<Boolean>;
-  acceptCodeOfConduct: () => Promise<Boolean>;
-  sponsorData: <T = SponsorDataPromise>() => T;
-  sendToSponsors: () => Promise<Boolean>;
+  mutation: () => Promise<MutationType>;
+  node: <T = SponsorDataPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = SponsorDataPreviousValuesPromise>() => T;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
+export interface SponsorDataSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<SponsorDataSubscriptionPayload>>,
     Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateSponsorData {
-  count: Int;
-}
-
-export interface AggregateSponsorDataPromise
-  extends Promise<AggregateSponsorData>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateSponsorDataSubscription
-  extends Promise<AsyncIterator<AggregateSponsorData>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = SponsorDataSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = SponsorDataPreviousValuesSubscription>() => T;
 }
 
 export interface SponsorDataPreviousValues {
@@ -1503,59 +1496,54 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
+export interface UserPreviousValues {
+  id: ID_Output;
+  email: String;
+  password: String;
+  firstName?: String;
+  lastName?: String;
+  appComplete: Boolean;
+  emailVerified: Boolean;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+  role: ROLE;
 }
 
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
+  id: () => Promise<ID_Output>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+  firstName: () => Promise<String>;
+  lastName: () => Promise<String>;
+  appComplete: () => Promise<Boolean>;
+  emailVerified: () => Promise<Boolean>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  role: () => Promise<ROLE>;
 }
 
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
-}
-
-export interface AggregateUser {
-  count: Int;
-}
-
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  firstName: () => Promise<AsyncIterator<String>>;
+  lastName: () => Promise<AsyncIterator<String>>;
+  appComplete: () => Promise<AsyncIterator<Boolean>>;
+  emailVerified: () => Promise<AsyncIterator<Boolean>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  role: () => Promise<AsyncIterator<ROLE>>;
 }
 
 /*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
 */
-export type String = string;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
-
-/*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-*/
-export type Float = number;
-
-export type Long = string;
+export type ID_Input = string | number;
+export type ID_Output = string;
 
 /*
 DateTime scalar input type, allowing Date
@@ -1568,15 +1556,26 @@ DateTime scalar output type, which is always a string
 export type DateTimeOutput = string;
 
 /*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
 
 /*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
-export type ID_Input = string | number;
-export type ID_Output = string;
+export type Int = number;
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
+*/
+export type Float = number;
+
+export type Long = string;
 
 /**
  * Model Metadata
