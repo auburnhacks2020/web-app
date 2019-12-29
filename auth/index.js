@@ -37,9 +37,7 @@ export const getToken = () => {
 	return new Promise((resolve, reject) => {
 		AsyncStorage.getItem('currentUserToken')
 			.then(res => {
-				if (res !== null) {
-					resolve(res);
-				}
+				resolve(res);
 			})
 			.catch(err => {
                 console.log(err);

@@ -63,7 +63,13 @@ const ProfileScreen = props => {
 				<ActivityIndicator />
 			</View>
 		);
-	if (error) return 'eRRoR';
+	if (error) return (<View
+	style={StyleSheet.flatten([
+		styles.container,
+		{ backgroundColor: colors.background }
+	])}>
+		<Text>Uh oh! An Error has occurred!</Text>
+	</View>);
 
 	const { firstName, lastName, appComplete, application } = data.currentUser;
 	console.log(application);
@@ -88,7 +94,7 @@ const ProfileScreen = props => {
 			</Button>
 			{!appComplete && !application ? (
 				<Button style={stylesheet.btn} onPress={()=> {
-					navigate('application')
+					navigate('ApplicationScreen')
 				}}>Apply Here!</Button>
 			) : null}
 		</View>
