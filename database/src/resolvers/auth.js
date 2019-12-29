@@ -89,14 +89,14 @@ module.exports = {
 			const valid = jwt.verify(token, process.env.EMAIL_SECRET);
 
 			if (valid) {
-				await ctx.prisma.updateUser({
+				const verifiedUser = await ctx.prisma.updateUser({
 					data: { emailVerified: true },
 					where: { email }
 				});
 
 				return {
 					verified: true,
-					user
+					user: verifiedUser
 				};
 			} else {
 				throw new Error('Invalid Token');

@@ -5,6 +5,7 @@ type User {
   firstName: String
   lastName: String
   application: Application
+  appComplete: Boolean! @default(value: false)
   emailVerified: Boolean! @default(value: false)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
@@ -14,7 +15,6 @@ type User {
 type Application {
   id: ID! @id
   createdAt: DateTime! @createdAt
-  complete: Boolean! @default(value: false)
   studentId: String
   dateOfBirth: String
   phoneNumber: String

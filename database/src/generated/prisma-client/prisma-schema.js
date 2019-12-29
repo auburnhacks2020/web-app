@@ -18,7 +18,6 @@ type AggregateUser {
 type Application {
   id: ID!
   createdAt: DateTime!
-  complete: Boolean!
   studentId: String
   dateOfBirth: String
   phoneNumber: String
@@ -47,7 +46,6 @@ input ApplicationCreatedietaryRestrictionsInput {
 
 input ApplicationCreateInput {
   id: ID
-  complete: Boolean
   studentId: String
   dateOfBirth: String
   phoneNumber: String
@@ -87,8 +85,6 @@ enum ApplicationOrderByInput {
   id_DESC
   createdAt_ASC
   createdAt_DESC
-  complete_ASC
-  complete_DESC
   studentId_ASC
   studentId_DESC
   dateOfBirth_ASC
@@ -114,7 +110,6 @@ enum ApplicationOrderByInput {
 type ApplicationPreviousValues {
   id: ID!
   createdAt: DateTime!
-  complete: Boolean!
   studentId: String
   dateOfBirth: String
   phoneNumber: String
@@ -149,7 +144,6 @@ input ApplicationSubscriptionWhereInput {
 }
 
 input ApplicationUpdateDataInput {
-  complete: Boolean
   studentId: String
   dateOfBirth: String
   phoneNumber: String
@@ -171,7 +165,6 @@ input ApplicationUpdatedietaryRestrictionsInput {
 }
 
 input ApplicationUpdateInput {
-  complete: Boolean
   studentId: String
   dateOfBirth: String
   phoneNumber: String
@@ -193,7 +186,6 @@ input ApplicationUpdatelanguagesInput {
 }
 
 input ApplicationUpdateManyMutationInput {
-  complete: Boolean
   studentId: String
   dateOfBirth: String
   phoneNumber: String
@@ -250,8 +242,6 @@ input ApplicationWhereInput {
   createdAt_lte: DateTime
   createdAt_gt: DateTime
   createdAt_gte: DateTime
-  complete: Boolean
-  complete_not: Boolean
   studentId: String
   studentId_not: String
   studentId_in: [String!]
@@ -736,6 +726,7 @@ type User {
   firstName: String
   lastName: String
   application: Application
+  appComplete: Boolean!
   emailVerified: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -755,6 +746,7 @@ input UserCreateInput {
   firstName: String
   lastName: String
   application: ApplicationCreateOneInput
+  appComplete: Boolean
   emailVerified: Boolean
   role: ROLE
 }
@@ -775,6 +767,8 @@ enum UserOrderByInput {
   firstName_DESC
   lastName_ASC
   lastName_DESC
+  appComplete_ASC
+  appComplete_DESC
   emailVerified_ASC
   emailVerified_DESC
   createdAt_ASC
@@ -791,6 +785,7 @@ type UserPreviousValues {
   password: String!
   firstName: String
   lastName: String
+  appComplete: Boolean!
   emailVerified: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -821,6 +816,7 @@ input UserUpdateInput {
   firstName: String
   lastName: String
   application: ApplicationUpdateOneInput
+  appComplete: Boolean
   emailVerified: Boolean
   role: ROLE
 }
@@ -830,6 +826,7 @@ input UserUpdateManyMutationInput {
   password: String
   firstName: String
   lastName: String
+  appComplete: Boolean
   emailVerified: Boolean
   role: ROLE
 }
@@ -906,6 +903,8 @@ input UserWhereInput {
   lastName_ends_with: String
   lastName_not_ends_with: String
   application: ApplicationWhereInput
+  appComplete: Boolean
+  appComplete_not: Boolean
   emailVerified: Boolean
   emailVerified_not: Boolean
   createdAt: DateTime

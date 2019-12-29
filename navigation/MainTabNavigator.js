@@ -15,7 +15,7 @@ import {
 	LoginScreen,
 	ProfileScreen,
 	AuthLoadingScreen,
-	VerifyEmailScreen
+	ApplicationScreen
 } from '../screens';
 
 import { ProfileButton } from '../components';
