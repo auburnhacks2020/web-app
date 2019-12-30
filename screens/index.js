@@ -6,7 +6,7 @@ import CountdownScreen from './CountdownScreen';
 import LoginScreen from './LoginScreen';
 import ProfileScreen from './ProfileScreen';
 import AuthLoadingScreen from './AuthLoadingScreen';
-import VerifyEmailScreen from './VerifyEmailScreen';
+import ApplicationScreen from './ApplicationScreen';
 
 export {
 	AboutScreen,
@@ -17,5 +17,5 @@ export {
 	LoginScreen,
 	ProfileScreen,
 	AuthLoadingScreen,
-	VerifyEmailScreen
+	ApplicationScreen
 };

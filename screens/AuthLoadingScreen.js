@@ -1,24 +1,50 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ActivityIndicator, StatusBar, StyleSheet, View } from 'react-native';
 import { withTheme } from 'react-native-paper';
-import { isSignedIn } from '../auth';
+import { onSignOut, getToken } from '../auth';
+import { gql } from 'apollo-boost';
+import { useLazyQuery } from '@apollo/react-hooks';
 
+const CURRENT_USER = gql`
+	{
+		currentUser {
+			id
+		}
+	}
+`;
 const AuthLoadingScreen = props => {
 	const { colors } = props.theme;
 
-	useEffect(() => {
-		getToken();
-	});
+	const [token, setToken] = useState('');
 
-	const getToken = async () => {
+	useEffect(() => {
+		if (token === '') getUserToken();
+		else checkSignInStatus();
+	}, [token]);
+
+	const getUserToken = async () => {
 		try {
-			const loggedIn = await isSignedIn();
-			props.navigation.navigate(loggedIn ? 'profile' : 'signIn');
+			const userToken = await getToken();
+			if (userToken) setToken(userToken);
+			else props.navigation.navigate('countdown');
 		} catch (err) {
 			console.log(err);
-			props.navigation.navigate('countdown');
 		}
 	}
+
+	const [getCurrentUser, { loading, error, data }] = useLazyQuery(CURRENT_USER, {
+		context: { headers: { authorization: 'Bearer ' + token } }
+	});
+
+	const checkSignInStatus = async () => {
+		getCurrentUser();
+		while (loading) {}
+		if (error) {
+			onSignOut();
+			props.navigation.navigate('countdown');
+		}
+		else props.navigation.navigate('profile');
+	};
 
 	return (
 		<View style={{ backgroundColor: colors.background }}>

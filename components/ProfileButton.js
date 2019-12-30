@@ -25,8 +25,6 @@ const styles = StyleSheet.create({
 const ProfileButton = props => {
 	const { routeName, onPress, theme } = props;
 	const { colors } = theme;
-
-	console.log(routeName);
 	return (
 		<View style={styles.container}>
 			<Button mode='outlined' style={styles.button} onPress={onPress}>

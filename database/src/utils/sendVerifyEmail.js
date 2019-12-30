@@ -24,7 +24,7 @@ const sendVerifyEmail = (toEmail, name) => {
 	);
 
 	
-	const url = 'http://192.168.1.4:19006/profile/login/' + token;
+	const url = process.env.WEBSITE_ADDRESS + 'profile/login/' + token;
 
 	const email = new Email({
 		message: {

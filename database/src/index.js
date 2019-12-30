@@ -10,7 +10,7 @@ require('dotenv').config();
 const getUser = token => {
 	try {
 		if (token) {
-			return jwt.verify(token, process.env.DB_SECRET);
+			return jwt.verify(token, process.env.LOGIN_SECRET);
 		}
 		return null;
 	} catch (err) {
