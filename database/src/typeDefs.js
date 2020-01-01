@@ -52,7 +52,7 @@ const typeDefs = gql`
 		experience: Int
 		hackathonAwards: [String]
 		skills: [String]
-		gpa: Float
+		gpa: String
 		aboutYou: String
 		biggestChallenge: String
 		resume: String

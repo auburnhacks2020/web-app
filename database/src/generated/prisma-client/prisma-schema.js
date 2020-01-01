@@ -418,7 +418,7 @@ type SponsorData {
   experience: Int
   hackathonAwards: [String!]!
   skills: [String!]!
-  gpa: Float
+  gpa: String
   aboutYou: String
   biggestChallenge: String
   resume: String
@@ -443,7 +443,7 @@ input SponsorDataCreateInput {
   experience: Int
   hackathonAwards: SponsorDataCreatehackathonAwardsInput
   skills: SponsorDataCreateskillsInput
-  gpa: Float
+  gpa: String
   aboutYou: String
   biggestChallenge: String
   resume: String
@@ -497,7 +497,7 @@ type SponsorDataPreviousValues {
   experience: Int
   hackathonAwards: [String!]!
   skills: [String!]!
-  gpa: Float
+  gpa: String
   aboutYou: String
   biggestChallenge: String
   resume: String
@@ -529,7 +529,7 @@ input SponsorDataUpdateDataInput {
   experience: Int
   hackathonAwards: SponsorDataUpdatehackathonAwardsInput
   skills: SponsorDataUpdateskillsInput
-  gpa: Float
+  gpa: String
   aboutYou: String
   biggestChallenge: String
   resume: String
@@ -547,7 +547,7 @@ input SponsorDataUpdateInput {
   experience: Int
   hackathonAwards: SponsorDataUpdatehackathonAwardsInput
   skills: SponsorDataUpdateskillsInput
-  gpa: Float
+  gpa: String
   aboutYou: String
   biggestChallenge: String
   resume: String
@@ -565,7 +565,7 @@ input SponsorDataUpdateManyMutationInput {
   experience: Int
   hackathonAwards: SponsorDataUpdatehackathonAwardsInput
   skills: SponsorDataUpdateskillsInput
-  gpa: Float
+  gpa: String
   aboutYou: String
   biggestChallenge: String
   resume: String
@@ -654,14 +654,20 @@ input SponsorDataWhereInput {
   experience_lte: Int
   experience_gt: Int
   experience_gte: Int
-  gpa: Float
-  gpa_not: Float
-  gpa_in: [Float!]
-  gpa_not_in: [Float!]
-  gpa_lt: Float
-  gpa_lte: Float
-  gpa_gt: Float
-  gpa_gte: Float
+  gpa: String
+  gpa_not: String
+  gpa_in: [String!]
+  gpa_not_in: [String!]
+  gpa_lt: String
+  gpa_lte: String
+  gpa_gt: String
+  gpa_gte: String
+  gpa_contains: String
+  gpa_not_contains: String
+  gpa_starts_with: String
+  gpa_not_starts_with: String
+  gpa_ends_with: String
+  gpa_not_ends_with: String
   aboutYou: String
   aboutYou_not: String
   aboutYou_in: [String!]
