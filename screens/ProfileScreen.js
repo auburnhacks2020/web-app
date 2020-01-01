@@ -92,9 +92,9 @@ const ProfileScreen = props => {
 				}}>
 				Follow Us!
 			</Button>
-			{!appComplete && !application ? (
-				<Button style={stylesheet.btn} onPress={()=> {
-					navigate('ApplicationScreen')
+			{!appComplete ? (
+				<Button style={stylesheet.btn2} onPress={()=> {
+					navigate('application')
 				}}>Apply Here!</Button>
 			) : null}
 		</View>

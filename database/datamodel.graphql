@@ -40,7 +40,7 @@ type SponsorData {
   experience: Int
   hackathonAwards: [String] @scalarList(strategy: RELATION)
   skills: [String] @scalarList(strategy: RELATION)
-  gpa: Float
+  gpa: String
   aboutYou: String
   biggestChallenge: String
   resume: String

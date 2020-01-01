@@ -33,8 +33,8 @@ const ProfileButton = props => {
 					size={SIZE / 1.5}
 					color={
 						routeName === 'ProfileStack'
-							? Colors.tabIconSelected
-							: Colors.tabIconDefault
+							? Colors.iconSelected
+							: Colors.iconDefault
 					}
 				/>
 			</Button>

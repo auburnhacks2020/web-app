@@ -449,14 +449,20 @@ export interface SponsorDataWhereInput {
   experience_lte?: Maybe<Int>;
   experience_gt?: Maybe<Int>;
   experience_gte?: Maybe<Int>;
-  gpa?: Maybe<Float>;
-  gpa_not?: Maybe<Float>;
-  gpa_in?: Maybe<Float[] | Float>;
-  gpa_not_in?: Maybe<Float[] | Float>;
-  gpa_lt?: Maybe<Float>;
-  gpa_lte?: Maybe<Float>;
-  gpa_gt?: Maybe<Float>;
-  gpa_gte?: Maybe<Float>;
+  gpa?: Maybe<String>;
+  gpa_not?: Maybe<String>;
+  gpa_in?: Maybe<String[] | String>;
+  gpa_not_in?: Maybe<String[] | String>;
+  gpa_lt?: Maybe<String>;
+  gpa_lte?: Maybe<String>;
+  gpa_gt?: Maybe<String>;
+  gpa_gte?: Maybe<String>;
+  gpa_contains?: Maybe<String>;
+  gpa_not_contains?: Maybe<String>;
+  gpa_starts_with?: Maybe<String>;
+  gpa_not_starts_with?: Maybe<String>;
+  gpa_ends_with?: Maybe<String>;
+  gpa_not_ends_with?: Maybe<String>;
   aboutYou?: Maybe<String>;
   aboutYou_not?: Maybe<String>;
   aboutYou_in?: Maybe<String[] | String>;
@@ -658,7 +664,7 @@ export interface SponsorDataCreateInput {
   experience?: Maybe<Int>;
   hackathonAwards?: Maybe<SponsorDataCreatehackathonAwardsInput>;
   skills?: Maybe<SponsorDataCreateskillsInput>;
-  gpa?: Maybe<Float>;
+  gpa?: Maybe<String>;
   aboutYou?: Maybe<String>;
   biggestChallenge?: Maybe<String>;
   resume?: Maybe<String>;
@@ -722,7 +728,7 @@ export interface SponsorDataUpdateDataInput {
   experience?: Maybe<Int>;
   hackathonAwards?: Maybe<SponsorDataUpdatehackathonAwardsInput>;
   skills?: Maybe<SponsorDataUpdateskillsInput>;
-  gpa?: Maybe<Float>;
+  gpa?: Maybe<String>;
   aboutYou?: Maybe<String>;
   biggestChallenge?: Maybe<String>;
   resume?: Maybe<String>;
@@ -769,7 +775,7 @@ export interface SponsorDataUpdateInput {
   experience?: Maybe<Int>;
   hackathonAwards?: Maybe<SponsorDataUpdatehackathonAwardsInput>;
   skills?: Maybe<SponsorDataUpdateskillsInput>;
-  gpa?: Maybe<Float>;
+  gpa?: Maybe<String>;
   aboutYou?: Maybe<String>;
   biggestChallenge?: Maybe<String>;
   resume?: Maybe<String>;
@@ -783,7 +789,7 @@ export interface SponsorDataUpdateManyMutationInput {
   experience?: Maybe<Int>;
   hackathonAwards?: Maybe<SponsorDataUpdatehackathonAwardsInput>;
   skills?: Maybe<SponsorDataUpdateskillsInput>;
-  gpa?: Maybe<Float>;
+  gpa?: Maybe<String>;
   aboutYou?: Maybe<String>;
   biggestChallenge?: Maybe<String>;
   resume?: Maybe<String>;
@@ -995,7 +1001,7 @@ export interface SponsorData {
   experience?: Int;
   hackathonAwards: String[];
   skills: String[];
-  gpa?: Float;
+  gpa?: String;
   aboutYou?: String;
   biggestChallenge?: String;
   resume?: String;
@@ -1010,7 +1016,7 @@ export interface SponsorDataPromise extends Promise<SponsorData>, Fragmentable {
   experience: () => Promise<Int>;
   hackathonAwards: () => Promise<String[]>;
   skills: () => Promise<String[]>;
-  gpa: () => Promise<Float>;
+  gpa: () => Promise<String>;
   aboutYou: () => Promise<String>;
   biggestChallenge: () => Promise<String>;
   resume: () => Promise<String>;
@@ -1027,7 +1033,7 @@ export interface SponsorDataSubscription
   experience: () => Promise<AsyncIterator<Int>>;
   hackathonAwards: () => Promise<AsyncIterator<String[]>>;
   skills: () => Promise<AsyncIterator<String[]>>;
-  gpa: () => Promise<AsyncIterator<Float>>;
+  gpa: () => Promise<AsyncIterator<String>>;
   aboutYou: () => Promise<AsyncIterator<String>>;
   biggestChallenge: () => Promise<AsyncIterator<String>>;
   resume: () => Promise<AsyncIterator<String>>;
@@ -1044,7 +1050,7 @@ export interface SponsorDataNullablePromise
   experience: () => Promise<Int>;
   hackathonAwards: () => Promise<String[]>;
   skills: () => Promise<String[]>;
-  gpa: () => Promise<Float>;
+  gpa: () => Promise<String>;
   aboutYou: () => Promise<String>;
   biggestChallenge: () => Promise<String>;
   resume: () => Promise<String>;
@@ -1431,7 +1437,7 @@ export interface SponsorDataPreviousValues {
   experience?: Int;
   hackathonAwards: String[];
   skills: String[];
-  gpa?: Float;
+  gpa?: String;
   aboutYou?: String;
   biggestChallenge?: String;
   resume?: String;
@@ -1448,7 +1454,7 @@ export interface SponsorDataPreviousValuesPromise
   experience: () => Promise<Int>;
   hackathonAwards: () => Promise<String[]>;
   skills: () => Promise<String[]>;
-  gpa: () => Promise<Float>;
+  gpa: () => Promise<String>;
   aboutYou: () => Promise<String>;
   biggestChallenge: () => Promise<String>;
   resume: () => Promise<String>;
@@ -1465,7 +1471,7 @@ export interface SponsorDataPreviousValuesSubscription
   experience: () => Promise<AsyncIterator<Int>>;
   hackathonAwards: () => Promise<AsyncIterator<String[]>>;
   skills: () => Promise<AsyncIterator<String[]>>;
-  gpa: () => Promise<AsyncIterator<Float>>;
+  gpa: () => Promise<AsyncIterator<String>>;
   aboutYou: () => Promise<AsyncIterator<String>>;
   biggestChallenge: () => Promise<AsyncIterator<String>>;
   resume: () => Promise<AsyncIterator<String>>;
@@ -1569,11 +1575,6 @@ export type Boolean = boolean;
 The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
 */
 export type Int = number;
-
-/*
-The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](https://en.wikipedia.org/wiki/IEEE_floating_point).
-*/
-export type Float = number;
 
 export type Long = string;
 
