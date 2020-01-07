@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { View, ScrollView, StyleSheet, Dimensions } from 'react-native';
 import {
-	Text,
 	TextInput,
 	Button,
 	IconButton,
 	Checkbox,
 	withTheme,
 	Subheading,
-	Paragraph
+	Portal,
+	Provider
 } from 'react-native-paper';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import { Select, ClearBottomTabsView } from '../components';
+import { getToken } from '../auth';
+import { Select } from '../components';
 import { Colors } from '../constants';
+
+const SUBMIT_APPLICATION = gql`
+	mutation submitApplication($applicationForm: ApplicationForm!) {
+		submitApplication(applicationForm: $applicationForm) {
+			submitted
+		}
+	}
+`;
 
 const useWindowDimensions = () => {
 	const [windowData, setWindowData] = useState(Dimensions.get('window'));
@@ -37,6 +46,7 @@ const useWindowDimensions = () => {
 const ApplicationScreen = props => {
 	const { colors } = props.theme;
 	const { width } = useWindowDimensions();
+	const [token, setToken] = useState('');
 	const [pageIndex, setPageIndex] = useState(0);
 	const [app, setApp] = useState({
 		studentId: '',
@@ -55,7 +65,7 @@ const ApplicationScreen = props => {
 			major: '',
 			educationLevel: '',
 			school: '',
-			interest: [],
+			interests: [],
 			experience: 0,
 			hackathonAwards: [],
 			skills: [],
@@ -66,6 +76,39 @@ const ApplicationScreen = props => {
 		},
 		sendToSponsors: false
 	});
+
+	useEffect(() => {
+		if (token === '') retrieveToken();
+	}, [token]);
+
+	const retrieveToken = async () => {
+		try {
+			const newToken = await getToken();
+			console.log(newToken);
+			setToken(newToken);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const [submitApplication, submitApplicationResult] = useMutation(
+		SUBMIT_APPLICATION,
+		{
+			context: { headers: { authorization: 'Bearer ' + token } }
+		}
+	);
+
+	const submitApp = async () => {
+		try {
+			const res = await submitApplication({
+				variables: { applicationForm: app }
+			});
+			console.log(res.data)
+			if (res.data.submitApplication.submitted) props.navigation.navigate('home');
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	const updateField = (key, val) => {
 		setApp(app => ({
@@ -89,10 +132,6 @@ const ApplicationScreen = props => {
 		console.log(err);
 	};
 
-	const submitApplication = () => {
-		alert('App Sumbitted... or not 👀');
-	};
-
 	let dobInput,
 		phoneNumInput,
 		challengeInput,
@@ -104,7 +143,6 @@ const ApplicationScreen = props => {
 				ref={input => {
 					sidInput = input;
 				}}
-				mode='outlined'
 				label='Student ID'
 				value={app.studentId}
 				onChangeText={val => updateField('studentId', val)}
@@ -118,7 +156,6 @@ const ApplicationScreen = props => {
 				ref={input => {
 					dobInput = input;
 				}}
-				mode='outlined'
 				label='Date of Birth'
 				value={app.dateOfBirth}
 				onChangeText={val => updateField('dateOfBirth', val)}
@@ -132,7 +169,6 @@ const ApplicationScreen = props => {
 				ref={input => {
 					phoneNumInput = input;
 				}}
-				mode='outlined'
 				label='Phone Number'
 				value={app.phoneNumber}
 				onChangeText={val => updateField('phoneNumber', val)}
@@ -161,7 +197,7 @@ const ApplicationScreen = props => {
 			<Select
 				multiple
 				placeholder='Dietary Restrictions'
-				type='dietaryRestricitions'
+				type='dietaryRestrictions'
 				selected={app.dietaryRestrictions}
 				setSelected={val => updateField('dietaryRestrictions', val)}
 			/>
@@ -184,7 +220,6 @@ const ApplicationScreen = props => {
 				ref={input => {
 					schoolInput = input;
 				}}
-				mode='outlined'
 				label='School'
 				value={app.sponsorData.school}
 				onChangeText={val => updateSponsorDataField('school', val)}
@@ -207,7 +242,6 @@ const ApplicationScreen = props => {
 				ref={input => {
 					gpaInput = input;
 				}}
-				mode='outlined'
 				label='GPA'
 				value={app.sponsorData.gpa}
 				onChangeText={val => updateSponsorDataField('gpa', val)}
@@ -219,12 +253,12 @@ const ApplicationScreen = props => {
 			<Select
 				multiple
 				placeholder='Interests'
-				type='interest'
-				selected={app.sponsorData.interest}
+				type='interests'
+				selected={app.sponsorData.interests}
 				setSelected={val => updateSponsorDataField('interest', val)}
 			/>
 			<Select
-				placeholder='Experience'
+				placeholder='Number of Hackathons Attended'
 				type='experience'
 				selected={app.sponsorData.experience}
 				setSelected={val => updateSponsorDataField('experience', val)}
@@ -247,7 +281,6 @@ const ApplicationScreen = props => {
 				ref={input => {
 					aboutInput = input;
 				}}
-				mode='outlined'
 				label='About You'
 				multiline
 				value={app.sponsorData.aboutYou}
@@ -262,7 +295,6 @@ const ApplicationScreen = props => {
 				ref={input => {
 					challengeInput = input;
 				}}
-				mode='outlined'
 				label='Describe your most challenging project'
 				multiline
 				value={app.sponsorData.biggestChallenge}
@@ -277,7 +309,6 @@ const ApplicationScreen = props => {
 				ref={input => {
 					resumeInput = input;
 				}}
-				mode='outlined'
 				label='Link to Resume'
 				value={app.sponsorData.resume}
 				onChangeText={val => updateSponsorDataField('resume', val)}
@@ -289,6 +320,7 @@ const ApplicationScreen = props => {
 			<View style={styles.checkboxContainer}>
 				<Subheading>Will you need travel reimbursments?</Subheading>
 				<Checkbox
+					color={colors.primary}
 					status={app.needTravel ? 'checked' : 'unchecked'}
 					onPress={() => {
 						updateField('needTravel', !app.needTravel);
@@ -296,8 +328,9 @@ const ApplicationScreen = props => {
 				/>
 			</View>
 			<View style={styles.checkboxContainer}>
-				<Subheading>Opt-in to emails from AuburnHacks?</Subheading>
+				<Subheading>Opt-in to receive emails from AuburnHacks?</Subheading>
 				<Checkbox
+					color={colors.primary}
 					status={app.emailOptIn ? 'checked' : 'unchecked'}
 					onPress={() => {
 						updateField('emailOptIn', !app.emailOptIn);
@@ -307,6 +340,7 @@ const ApplicationScreen = props => {
 			<View style={styles.checkboxContainer}>
 				<Subheading>Would you like to send your info to sponsors?</Subheading>
 				<Checkbox
+					color={colors.primary}
 					status={app.sendToSponsors ? 'checked' : 'unchecked'}
 					onPress={() => {
 						updateField('sendToSponsors', !app.sendToSponsors);
@@ -316,6 +350,7 @@ const ApplicationScreen = props => {
 			<View style={styles.checkboxContainer}>
 				<Subheading>Do you accept the MLH Code of Conduct?</Subheading>
 				<Checkbox
+					color={colors.primary}
 					status={app.acceptCodeOfConduct ? 'checked' : 'unchecked'}
 					onPress={() => {
 						updateField('acceptCodeOfConduct', !app.acceptCodeOfConduct);
@@ -325,76 +360,80 @@ const ApplicationScreen = props => {
 		</View>
 	];
 
-	console.log(width);
-
 	return (
-		<View
-			style={StyleSheet.flatten([
-				styles.container,
-				{ backgroundColor: colors.background }
-			])}>
-			<ScrollView
-				style={styles.applicationForm}
-				contentContainerStyle={{ alignItems: 'center' }}>
-				<View
-					style={{
-						width: width < 500 ? width : 500,
-						maxWidth: 500,
-						padding: 10,
-						borderWidth: 2,
-						padding: 20,
-						margin: 50,
-						borderRadius: 10,
-						borderColor: Colors.iconDefault
-					}}>
-					{pages[pageIndex]}
-					<View style={styles.paginator}>
-						<IconButton
-							icon='arrow-left'
-							onPress={() =>
-								pageIndex > 0 ? setPageIndex(pageIndex - 1) : null
-							}
-							color={pageIndex !== 0 ? Colors.iconDefault : colors.background}
-						/>
-						<View style={styles.paginatorDots}>
-							{pages.map((_, idx) => (
-								<Button
-									icon='circle'
-									compact
-									color={
-										idx === pageIndex ? Colors.iconSelected : Colors.iconDefault
-									}
-									onPress={() => setPageIndex(idx)}
-								/>
-							))}
+		<Provider theme={props.theme}>
+			<View
+				style={StyleSheet.flatten([
+					styles.container,
+					{ backgroundColor: colors.background }
+				])}>
+				<ScrollView
+					style={styles.applicationForm}
+					contentContainerStyle={{ alignItems: 'center' }}
+					showsHorizontalScrollIndicator={false}>
+					<View
+						style={{
+							width: width < 500 ? width : 500,
+							maxWidth: 500,
+							padding: 10,
+							borderWidth: 2,
+							padding: 20,
+							margin: 50,
+							borderRadius: 10,
+							borderColor: Colors.iconDefault
+						}}>
+						{pages[pageIndex]}
+						<View style={styles.paginator}>
+							<IconButton
+								icon='arrow-left'
+								onPress={() =>
+									pageIndex > 0 ? setPageIndex(pageIndex - 1) : null
+								}
+								color={pageIndex !== 0 ? Colors.iconDefault : colors.background}
+							/>
+							<View style={styles.paginatorDots}>
+								{pages.map((_, idx) => (
+									<Button
+										key={idx}
+										icon='circle'
+										compact
+										color={
+											idx === pageIndex
+												? Colors.iconSelected
+												: Colors.iconDefault
+										}
+										onPress={() => setPageIndex(idx)}
+									/>
+								))}
+							</View>
+							<IconButton
+								icon='arrow-right'
+								onPress={() =>
+									pageIndex < pages.length - 1
+										? setPageIndex(pageIndex + 1)
+										: null
+								}
+								color={
+									pageIndex !== pages.length - 1
+										? Colors.iconDefault
+										: colors.background
+								}
+							/>
 						</View>
-						<IconButton
-							icon='arrow-right'
-							onPress={() =>
-								pageIndex < pages.length - 1
-									? setPageIndex(pageIndex + 1)
-									: null
-							}
-							color={
-								pageIndex !== pages.length - 1
-									? Colors.iconDefault
-									: colors.background
-							}
-						/>
+						{pageIndex === pages.length - 1 ? (
+							<Button
+								style={styles.button}
+								mode='contained'
+								onPress={submitApp}
+								loading={submitApplicationResult.loading}
+								disabled={!app.acceptCodeOfConduct}>
+								Submit Application
+							</Button>
+						) : null}
 					</View>
-					{pageIndex === pages.length - 1 ? (
-						<Button
-							style={styles.button}
-							mode='contained'
-							onPress={submitApplication}
-							loading={false}
-							disabled={!app.acceptCodeOfConduct}>
-							Submit Application
-						</Button>
-					) : null}
-				</View>
-			</ScrollView>
-		</View>
+				</ScrollView>
+			</View>
+		</Provider>
 	);
 };
 

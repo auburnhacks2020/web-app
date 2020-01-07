@@ -1,0 +1,7 @@
+endpoint: http://localhost:4467/database-service/production
+datamodel: datamodel.graphql
+secret: auburnhacks-prisma
+
+generate:
+  - generator: javascript-client
+    output: ../apollo/src/generated/prisma-client/

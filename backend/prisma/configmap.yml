@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prisma-configmap
+  namespace: prisma
+  labels:
+    stage: production
+    name: prisma 
+    app: prisma
+data:
+  PRISMA_CONFIG: |
+    port: 4466
+    managementApiSecret: auburnhacks-prisma
+    databases:
+      default:
+        connector: mysql
+        host: database
+        port: 3306
+        user: root
+        password: prisma
+        migrations: true
+        ssl: true

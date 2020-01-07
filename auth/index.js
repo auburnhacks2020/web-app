@@ -27,21 +27,17 @@ export const isSignedIn = () => {
 				}
 			})
 			.catch(err => {
-                console.log(err);
-                reject(err);
+				console.log(err);
+				reject(err);
 			});
 	});
 };
 
-export const getToken = () => {
-	return new Promise((resolve, reject) => {
-		AsyncStorage.getItem('currentUserToken')
-			.then(res => {
-				resolve(res);
-			})
-			.catch(err => {
-                console.log(err);
-                reject(err);
-			});
-	});
+export const getToken = async () => {
+	try {
+		const token = await AsyncStorage.getItem('currentUserToken');
+		return token;
+	} catch (err) {
+		console.log(error)
+	}
 };

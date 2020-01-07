@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { withTheme, IconButton } from 'react-native-paper';
+import { View, StyleSheet } from 'react-native';
+import { withTheme, Text, IconButton } from 'react-native-paper';
 
 const SelectedItem = props => {
 	const { colors } = props.theme;
@@ -13,7 +13,6 @@ const SelectedItem = props => {
 			])}>
 			<Text>{props.item}</Text>
 			<IconButton
-				size=''
 				icon='close'
 				onPress={() => props.removeItem(props.item)}
 			/>
@@ -23,8 +22,14 @@ const SelectedItem = props => {
 
 const styles = StyleSheet.create({
 	container: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'center',
 		borderRadius: 100,
-		borderWidth: 1
+		borderWidth: 2,
+		paddingLeft: 18,
+		marginBottom: 10,
+		marginRight: 10
 	}
 });
 
