@@ -1,0 +1,16 @@
+node_modules/
+.*/
+assets/
+auth/
+backend/
+components/
+constants/
+navigation/
+screens/
+.*
+App.js
+app.json
+babel.config.js
+cloud_sql_proxy*
+package.json
+*.md

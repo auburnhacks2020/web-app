@@ -168,7 +168,9 @@ const createProfileStack = () => {
 			profile: {
 				screen: createStackNavigator(
 					{
-						ProfileScreen,
+						home: {
+							screen: ProfileScreen
+						},
 						application: {
 							screen: ApplicationScreen
 						}
