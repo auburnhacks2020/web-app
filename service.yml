@@ -9,7 +9,6 @@
     type: NodePort
     selector:
       app: auburnhacks
-      tier: web
     ports:
     - port: 80
       targetPort: 80
