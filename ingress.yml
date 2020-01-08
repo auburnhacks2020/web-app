@@ -7,6 +7,12 @@ metadata:
   labels:
     app: auburnhacks
 spec:
-  backend:
-    serviceName: apollo
-    servicePort: 80
+  tls:
+  - secretName: secret
+  rules:
+  - host: auburnhacks.com
+    http:
+      paths:
+          backend:
+            serviceName: frontend
+            servicePort: 80
