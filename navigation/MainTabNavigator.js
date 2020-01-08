@@ -1,5 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
+import { Menu, Provider } from 'react-native-paper';
 import {
 	createStackNavigator,
 	createSwitchNavigator,

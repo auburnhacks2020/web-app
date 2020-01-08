@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Platform, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import ActiveTabGradient from './ActiveTabGradient';
-import { Button, withTheme } from 'react-native-paper';
+import { Button, withTheme, Menu, Provider } from 'react-native-paper';
 import { Colors } from '../constants';
 
 const SIZE = Platform.OS === 'web' ? 80 : 70;
@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
 const ProfileButton = props => {
 	const { routeName, onPress, theme } = props;
 	const { colors } = theme;
+	const [isVisible, setVisible] = useState(false);
 	return (
 		<View style={styles.container}>
 			<Button mode='outlined' style={styles.button} onPress={onPress}>
