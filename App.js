@@ -14,7 +14,9 @@ import * as WebBrowser from 'expo-web-browser';
 
 import AppNavigator from './navigation/AppNavigator';
 
+
 console.log(APOLLO_SERVER_URL)
+
 
 const client = new ApolloClient({
 	uri: APOLLO_SERVER_URL
