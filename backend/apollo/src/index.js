@@ -30,12 +30,13 @@ const server = new ApolloServer({
 			user,
 			prisma
 		};
-	}
+	},
+	playground: true
 });
 
 server
 	.listen({
-		port: 8383
+		port: process.env.PORT | 8383
 	})
 	.then(info => {
 		console.log(`Server started on ${info.url}`);
