@@ -24,7 +24,7 @@ var models = [
 exports.Prisma = prisma_lib_1.makePrismaClientClass({
   typeDefs,
   models,
-  endpoint: `http://10.4.15.111:4466/database-service/production`,
+  endpoint: `http://35.202.40.34:4466/database-service/production`,
   secret: `auburnhacks-prisma`
 });
 exports.prisma = new exports.Prisma();

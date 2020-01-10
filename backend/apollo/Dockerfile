@@ -11,8 +11,11 @@ RUN npm install --only=production
 
 # RUN npm ci --only=production
 
-ENV LOGIN_SECRET=login-secret
-ENV EMAIL_SECRET=email-secret
+ENV WEBSITE_ADDRESS=https://auburnhacks.com/
+ENV LOGIN_SECRET=login_secret
+ENV EMAIL_SECRET=email_secret
+ENV EMAIL_PASS=X^tpv7781!GhatREw
+ENV NODE_ENV=production
 
 # EXPOSE 8383
 
