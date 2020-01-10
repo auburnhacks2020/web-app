@@ -1,7 +1,7 @@
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
-import { TouchableOpacity, Image } from 'react-native';
+import { TouchableOpacity, Image, View, SafeAreaView, Platform } from 'react-native';
 import { layout } from './constants';
 import { Ionicons } from '@expo/vector-icons';
 import { Asset } from 'expo-asset';
@@ -38,57 +38,36 @@ export default function App(props) {
 			<ApolloProvider client={client}>
 				<PaperProvider theme={defaultTheme}>
 					<AppNavigator />
-					<TouchableOpacity
-						style={{position:'absolute', top: layout.isBrowser ? 0 : 23, right:0,}}
-						onPress={() =>
-							WebBrowser.openBrowserAsync(
-								'https://mlh.io/seasons/na-2020/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2020-season&utm_content=white'
-							)
-						}>
-						<Image
-							style={{
-								width: 100,
-								height: 200,
-							}}
-							source={require('./assets/logos/mlh-trust-badge-2020-white.png')}
-						/>
-					</TouchableOpacity>
+					<SafeAreaView
+						style={{
+							position: 'absolute',
+							top: Platform.OS === 'android' ? 16 : -18,
+							right: 7,
+							width: layout.isBrowser ? 100 : 75,
+							height: layout.isBrowser ? 200 : 165
+						}}>
+						<View>
+							<TouchableOpacity
+								onPress={() =>
+									WebBrowser.openBrowserAsync(
+										'https://mlh.io/seasons/na-2020/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2020-season&utm_content=white'
+									)
+								}>
+								<Image
+									style={{
+										width: layout.isBrowser ? 100 : 75,
+										height: layout.isBrowser ? 200 : 165
+									}}
+									source={require('./assets/logos/mlh-trust-badge-2020-white.png')}
+									resizeMode='contain'
+								/>
+							</TouchableOpacity>
+						</View>
+					</SafeAreaView>
 				</PaperProvider>
 			</ApolloProvider>
 		);
 	}
-}
-{
-	{
-		/* <View style={{alignSelf:'flex-start', position:'relative', top:33}}>
-				{signedIn ?
-					<TouchableOpacity onPress={() => onSignOut().then(() => props.navigation.navigate('signIn'))}>
-						<Ionicons
-							name={Platform.OS == 'ios' ? 'ios-more' : 'md-more'}
-							size={30}
-							color='#fff'
-							style={{ position: 'relative', top: 85, left: 25 }}
-						/>
-					</TouchableOpacity>
-				 : null}
-				</View> */
-	}
-	/* <View style={{alignSelf:'flex-end', position:'relative', top: isSignedIn === true ? 33 : 45}}>
-					<TouchableOpacity
-						onPress={() =>
-							WebBrowser.openBrowserAsync(
-								'https://mlh.io/seasons/na-2020/events?utm_source=na-hackathon&utm_medium=TrustBadge&utm_campaign=2020-season&utm_content=white'
-							)
-						}>
-						<Image
-							style={{
-								width: 100,
-								height: 200,
-							}}
-							source={require('../assets/logos/mlh-trust-badge-2020-white.png')}
-						/>
-					</TouchableOpacity>
-				</View> */
 }
 async function loadResourcesAsync() {
 	await Promise.all([
