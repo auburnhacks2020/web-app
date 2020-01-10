@@ -9,40 +9,14 @@ const CountdownScreen = props => {
 	const registrationOpenDate = new Date('2019/12/1');
 	const today = new Date();
 
-	return ( 
+	return (
 		<View
 			style={StyleSheet.flatten([
 				styles.container,
 				{ backgroundColor: colors.background }
 			])}>
 			<View style={styles.countdown}>
-				<Headline>Registration opens in:</Headline>
-				<CountDown
-					style={styles.timer}
-					until={(registrationOpenDate - today) / 1000}
-					size={30}
-					digitStyle={StyleSheet.flatten([
-						styles.countdownDigit,
-						{
-							backgroundColor: colors.background,
-							borderColor: colors.primary
-						}
-					])}
-					timeLabels={{ d: 'DD', h: 'HH', m: 'MM', s: 'SS' }}
-					digitTxtStyle={{
-						color: colors.primary,
-						fontFamily: fonts.medium.fontFamily
-					}}
-					timeLabelStyle={{
-						color: colors.text,
-						fontFamily: fonts.regular.fontFamily
-					}}
-				/>
-			</View>
-			<View style={styles.signUp}>
-				<Headline style={stylesheet.centerText}>
-					Sign up here to be notified when registration opens!
-				</Headline>
+				<Headline>Registration is Open!</Headline>
 				<Button
 					style={styles.button}
 					mode='contained'
