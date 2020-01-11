@@ -1,4 +1,8 @@
 FROM nginx:alpine
 EXPOSE 80
-COPY web-build/ /usr/share/nginx/html
+# EXPOSE 443
+COPY nginx.conf /etc/nginx/nginx.conf
+# COPY ingress.crt /etc/ssl/
+# COPY ingress.key /etc/ssl/
+COPY web-build/ /var/www
 CMD ["nginx", "-g", "daemon off;"]

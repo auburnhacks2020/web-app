@@ -17,13 +17,15 @@ import { ApplicationData } from '../constants';
 import { SelectedItem } from '../components';
 
 const Select = props => {
+	const [type, setType] = useState('')
 	const { colors } = props.theme;
 	const [searchText, setSearchText] = useState('');
 	const [data, setData] = useState([]);
-	const [focused, setFocused] = useState(false);
+	const [modalVisible, setModalVisible] = useState(false);
 
 	useEffect(() => {
-		if (ApplicationData[props.type]) {
+		if (ApplicationData[props.type] && props.type !== type) {
+			setType(props.type)
 			setData(ApplicationData[props.type]);
 		}
 	}, [props.type]);
@@ -69,7 +71,6 @@ const Select = props => {
 		);
 	};
 
-	let modal = null;
 	return (
 		<View style={styles.container}>
 			<Searchbar
@@ -89,97 +90,96 @@ const Select = props => {
 				])}
 				placeholder={props.placeholder}
 				iconColor='#8B9AAD'
-				onFocus={() => setFocused(true)}
+				onFocus={() => setModalVisible(true)}
 			/>
 			{renderSelectedItems()}
-			{focused ? (
-				<Portal>
-					<Modal
-						ref={ref => {
-							modal = ref;
-						}}
-						contentContainerStyle={StyleSheet.flatten([
-							styles.modal,
-							{
-								backgroundColor: colors.surface
-							}
-						])}
-						visible={focused}
-						onDismiss={() => setFocused(false)}>
-						{props.multiple ? (
-							<ScrollView
-								nestedScrollEnable
-								showsHorizontalScrollIndicator={false}
-								contentContainerStyle={styles.modalContent}>
-								{data.map((item, idx) => (
-									<View style={styles.item} key={idx}>
-										<RadioButton
-											onPress={() => {
-												let newItems = props.selected;
-												newItems.push(item);
-												props.setSelected(newItems);
-											}}
-											color={colors.primary}
-											value={item}
-											status={isSelected(item) ? 'checked' : 'unchecked'}
-										/>
-										<Text>{item}</Text>
-									</View>
-								))}
-							</ScrollView>
-						) : (
-							<ScrollView
-								nestedScrollEnabled
-								showsHorizontalScrollIndicator={false}
-								contentContainerStyle={styles.modalContent}>
-								{data.map((item, idx) => (
-									<View style={styles.item} key={idx}>
-										<RadioButton
-											onPress={() => props.setSelected(item)}
-											color={colors.primary}
-											value={item}
-											status={props.selected === item ? 'checked' : 'unchecked'}
-										/>
-										<Text>{item}</Text>
-									</View>
-								))}
-							</ScrollView>
-						)}
-						<View style={styles.customInput}>
-							<TextInput
-								style={StyleSheet.flatten([
-									styles.searchInput,
-									{
-										backgroundColor: colors.surface,
-										outline: 'none'
-									}
-								])}
-								mode='outlined'
-								value={searchText}
-								onChangeText={setSearchText}
-								placeholder='Other...'
-								placeholderTextColor={colors.placeholder}
-							/>
-							<IconButton
-								icon='plus-circle'
-								onPress={() => {
-									if (props.multiple) {
-										let newItems = props.selected;
-										newItems.push(searchText);
-										props.setSelected(newItems);
-									} else {
-										props.setSelected(searchText);
-									}
-									setSearchText('');
-								}}
-							/>
-						</View>
-						<Button mode='contained' onPress={() => modal.hideModal()}>
-							done
-						</Button>
-					</Modal>
-				</Portal>
-			) : null}
+			<Portal>
+				<Modal
+					dismissable
+					contentContainerStyle={StyleSheet.flatten([
+						styles.modal,
+						{
+							backgroundColor: colors.surface
+						}
+					])}
+					visible={modalVisible}
+					onDismiss={() => setModalVisible(false)}>
+					{props.multiple ? (
+						<ScrollView
+							nestedScrollEnable
+							showsHorizontalScrollIndicator={false}
+							contentContainerStyle={styles.modalContent}>
+							{data.map((item, idx) => (
+								<View style={styles.item} key={idx}>
+									<RadioButton
+										onPress={() => {
+											let newItems = props.selected;
+											newItems.push(item);
+											props.setSelected(newItems);
+										}}
+										color={colors.primary}
+										value={item}
+										status={isSelected(item) ? 'checked' : 'unchecked'}
+									/>
+									<Text>{item}</Text>
+								</View>
+							))}
+						</ScrollView>
+					) : (
+						<ScrollView
+							nestedScrollEnabled
+							showsHorizontalScrollIndicator={false}
+							contentContainerStyle={styles.modalContent}>
+							{data.map((item, idx) => (
+								<View style={styles.item} key={idx}>
+									<RadioButton
+										onPress={() => props.setSelected(item)}
+										color={colors.primary}
+										value={item}
+										status={props.selected === item ? 'checked' : 'unchecked'}
+									/>
+									<Text>{item}</Text>
+								</View>
+							))}
+						</ScrollView>
+					)}
+					<View style={styles.customInput}>
+						<TextInput
+							style={StyleSheet.flatten([
+								styles.searchInput,
+								{
+									backgroundColor: colors.surface,
+									outline: 'none'
+								}
+							])}
+							mode='outlined'
+							value={searchText}
+							onChangeText={setSearchText}
+							placeholder='Other...'
+							placeholderTextColor={colors.placeholder}
+						/>
+						<IconButton
+							icon='plus-circle'
+							onPress={() => {
+								if (props.multiple) {
+									let newItems = props.selected;
+									newItems.push(searchText);
+									props.setSelected(newItems);
+								} else {
+									props.setSelected(searchText);
+								}
+								setSearchText('');
+							}}
+						/>
+					</View>
+					<Button
+						mode='contained'
+						style={styles.closeModalButton}
+						onPress={() => setModalVisible(false)}>
+						done
+					</Button>
+				</Modal>
+			</Portal>
 		</View>
 	);
 };
@@ -220,7 +220,11 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center'
 	},
-	customInput: { flexDirection: 'row', margin: 5, alignItems: 'center' }
+	customInput: { flexDirection: 'row', margin: 5, alignItems: 'center' },
+	closeModalButton: {
+		alignSelf: "flex-end",
+		margin: 10
+	}
 });
 
 Select.propTypes = {};

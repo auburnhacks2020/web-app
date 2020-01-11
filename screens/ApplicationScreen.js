@@ -7,7 +7,6 @@ import {
 	Checkbox,
 	withTheme,
 	Subheading,
-	Portal,
 	Provider
 } from 'react-native-paper';
 import { gql } from 'apollo-boost';
@@ -84,7 +83,6 @@ const ApplicationScreen = props => {
 	const retrieveToken = async () => {
 		try {
 			const newToken = await getToken();
-			console.log(newToken);
 			setToken(newToken);
 		} catch (err) {
 			console.log(err);
@@ -216,15 +214,11 @@ const ApplicationScreen = props => {
 			/>
 		</View>,
 		<View style={styles.appPage}>
-			<TextInput
-				ref={input => {
-					schoolInput = input;
-				}}
-				label='School'
-				value={app.sponsorData.school}
-				onChangeText={val => updateSponsorDataField('school', val)}
-				blurOnSubmit
-				style={styles.textInput}
+			<Select
+				placeholder='School'
+				type='school'
+				selected={app.sponsorData.school}
+				setSelected={val => updateSponsorDataField('school', val)}
 			/>
 			<Select
 				placeholder='Major'

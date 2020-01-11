@@ -4,11 +4,12 @@ metadata:
   name: prisma
   namespace: prisma
 spec:
+  type: LoadBalancer
   ports:
   - port: 4466
     targetPort: 4466
     protocol: TCP
   selector:
     stage: production
-    name: prisma 
+    name: prisma
     app: prisma

@@ -179,7 +179,6 @@ const LoginScreen = props => {
 					loading={loginResult.loading || verifyResult.loading}>
 					Login
 				</Button>
-				{console.log(verification)}
 				{tokenExpired ||
 				(!verification[0] && verification[1] && verification[2]) ? (
 					<View style={styles.sendVerification}>

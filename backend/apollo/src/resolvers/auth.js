@@ -21,14 +21,15 @@ module.exports = {
 				throw new Error('Email Taken');
 			}
 
-			sendVerifyEmail(email, firstName);
+			// sendVerifyEmail(email, firstName);
 			// hash password and create user
 			const hashedPassword = await bcrypt.hash(password, 10);
 			const user = await prisma.createUser({
 				firstName,
 				lastName,
 				email,
-				password: hashedPassword
+				password: hashedPassword,
+				emailVerified: true
 			});
 
 			return user;

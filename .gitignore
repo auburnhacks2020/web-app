@@ -1,10 +1,12 @@
-node_modules/**/*
+node_modules/
 .expo/*
 npm-debug.*
 *.jks
 *.p8
 *.p12
 *.key
+*.crt
+*.csr
 *.mobileprovision
 *.orig.*
 web-build/
