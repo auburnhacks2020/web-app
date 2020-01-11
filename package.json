@@ -27,6 +27,7 @@
     "graphql": "^14.5.8",
     "prop-types": "^15.7.2",
     "react": "16.9.0",
+    "react-art": "16.9.0",
     "react-dom": "16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.1.tar.gz",
     "react-native-animatable": "^1.3.3",

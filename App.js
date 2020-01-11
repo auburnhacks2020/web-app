@@ -13,8 +13,6 @@ import { APOLLO_SERVER_URL } from 'react-native-dotenv';
 import * as WebBrowser from 'expo-web-browser';
 
 import AppNavigator from './navigation/AppNavigator';
-
-
 console.log(APOLLO_SERVER_URL)
 
 
