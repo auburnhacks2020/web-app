@@ -14,6 +14,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { getToken } from '../auth';
 import { Select } from '../components';
 import { Colors } from '../constants';
+import * as WebBrowser from 'expo-web-browser';
 
 const SUBMIT_APPLICATION = gql`
 	mutation submitApplication($applicationForm: ApplicationForm!) {
@@ -101,8 +102,9 @@ const ApplicationScreen = props => {
 			const res = await submitApplication({
 				variables: { applicationForm: app }
 			});
-			console.log(res.data)
-			if (res.data.submitApplication.submitted) props.navigation.navigate('home');
+			console.log(res.data);
+			if (res.data.submitApplication.submitted)
+				props.navigation.navigate('home');
 		} catch (err) {
 			console.log(err);
 		}
@@ -312,7 +314,7 @@ const ApplicationScreen = props => {
 		</View>,
 		<View style={styles.appPage}>
 			<View style={styles.checkboxContainer}>
-				<Subheading>Will you need travel reimbursments?</Subheading>
+				<Subheading>Will you need bus travel from Atlanta?*</Subheading>
 				<Checkbox
 					color={colors.primary}
 					status={app.needTravel ? 'checked' : 'unchecked'}
@@ -332,7 +334,13 @@ const ApplicationScreen = props => {
 				/>
 			</View>
 			<View style={styles.checkboxContainer}>
-				<Subheading>Would you like to send your info to sponsors?</Subheading>
+				<Subheading>
+					I authorize you to share my application/registration information for
+					event administration, ranking, MLH administration, pre- and post-event
+					informational e-mails, and occasional messages about hackathons
+					in-line with the MLH Privacy Policy. I further agree to the terms of
+					both the MLH Contest Terms and Conditions and the MLH Privacy Policy.
+				</Subheading>
 				<Checkbox
 					color={colors.primary}
 					status={app.sendToSponsors ? 'checked' : 'unchecked'}
@@ -342,7 +350,20 @@ const ApplicationScreen = props => {
 				/>
 			</View>
 			<View style={styles.checkboxContainer}>
-				<Subheading>Do you accept the MLH Code of Conduct?</Subheading>
+				<Subheading>
+					Do you accept the{' '}
+					<Subheading
+						accessibilityRole='link'
+						style={{ color: colors.primary, textDecorationLine: 'underline' }}
+						onPress={() =>
+							WebBrowser.openBrowserAsync(
+								'https://static.mlh.io/docs/mlh-code-of-conduct.pdf'
+							)
+						}>
+						MLH Code of Conduct
+					</Subheading>
+					?
+				</Subheading>
 				<Checkbox
 					color={colors.primary}
 					status={app.acceptCodeOfConduct ? 'checked' : 'unchecked'}
