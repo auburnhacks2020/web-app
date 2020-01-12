@@ -34,7 +34,8 @@ export default {
 		backgroundColor: '#03244d'
 	},
 	btn2: {
-    backgroundColor: '#000',
+	backgroundColor: '#000',
+	margin: 10
 	},
 	cardbtn: {
 		backgroundColor: '#03244d',
