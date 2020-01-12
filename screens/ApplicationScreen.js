@@ -7,7 +7,8 @@ import {
 	Checkbox,
 	withTheme,
 	Subheading,
-	Provider
+	Provider,
+	Headline
 } from 'react-native-paper';
 import { gql } from 'apollo-boost';
 import { useQuery, useMutation } from '@apollo/react-hooks';
@@ -75,6 +76,7 @@ const ApplicationScreen = props => {
 		},
 		sendToSponsors: false
 	});
+	const [title, setTitle] = useState('');
 
 	useEffect(() => {
 		if (token === '') retrieveToken();
@@ -101,8 +103,9 @@ const ApplicationScreen = props => {
 			const res = await submitApplication({
 				variables: { applicationForm: app }
 			});
-			console.log(res.data)
-			if (res.data.submitApplication.submitted) props.navigation.navigate('home');
+			console.log(res.data);
+			if (res.data.submitApplication.submitted)
+				props.navigation.navigate('home');
 		} catch (err) {
 			console.log(err);
 		}
@@ -134,7 +137,32 @@ const ApplicationScreen = props => {
 		phoneNumInput,
 		challengeInput,
 		resumeInput = null;
-
+	const titles = [
+		{
+			id: 0,
+			title: 'Basic Info'
+		},
+		{
+			id: 1,
+			title: 'Education info'
+		},
+		{
+			id: 2,
+			title: 'Hackathon Experience'
+		},
+		{
+			id: 3,
+			title: 'Short answer questions'
+		},
+		{
+			id: 4,
+			title: 'Info for our sponsors'
+		},
+		{
+			id: 5,
+			title: 'Almost There!'
+		}
+	];
 	const pages = [
 		<View style={styles.appPage}>
 			<TextInput
@@ -357,10 +385,16 @@ const ApplicationScreen = props => {
 	return (
 		<Provider theme={props.theme}>
 			<View
+				onLayout={() => {
+					setTitle(titles[pageIndex].title);
+				}}
 				style={StyleSheet.flatten([
 					styles.container,
 					{ backgroundColor: colors.background }
 				])}>
+				<View style={styles.title}>
+					<Headline style={{fontSize:36}}>{title}</Headline>
+				</View>
 				<ScrollView
 					style={styles.applicationForm}
 					contentContainerStyle={{ alignItems: 'center' }}
@@ -380,9 +414,10 @@ const ApplicationScreen = props => {
 						<View style={styles.paginator}>
 							<IconButton
 								icon='arrow-left'
-								onPress={() =>
-									pageIndex > 0 ? setPageIndex(pageIndex - 1) : null
-								}
+								onPress={() => {
+									pageIndex > 0 ? setPageIndex(pageIndex - 1) : null;
+									setTitle(titles[pageIndex - 1].title);
+								}}
 								color={pageIndex !== 0 ? Colors.iconDefault : colors.background}
 							/>
 							<View style={styles.paginatorDots}>
@@ -396,17 +431,21 @@ const ApplicationScreen = props => {
 												? Colors.iconSelected
 												: Colors.iconDefault
 										}
-										onPress={() => setPageIndex(idx)}
+										onPress={() => {
+											setPageIndex(idx);
+											setTitle(titles[idx].title);
+										}}
 									/>
 								))}
 							</View>
 							<IconButton
 								icon='arrow-right'
-								onPress={() =>
+								onPress={() => {
 									pageIndex < pages.length - 1
 										? setPageIndex(pageIndex + 1)
-										: null
-								}
+										: null;
+									setTitle(titles[pageIndex + 1].title);
+								}}
 								color={
 									pageIndex !== pages.length - 1
 										? Colors.iconDefault
@@ -462,6 +501,11 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center'
+	},
+	title: {
+		justifyContent: 'center',
+		alignItems: 'center',
+		padding: 20
 	}
 });
 
