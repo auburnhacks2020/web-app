@@ -1,14 +1,14 @@
 import data from '../assets/ApplicationData'
 
 export default {
-	gender: ['Male', 'Female', 'Non-binary'],
-	race: ['American Indian or Alaskan Native', 'Asian / Pacific Islander', 'Black or African American', 'Black or African American', 'White / Caucasian', 'Mutliple ethnicity'],
+	gender: ['Male', 'Female', 'Prefer not to Answer'],
+	race: ['American Indian or Alaskan Native', 'Asian / Pacific Islander', 'Black or African American', 'Black or African American', 'White / Caucasian', 'Mutliple ethnicity', 'Prefer not to Answer'],
 	language: [],
 	dietaryRestrictions: ['Vegetarian', 'Vegan', 'None'],
 	shirtSize: ['Small', 'Medium', 'Large', 'X-Large', 'XX-Large', 'XXX-Large'],
 	school: data.school,
 	major: [],
-	educationLevel: ['Undergraduate', 'Graduate', 'Post-Graduate'],
+	educationLevel: ['Associates', 'Bachelors', 'Masters', 'Doctorate', 'Post-Doctorate'],
 	interests: [],
 	experience: [1, 2, 3, 4, 5],
 	skills: [

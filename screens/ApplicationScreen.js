@@ -16,6 +16,7 @@ import { getToken } from '../auth';
 import { Select } from '../components';
 import { Colors } from '../constants';
 import * as WebBrowser from 'expo-web-browser';
+import { TextInputMask } from 'react-native-masked-text';
 
 const SUBMIT_APPLICATION = gql`
 	mutation submitApplication($applicationForm: ApplicationForm!) {
@@ -170,7 +171,7 @@ const ApplicationScreen = props => {
 				ref={input => {
 					sidInput = input;
 				}}
-				label='Student ID'
+				label='Student ID #'
 				value={app.studentId}
 				onChangeText={val => updateField('studentId', val)}
 				onSubmitEditing={() => {
@@ -183,9 +184,26 @@ const ApplicationScreen = props => {
 				ref={input => {
 					dobInput = input;
 				}}
-				label='Date of Birth'
-				value={app.dateOfBirth}
-				onChangeText={val => updateField('dateOfBirth', val)}
+				label='Date of Birth MM/DD/YYYY'
+				render={props => (
+					<TextInputMask
+						{...props}
+						type={'custom'}
+						options={{
+							/**
+							 * mask: (String | required | default '')
+							 * the mask pattern
+							 * 9 - accept digit.
+							 * A - accept alpha.
+							 * S - accept alphanumeric.
+							 * * - accept all, EXCEPT white space.
+							 */
+							mask: '99/99/9999'
+						}}
+						value={app.dateOfBirth}
+						onChangeText={val => updateField('dateOfBirth', val)}
+					/>
+				)}
 				onSubmitEditing={() => {
 					phoneNumInput.focus();
 				}}
@@ -196,9 +214,26 @@ const ApplicationScreen = props => {
 				ref={input => {
 					phoneNumInput = input;
 				}}
-				label='Phone Number'
-				value={app.phoneNumber}
-				onChangeText={val => updateField('phoneNumber', val)}
+				render={props => (
+					<TextInputMask
+						{...props}
+						type={'custom'}
+						options={{
+							/**
+							 * mask: (String | required | default '')
+							 * the mask pattern
+							 * 9 - accept digit.
+							 * A - accept alpha.
+							 * S - accept alphanumeric.
+							 * * - accept all, EXCEPT white space.
+							 */
+							mask: '(999)-999-9999'
+						}}
+						value={app.phoneNumber}
+						onChangeText={val => updateField('phoneNumber', val)}
+					/>
+				)}
+				label='Phone Number (xxx)-xxx-xxxx'
 				blurOnSubmit
 				style={styles.textInput}
 			/>
