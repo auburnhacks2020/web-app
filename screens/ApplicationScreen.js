@@ -399,6 +399,9 @@ const ApplicationScreen = props => {
 					}}
 				/>
 			</View>
+			<Subheading>
+				*We will be providing bus travel from the ATL Airport / Atlanta Area.
+			</Subheading>
 		</View>
 	];
 
@@ -413,7 +416,7 @@ const ApplicationScreen = props => {
 					{ backgroundColor: colors.background }
 				])}>
 				<View style={styles.title}>
-					<Headline style={{fontSize:36}}>{title}</Headline>
+					<Headline style={{ fontSize: 36 }}>{title}</Headline>
 				</View>
 				<ScrollView
 					style={styles.applicationForm}
