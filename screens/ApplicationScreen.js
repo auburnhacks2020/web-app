@@ -365,8 +365,34 @@ const ApplicationScreen = props => {
 					I authorize you to share my application/registration information for
 					event administration, ranking, MLH administration, pre- and post-event
 					informational e-mails, and occasional messages about hackathons
-					in-line with the MLH Privacy Policy. I further agree to the terms of
-					both the MLH Contest Terms and Conditions and the MLH Privacy Policy.
+					in-line with{' '}
+					<Subheading
+						style={{ color: colors.primary, textDecorationLine: 'underline' }}
+						onPress={() =>
+							WebBrowser.openBrowserAsync('https://mlh.io/privacy')
+						}>
+						the MLH Privacy Policy
+					</Subheading>
+					. I further agree to the terms of both the{' '}
+					<Subheading
+						style={{ color: colors.primary, textDecorationLine: 'underline' }}
+						onPress={() =>
+							WebBrowser.openBrowserAsync(
+								'https://github.com/MLH/mlh-policies/tree/master/prize-terms-and-conditions'
+							)
+						}>
+						{' '}
+						MLH Contest Terms and Conditions
+					</Subheading>{' '}
+					and the{' '}
+					<Subheading
+						style={{ color: colors.primary, textDecorationLine: 'underline' }}
+						onPress={() =>
+							WebBrowser.openBrowserAsync('https://mlh.io/privacy')
+						}>
+						the MLH Privacy Policy
+					</Subheading>
+					.
 				</Subheading>
 				<Checkbox
 					color={colors.primary}
