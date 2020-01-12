@@ -28,7 +28,7 @@ export default function AboutScreen(props) {
               students, for students. With this hackathon, Auburn University's
               Computer Science & Software Engineering strives to promote
               technical innovation and highlight students’ skills and abilities.
-              Partnering with Major League Hacking (MLH) for the first time, we
+              Partnering with Major League Hacking (MLH), we
               aim to bring out the best and brightest students, not just from
               Auburn University but from other universities all over the United
               States.

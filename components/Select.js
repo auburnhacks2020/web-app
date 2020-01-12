@@ -155,7 +155,7 @@ const Select = props => {
 							mode='outlined'
 							value={searchText}
 							onChangeText={setSearchText}
-							placeholder='Other...'
+							placeholder='Other (Please Specify)'
 							placeholderTextColor={colors.placeholder}
 						/>
 						<IconButton
