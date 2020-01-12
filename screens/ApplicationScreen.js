@@ -244,7 +244,7 @@ const ApplicationScreen = props => {
 				setSelected={val => updateField('gender', val)}
 			/>
 			<Select
-				placeholder='Race'
+				placeholder='Race/Ethnicity'
 				type='race'
 				selected={app.race}
 				setSelected={val => updateField('race', val)}
