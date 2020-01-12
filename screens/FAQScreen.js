@@ -76,6 +76,11 @@ export default function FAQScreen(props) {
 			question: "What if I'm traveling by air?",
 			answer:
 				"If you're traveling by air, the closest airport to Auburn University is the Hartsfield-Jackson Atlanta International Airport, which is approximately an hour and forty minutes away (Please also note the change from Eastern to Central timezone). From the Atlanta airport, you have the option of taking Groome transportation. If there is enough interest, we will probably charter a bus from the airport to the event."
+		},
+		{
+			id: 10,
+			question: 'Can high school students participate?',
+			answer: 'Unfortunately, no. In the future, we hope to open participation to include high school students, but you must be a university student to participate in AuburnHacks 2020.'
 		}
 	];
 	return (
@@ -100,7 +105,9 @@ export default function FAQScreen(props) {
 												backgroundColor: '#181818'
 										  }
 								}>
-								<Card.Title title={q.question} titleStyle={{ color: '#fff' }} />
+								<Card.Content>
+								<Headline style={{color:'#fff'}}>{q.question}</Headline>
+								</Card.Content>
 								<Card.Actions style={stylesheet.cardAction}>
 									<Button
 										mode='contained'

@@ -11,6 +11,7 @@ import { stylesheet } from '../constants';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { getToken } from '../auth';
 import { gql } from 'apollo-boost';
+import * as WebBrowser from 'expo-web-browser';
 
 const CURRENT_USER = gql`
 	{
@@ -63,13 +64,15 @@ const ProfileScreen = props => {
 				<ActivityIndicator />
 			</View>
 		);
-	if (error) return (<View
-	style={StyleSheet.flatten([
-		styles.container,
-		{ backgroundColor: colors.background }
-	])}>
-		<Text>Uh oh! An Error has occurred!</Text>
-	</View>);
+	if (error) return (
+								<View
+									style={StyleSheet.flatten([
+										styles.container,
+										{ backgroundColor: colors.background }
+									])}>
+									<Text>Uh oh! An Error has occurred!</Text>
+								</View>
+							);
 
 	const { firstName, lastName, appComplete, application } = data.currentUser;
 	console.log(application);
@@ -85,18 +88,29 @@ const ProfileScreen = props => {
 				Thanks for registering for AuburnHacks!{'\n'}
 				Follow us on social media for news and updates about the event!
 			</Headline>
-			<Button
-				style={stylesheet.btn2}
-				onPress={() => {
-					navigate('SocialStack');
-				}}>
-				Follow Us!
-			</Button>
-			{!appComplete ? (
-				<Button style={stylesheet.btn2} onPress={()=> {
-					navigate('application')
-				}}>Apply Here!</Button>
-			) : null}
+			<View style={{ flexDirection: 'row' }}>
+				<Button
+					style={stylesheet.btn2}
+					onPress={() => {
+						navigate('SocialStack');
+					}}>
+					Follow Us!
+				</Button>
+				<Button
+					onPress={() => {
+						WebBrowser.openBrowserAsync('http://mlh.io/code-of-conduct');
+					}}
+					style={stylesheet.btn2}>
+					MLH Code of Conduct
+				</Button>
+				<Button
+					style={stylesheet.btn2}
+					onPress={() => {
+						navigate('application');
+					}}>
+					Apply Here!
+				</Button>
+			</View>
 		</View>
 	);
 };
