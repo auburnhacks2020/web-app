@@ -35,7 +35,7 @@ export default function SponsorsScreen() {
 						style={stylesheet.links}
 						onPress={() =>
 							WebBrowser.openBrowserAsync(
-								'/assets/pdfs/prospectus.pdf'
+								'https://drive.google.com/file/d/1bRhvxBZ9CtOfEHPSaJyOaXc7B88eYERT/view?usp=sharing'
 							)
 						}>
 						Click here to download the 2020 Prospectus.
