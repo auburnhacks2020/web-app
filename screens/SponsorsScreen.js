@@ -8,11 +8,13 @@ import {
 	Image
 } from 'react-native';
 import { Header } from '../components';
-import { layout, stylesheet } from '../constants';
-import { Paragraph } from 'react-native-paper';
+import { layout, stylesheet, Colors } from '../constants';
+import { Paragraph, Headline, withTheme } from 'react-native-paper';
 import * as WebBrowser from 'expo-web-browser';
 
-export default function SponsorsScreen() {
+const SponsorsScreen = props => {
+	const { colors } = props.theme;
+
 	const logos = [
 		{
 			logo: require('../assets/sponsors/MI_KIIM_reversedwhite.png'),
@@ -65,6 +67,10 @@ export default function SponsorsScreen() {
 		{
 			logo: require('../assets/sponsors/Brooksourcelogo-color.png'),
 			level: 'bronze'
+		},
+		{
+			logo: require('../assets/sponsors/Acc_Logo_Black_Purple_RGB.png'),
+			level: 'silver'
 		}
 	];
 	return (
@@ -96,20 +102,70 @@ export default function SponsorsScreen() {
 					{'\n'}
 				</Paragraph>
 			</View>
-			<View style={{flexDirection:'row', flexWrap:'wrap', width:'100%'}}>
-				{logos.map(img => (
-					<View style={{width:'25%'}}>
-					<Image
-						resizeMode='contain'
-						style={{ width: '100%', height: 100 }}
-						resizeMethod='auto'
-						source={img.logo}
-					/>
-					</View>
-				))}
+			<View style={{margin: 10}}>
+				<View
+					style={{
+						flexDirection: 'row',
+						flexWrap: 'wrap',
+						justifyContent: 'center',
+						width: '100%'
+					}}>
+					{logos.map(img =>
+						img.level === 'gold' ? (
+							<Image
+								resizeMode='contain'
+								style={{ width: 300, height: 300, margin: 20 }}
+								resizeMethod='auto'
+								source={img.logo}
+							/>
+						) : null
+					)}
+				</View>
+			</View>
+			<View style={{margin: 10}}>
+				<View
+					style={{
+						flexDirection: 'row',
+						flexWrap: 'wrap',
+						justifyContent: 'center',
+						width: '100%'
+					}}>
+					{logos.map(img =>
+						img.level === 'silver' ? (
+							<Image
+								resizeMode='contain'
+								style={{ width: 150, height: 150, margin: 20 }}
+								resizeMethod='auto'
+								source={img.logo}
+							/>
+						) : null
+					)}
+				</View>
+			</View>
+			<View style={{margin: 10}}>
+				<View
+					style={{
+						flexDirection: 'row',
+						flexWrap: 'wrap',
+						justifyContent: 'center',
+						width: '100%'
+					}}>
+					{logos.map(img =>
+						img.level === 'bronze' ? (
+							<Image
+								resizeMode='contain'
+								style={{ width: 100, height: 100, margin: 20 }}
+								resizeMethod='auto'
+								source={img.logo}
+							/>
+						) : null
+					)}
+				</View>
 			</View>
 		</ScrollView>
 	);
-}
+};
 
 SponsorsScreen.navigationOptions = {};
+
+export default withTheme(SponsorsScreen);
