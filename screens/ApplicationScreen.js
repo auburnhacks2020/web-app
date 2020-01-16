@@ -313,7 +313,7 @@ const ApplicationScreen = props => {
 				placeholder='Interests'
 				type='interests'
 				selected={app.sponsorData.interests}
-				setSelected={val => updateSponsorDataField('interest', val)}
+				setSelected={val => updateSponsorDataField('interests', val)}
 			/>
 			<Select
 				placeholder='Number of Hackathons Attended'
