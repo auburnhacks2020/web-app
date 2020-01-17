@@ -6,9 +6,10 @@ const path = require('path');
 const sendVerifyEmail = (toEmail, name) => {
 
     let transporter = nodemailer.createTransport({
-        service: 'gmail',
+		port: 587,
+		host: 'smtp.mailgun.org',
         auth: {
-        	user: 'auburnhacks@gmail.com',
+        	user: 'staff@mail.auburnhacks.com',
         	pass: process.env.EMAIL_PASS
         }
 	});
@@ -28,7 +29,7 @@ const sendVerifyEmail = (toEmail, name) => {
 
 	const email = new Email({
 		message: {
-            from: '"AuburnHacks Staff" <auburnhacks@gmail.com>',
+            from: '"AuburnHacks Staff" <staff@auburnhacks.com>',
 			to: toEmail,
 			attachments: [
 				{

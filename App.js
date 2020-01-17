@@ -1,7 +1,13 @@
 import { AppLoading } from 'expo';
 import * as Font from 'expo-font';
 import React, { useState } from 'react';
-import { TouchableOpacity, Image, View, SafeAreaView, Platform } from 'react-native';
+import {
+	TouchableOpacity,
+	Image,
+	View,
+	SafeAreaView,
+	Platform
+} from 'react-native';
 import { layout } from './constants';
 import { Ionicons } from '@expo/vector-icons';
 import { Asset } from 'expo-asset';
@@ -14,7 +20,7 @@ import * as WebBrowser from 'expo-web-browser';
 
 import AppNavigator from './navigation/AppNavigator';
 
-console.log(APOLLO_SERVER_URL)
+console.log(APOLLO_SERVER_URL);
 
 const client = new ApolloClient({
 	uri: APOLLO_SERVER_URL
