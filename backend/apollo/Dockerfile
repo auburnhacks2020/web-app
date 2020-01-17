@@ -14,7 +14,6 @@ RUN npm install --only=production
 ENV WEBSITE_ADDRESS=https://auburnhacks.com/
 ENV LOGIN_SECRET=login_secret
 ENV EMAIL_SECRET=email_secret
-ENV EMAIL_PASS=b680b119db3c19f4024512f9b7d80fa8-0a4b0c40-1a5fcac2
 ENV NODE_ENV=production
 
 # EXPOSE 8383
