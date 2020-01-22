@@ -9,14 +9,13 @@ const SIZE = Platform.OS === 'web' ? 80 : 70;
 
 const styles = StyleSheet.create({
 	container: {
-		paddingTop: 10,
+		flex: 1,
 		flexDirection: 'row',
 		justifyContent: 'center'
 	},
 	button: {
-		position: 'absolute',
 		top: -SIZE / 2,
-		left: -SIZE / 2,
+		maxWidth: SIZE,
 		shadowRadius: 10,
 		borderRadius: SIZE / 2,
 		width: SIZE,
@@ -36,30 +35,32 @@ const ProfileButton = props => {
 	};
 
 	return (
-		<Provider theme={theme}>
-			<View style={styles.container}>
+		<View style={styles.container}>
+			<Provider theme={theme}/>
 			<Button
-					theme={theme}
-					mode='outlined'
-					onPress={handlePress}
-					style={styles.button}>
-					<Ionicons
-						name='md-person'
-						size={SIZE / 1.5}
-						color={
-							routeName === 'ProfileStack'
-								? Colors.iconSelected
-								: Colors.iconDefault
-						}
-					/>
-				</Button>
-				<Menu visible={isVisible} onDismiss={() => setVisible(false)} anchor={{x: Dimensions.get("window").width / 2, y: Dimensions.get("window").height / 2}}>
-					<Menu.Item onPress={() => {}} title='Item 1' />
-					<Menu.Item onPress={() => {}} title='Item 2' />
-					<Menu.Item onPress={() => {}} title='Item 3' />
-				</Menu>
-			</View>
-		</Provider>
+				theme={theme}
+				mode='outlined'
+				onPress={handlePress}
+				style={styles.button}>
+				<Ionicons
+					name='md-person'
+					size={SIZE / 1.5}
+					color={
+						routeName === 'ProfileStack'
+							? Colors.iconSelected
+							: Colors.iconDefault
+					}
+				/>
+			</Button>
+			<Menu
+				visible={isVisible}
+				onDismiss={() => setVisible(false)}
+				anchor={{}}>
+				<Menu.Item onPress={() => {}} title='Item 1' />
+				<Menu.Item onPress={() => {}} title='Item 2' />
+				<Menu.Item onPress={() => {}} title='Item 3' />
+			</Menu>
+		</View>
 	);
 };
 export default withTheme(ProfileButton);

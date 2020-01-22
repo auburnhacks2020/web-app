@@ -75,6 +75,10 @@ const SponsorsScreen = props => {
 		{
 			logo: require('../assets/sponsors/sticker-mule-logo-light.png'),
 			level: 'bronze'
+		},
+		{
+			logo: require('../assets/sponsors/Coke-color.png'),
+			level: 'bronze'
 		}
 	];
 	return (
