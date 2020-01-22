@@ -108,7 +108,7 @@ const ProfileScreen = props => {
 						MLH Code of Conduct
 					</Button>
 					{console.log(data)}
-					{data.currentUser.application === null ? (
+					{!data.currentUser.appComplete ? (
 						<Button
 							style={stylesheet.btn2}
 							onPress={() => {
@@ -116,15 +116,7 @@ const ProfileScreen = props => {
 							}}>
 							Apply Here!
 						</Button>
-					) : (
-						<Button
-							style={stylesheet.btn2}
-							onPress={() => {
-								navigate('application');
-							}}>
-							Update App Here!
-						</Button>
-					)}
+					) : null }
 				</View>
 			</View>
 	);

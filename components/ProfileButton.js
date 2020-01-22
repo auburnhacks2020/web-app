@@ -86,7 +86,7 @@ const ProfileButton = props => {
 						<Menu.Item
 							onPress={() => {
 								onSignOut();
-								props.navigation.navigate('ProfileStack');
+								props.navigation.navigate('login');
 								setVisible(false);
 							}}
 							title='Logout'
@@ -96,7 +96,7 @@ const ProfileButton = props => {
 					<View>
 						<Menu.Item
 							onPress={() => {
-								props.navigation.navigate('ProfileStack');
+								props.navigation.navigate('countdown');
 								setVisible(false);
 							}}
 							title='Login'
