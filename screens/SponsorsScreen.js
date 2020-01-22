@@ -106,7 +106,7 @@ const SponsorsScreen = props => {
 					{'\n'}
 				</Paragraph>
 			</View>
-			<View style={{margin: 10}}>
+			<View style={{ margin: 10 }}>
 				<View
 					style={{
 						flexDirection: 'row',
@@ -126,7 +126,7 @@ const SponsorsScreen = props => {
 					)}
 				</View>
 			</View>
-			<View style={{margin: 10}}>
+			<View style={{ margin: 10 }}>
 				<View
 					style={{
 						flexDirection: 'row',
@@ -146,7 +146,7 @@ const SponsorsScreen = props => {
 					)}
 				</View>
 			</View>
-			<View style={{margin: 10}}>
+			<View style={{ margin: 10 }}>
 				<View
 					style={{
 						flexDirection: 'row',

@@ -65,7 +65,8 @@ const ProfileScreen = props => {
 				<ActivityIndicator />
 			</View>
 		);
-	if (error)
+	if (error) {
+		console.log(error)
 		return (
 			<View
 				style={StyleSheet.flatten([
@@ -75,6 +76,7 @@ const ProfileScreen = props => {
 				<Text>Uh oh! An Error has occurred!</Text>
 			</View>
 		);
+	}
 
 	const { firstName, lastName, appComplete, application } = data.currentUser;
 	console.log(application);
