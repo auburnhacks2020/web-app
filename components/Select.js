@@ -14,7 +14,7 @@ import {
 	IconButton
 } from 'react-native-paper';
 import { ApplicationData } from '../constants';
-import { SelectedItem } from '../components';
+import SelectedItem from '../components/SelectedItem';
 
 const Select = props => {
 	const [type, setType] = useState('')

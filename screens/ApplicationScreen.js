@@ -251,21 +251,21 @@ const ApplicationScreen = props => {
 			/>
 			<Select
 				multiple
-				placeholder='Language'
+				placeholder='Preffered Spoken Language(s)'
 				type='language'
 				selected={app.languages}
 				setSelected={val => updateField('languages', val)}
 			/>
 			<Select
 				multiple
-				placeholder='Dietary Restrictions'
+				placeholder='Do you have any dietary restrictions?'
 				type='dietaryRestrictions'
 				selected={app.dietaryRestrictions}
 				setSelected={val => updateField('dietaryRestrictions', val)}
 			/>
 			<Select
 				multiple
-				placeholder='Special Accomodations'
+				placeholder='Do you need any special accomodations?'
 				type='specialAccomodations'
 				selected={app.specialAccomodations}
 				setSelected={val => updateField('specialAccomodations', val)}
@@ -297,12 +297,26 @@ const ApplicationScreen = props => {
 				setSelected={val => updateSponsorDataField('educationLevel', val)}
 			/>
 			<TextInput
-				ref={input => {
-					gpaInput = input;
-				}}
-				label='GPA'
-				value={app.sponsorData.gpa}
-				onChangeText={val => updateSponsorDataField('gpa', val)}
+				label='GPA (on a 4.0 scale)'
+				render={props => (
+					<TextInputMask
+						{...props}
+						type={'custom'}
+						options={{
+							/**
+							 * mask: (String | required | default '')
+							 * the mask pattern
+							 * 9 - accept digit.
+							 * A - accept alpha.
+							 * S - accept alphanumeric.
+							 * * - accept all, EXCEPT white space.
+							 */
+							mask: '9.9'
+						}}
+						value={app.sponsorData.gpa}
+						onChangeText={val => updateSponsorDataField('gpa', val)}
+					/>
+				)}
 				blurOnSubmit
 				style={styles.textInput}
 			/>
@@ -316,14 +330,14 @@ const ApplicationScreen = props => {
 				setSelected={val => updateSponsorDataField('interests', val)}
 			/>
 			<Select
-				placeholder='Number of Hackathons Attended'
+				placeholder='How many hackathons have you participated in?'
 				type='experience'
 				selected={app.sponsorData.experience}
 				setSelected={val => updateSponsorDataField('experience', val)}
 			/>
 			<Select
 				multiple
-				placeholder='Hackathon Awards'
+				placeholder='Has one of your projects won a prize?'
 				type='awards'
 				selected={app.sponsorData.hackathonAwards}
 				setSelected={val => updateSponsorDataField('hackathonAwards', val)}
@@ -339,7 +353,7 @@ const ApplicationScreen = props => {
 				ref={input => {
 					aboutInput = input;
 				}}
-				label='About You'
+				label='Why do you want to participate at AuburnHacks?'
 				multiline
 				value={app.sponsorData.aboutYou}
 				onChangeText={val => updateSponsorDataField('aboutYou', val)}
@@ -347,13 +361,14 @@ const ApplicationScreen = props => {
 					challengeInput.focus();
 				}}
 				blurOnSubmit={false}
-				style={styles.textInput}
+				style={StyleSheet.flatten([styles.textInput, { height: 350 }])}
 			/>
 			<TextInput
 				ref={input => {
 					challengeInput = input;
 				}}
-				label='Describe your most challenging project'
+				label='Describe the coolest/most satisfying project you’ve worked on. (Doesn’t have to be tech-related)'
+				placeholder='Describe the coolest/most satisfying project you’ve worked on. (Doesn’t have to be tech-related)'
 				multiline
 				value={app.sponsorData.biggestChallenge}
 				onChangeText={val => updateSponsorDataField('biggestChallenge', val)}
@@ -361,7 +376,7 @@ const ApplicationScreen = props => {
 					resumeInput.focus();
 				}}
 				blurOnSubmit={false}
-				style={styles.textInput}
+				style={StyleSheet.flatten([styles.textInput, { height: 350 }])}
 			/>
 			<TextInput
 				ref={input => {
@@ -371,12 +386,16 @@ const ApplicationScreen = props => {
 				value={app.sponsorData.resume}
 				onChangeText={val => updateSponsorDataField('resume', val)}
 				blurOnSubmit
+				dataDetectorTypes='link'
 				style={styles.textInput}
 			/>
 		</View>,
 		<View style={styles.appPage}>
 			<View style={styles.checkboxContainer}>
-				<Subheading>Will you need bus travel from Atlanta?*</Subheading>
+				<Subheading>
+					Will you need bus travel from Atlanta? {'('}We will be providing bus
+					travel from the ATL Airport / Atlanta Area.{')'}
+				</Subheading>
 				<Checkbox
 					color={colors.primary}
 					status={app.needTravel ? 'checked' : 'unchecked'}
@@ -449,6 +468,17 @@ const ApplicationScreen = props => {
 							)
 						}>
 						MLH Code of Conduct
+					</Subheading>{' '}
+					and the{' '}
+					<Subheading
+						accessibilityRole='link'
+						style={{ color: colors.primary, textDecorationLine: 'underline' }}
+						onPress={() =>
+							WebBrowser.openBrowserAsync(
+								'https://drive.google.com/file/d/1oaYukg6gLMciTBAAyRDgjCRhnvSkp6OA/view'
+							)
+						}>
+						INFORMED CONSENT WAIVER for AUBURNHACKS
 					</Subheading>
 					?
 				</Subheading>
@@ -460,9 +490,6 @@ const ApplicationScreen = props => {
 					}}
 				/>
 			</View>
-			<Subheading>
-				*We will be providing bus travel from the ATL Airport / Atlanta Area.
-			</Subheading>
 		</View>
 	];
 
@@ -543,7 +570,7 @@ const ApplicationScreen = props => {
 								mode='contained'
 								onPress={submitApp}
 								loading={submitApplicationResult.loading}
-								disabled={!app.sendToSponsors && !app.acceptCodeOfConduct}>
+								disabled={!(app.sendToSponsors && app.acceptCodeOfConduct)}>
 								Submit Application
 							</Button>
 						) : null}
@@ -584,7 +611,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		alignItems: 'center'
+		alignItems: 'center',
+		margin: 10
 	},
 	title: {
 		justifyContent: 'center',
