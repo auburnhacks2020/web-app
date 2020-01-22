@@ -8,18 +8,6 @@ import { isSignedIn, onSignOut } from '../auth';
 import { Ionicons } from '@expo/vector-icons';
 
 const AppHeader = (props) => {
-	const [signedIn, setSignedIn] = useState(null);
-	useEffect(() => {
-		if(signedIn === null) fetchSignInState();
-	}, [signedIn]);
-	const fetchSignInState = async () => {
-		try {
-			const status = await isSignedIn();
-			setSignedIn(status);
-		} catch (err) {
-			console.log(err);
-		}
-	};
 
 	const styles = StyleSheet.create({
 		header: {

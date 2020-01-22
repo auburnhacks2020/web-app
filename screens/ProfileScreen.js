@@ -21,6 +21,7 @@ const CURRENT_USER = gql`
 			appComplete
 			application {
 				id
+				studentId
 			}
 		}
 	}
@@ -35,10 +36,10 @@ const ProfileScreen = props => {
 	const getUserToken = async () => {
 		try {
 			const userToken = await getToken();
+			if (userToken === null) navigate('login');
 			setToken(userToken);
 		} catch (err) {
 			console.log(err);
-			return '';
 		}
 	};
 
@@ -64,54 +65,68 @@ const ProfileScreen = props => {
 				<ActivityIndicator />
 			</View>
 		);
-	if (error) return (
-								<View
-									style={StyleSheet.flatten([
-										styles.container,
-										{ backgroundColor: colors.background }
-									])}>
-									<Text>Uh oh! An Error has occurred!</Text>
-								</View>
-							);
+	if (error) {
+		console.log(error)
+		return (
+			<View
+				style={StyleSheet.flatten([
+					styles.container,
+					{ backgroundColor: colors.background }
+				])}>
+				<Text>Uh oh! An Error has occurred!</Text>
+			</View>
+		);
+	}
 
 	const { firstName, lastName, appComplete, application } = data.currentUser;
 	console.log(application);
 
 	return (
-		<View
-			style={StyleSheet.flatten([
-				styles.container,
-				{ backgroundColor: colors.background }
-			])}>
-			<Headline style={styles.headline}>
-				Welcome {firstName} {lastName}!{'\n'}
-				Thanks for registering for AuburnHacks!{'\n'}
-				Follow us on social media for news and updates about the event!
-			</Headline>
-			<View style={{ flexDirection: 'row' }}>
-				<Button
-					style={stylesheet.btn2}
-					onPress={() => {
-						navigate('SocialStack');
-					}}>
-					Follow Us!
-				</Button>
-				<Button
-					onPress={() => {
-						WebBrowser.openBrowserAsync('http://mlh.io/code-of-conduct');
-					}}
-					style={stylesheet.btn2}>
-					MLH Code of Conduct
-				</Button>
-				<Button
-					style={stylesheet.btn2}
-					onPress={() => {
-						navigate('application');
-					}}>
-					Apply Here!
-				</Button>
+			<View
+				style={StyleSheet.flatten([
+					styles.container,
+					{ backgroundColor: colors.background }
+				])}>
+				<Headline style={styles.headline}>
+					Welcome {firstName} {lastName}!{'\n'}
+					Thanks for creating an account with AuburnHacks!{'\n'}
+					Follow us on social media for news and updates about the event!
+				</Headline>
+				<View style={{ flexDirection: 'row' }}>
+					<Button
+						style={stylesheet.btn2}
+						onPress={() => {
+							navigate('SocialStack');
+						}}>
+						Follow Us!
+					</Button>
+					<Button
+						onPress={() => {
+							WebBrowser.openBrowserAsync('http://mlh.io/code-of-conduct');
+						}}
+						style={stylesheet.btn2}>
+						MLH Code of Conduct
+					</Button>
+					{console.log(data)}
+					{data.currentUser.application === null ? (
+						<Button
+							style={stylesheet.btn2}
+							onPress={() => {
+								navigate('application');
+							}}>
+							Apply Here!
+						</Button>
+					) : (
+						<Button
+							style={stylesheet.btn2}
+							onPress={() => {
+								navigate('application');
+							}}>
+							Update App Here!
+						</Button>
+					)}
+				</View>
 			</View>
-		</View>
 	);
 };
 

@@ -184,7 +184,11 @@ const createProfileStack = () => {
 		{
 			navigationOptions: ({ navigation }) => ({
 				tabBarButtonComponent: props => (
-					<ProfileButton routeName={navigation.state.routeName} {...props} />
+					<ProfileButton
+						routeName={navigation.state.routeName}
+						{...props}
+						navigation={navigation}
+					/>
 				),
 				title: 'Home',
 				headerStyle: {

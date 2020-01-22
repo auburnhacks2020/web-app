@@ -3,3 +3,4 @@ yarn.lock
 .env
 email_templates/
 docker-compose.yml
+Dockerfile

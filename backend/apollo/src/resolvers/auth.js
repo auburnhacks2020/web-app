@@ -21,30 +21,29 @@ module.exports = {
 				throw new Error('Email Taken');
 			}
 
-			// sendVerifyEmail(email, firstName);
+			sendVerifyEmail(email, firstName);
 			// hash password and create user
 			const hashedPassword = await bcrypt.hash(password, 10);
 			const user = await prisma.createUser({
 				firstName,
 				lastName,
 				email,
-				password: hashedPassword,
-				emailVerified: true
+				password: hashedPassword
 			});
 
 			return user;
 		},
-		sendVerification: async (parent, { email }, ctx, info ) => {
+		sendVerification: async (parent, { email }, ctx, info) => {
 			if (email === '') {
-				throw new Error('Invalid Email')
+				throw new Error('Invalid Email');
 			}
 			const user = await ctx.prisma.user({ email });
-			
+
 			if (!user) {
 				throw new Error('Invalid Login');
 			}
 
-			sendVerifyEmail(email, user.firstName)
+			sendVerifyEmail(email, user.firstName);
 
 			return true;
 		},

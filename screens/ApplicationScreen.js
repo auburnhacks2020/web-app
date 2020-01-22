@@ -244,7 +244,7 @@ const ApplicationScreen = props => {
 				setSelected={val => updateField('gender', val)}
 			/>
 			<Select
-				placeholder='Race'
+				placeholder='Race/Ethnicity'
 				type='race'
 				selected={app.race}
 				setSelected={val => updateField('race', val)}
@@ -313,7 +313,7 @@ const ApplicationScreen = props => {
 				placeholder='Interests'
 				type='interests'
 				selected={app.sponsorData.interests}
-				setSelected={val => updateSponsorDataField('interest', val)}
+				setSelected={val => updateSponsorDataField('interests', val)}
 			/>
 			<Select
 				placeholder='Number of Hackathons Attended'
@@ -396,7 +396,7 @@ const ApplicationScreen = props => {
 				/>
 			</View>
 			<View style={styles.checkboxContainer}>
-				<Subheading>
+				<Subheading style={{ fontStyle: 'italic' }}>
 					I authorize you to share my application/registration information for
 					event administration, ranking, MLH administration, pre- and post-event
 					informational e-mails, and occasional messages about hackathons
@@ -438,7 +438,7 @@ const ApplicationScreen = props => {
 				/>
 			</View>
 			<View style={styles.checkboxContainer}>
-				<Subheading>
+				<Subheading style={{ fontStyle: 'italic' }}>
 					Do you accept the{' '}
 					<Subheading
 						accessibilityRole='link'
@@ -543,7 +543,7 @@ const ApplicationScreen = props => {
 								mode='contained'
 								onPress={submitApp}
 								loading={submitApplicationResult.loading}
-								disabled={!app.acceptCodeOfConduct}>
+								disabled={!app.sendToSponsors && !app.acceptCodeOfConduct}>
 								Submit Application
 							</Button>
 						) : null}
