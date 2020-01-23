@@ -84,6 +84,65 @@ const SponsorsScreen = props => {
 	return (
 		<ScrollView style={stylesheet.container}>
 			<Header title='Sponsors' />
+			<View style={{ margin: 7 }}>
+				<View
+					style={{
+						flexDirection: 'row',
+						flexWrap: 'wrap',
+						justifyContent: 'center',
+						width: '100%'
+					}}>
+					{logos.map(img =>
+						img.level === 'gold' ? (
+							<Image
+								resizeMode='contain'
+								style={{ width: 300, height: 300, margin: 20 }}
+								resizeMethod='auto'
+								source={img.logo}
+							/>
+						) : null
+					)}
+				</View>
+			</View>
+			<View style={{ margin: 7 }}>
+				<View
+					style={{
+						flexDirection: 'row',
+						flexWrap: 'wrap',
+						justifyContent: 'center',
+						width: '100%'
+					}}>
+					{logos.map(img =>
+						img.level === 'silver' ? (
+							<Image
+								resizeMode='contain'
+								style={{ width: 150, height: 150, margin: 20 }}
+								resizeMethod='auto'
+								source={img.logo}
+							/>
+						) : null
+					)}
+				</View>
+			</View>
+			<View style={{ margin: 7 }}>
+				<View
+					style={{
+						flexDirection: 'row',
+						flexWrap: 'wrap',
+						justifyContent: 'center',
+						width: '100%'
+					}}>
+					{logos.map(img =>
+						img.level === 'bronze' ? (
+							<Image
+								resizeMode='contain'
+								style={{ width: 100, height: 100, margin: 20 }}
+								resizeMethod='auto'
+								source={img.logo}
+							/>
+						) : null
+					)}
+				</View>
 			<View style={stylesheet.row}>
 				<Paragraph>
 					This event would not be possible without the support shown to us by
@@ -110,65 +169,6 @@ const SponsorsScreen = props => {
 					{'\n'}
 				</Paragraph>
 			</View>
-			<View style={{ margin: 10 }}>
-				<View
-					style={{
-						flexDirection: 'row',
-						flexWrap: 'wrap',
-						justifyContent: 'center',
-						width: '100%'
-					}}>
-					{logos.map(img =>
-						img.level === 'gold' ? (
-							<Image
-								resizeMode='contain'
-								style={{ width: 300, height: 300, margin: 20 }}
-								resizeMethod='auto'
-								source={img.logo}
-							/>
-						) : null
-					)}
-				</View>
-			</View>
-			<View style={{ margin: 10 }}>
-				<View
-					style={{
-						flexDirection: 'row',
-						flexWrap: 'wrap',
-						justifyContent: 'center',
-						width: '100%'
-					}}>
-					{logos.map(img =>
-						img.level === 'silver' ? (
-							<Image
-								resizeMode='contain'
-								style={{ width: 150, height: 150, margin: 20 }}
-								resizeMethod='auto'
-								source={img.logo}
-							/>
-						) : null
-					)}
-				</View>
-			</View>
-			<View style={{ margin: 10 }}>
-				<View
-					style={{
-						flexDirection: 'row',
-						flexWrap: 'wrap',
-						justifyContent: 'center',
-						width: '100%'
-					}}>
-					{logos.map(img =>
-						img.level === 'bronze' ? (
-							<Image
-								resizeMode='contain'
-								style={{ width: 100, height: 100, margin: 20 }}
-								resizeMethod='auto'
-								source={img.logo}
-							/>
-						) : null
-					)}
-				</View>
 			</View>
 		</ScrollView>
 	);
