@@ -8,7 +8,7 @@ const typeDefs = gql`
 		lastName: String
 		emailVerified: Boolean!
 		appComplete: Boolean!
-		application: Application
+		application: Application!
 		role: ROLE!
 	}
 
@@ -27,34 +27,34 @@ const typeDefs = gql`
 
 	type Application {
 		id: ID!
-		studentId: String
-		dateOfBirth: String
-		phoneNumber: String
-		gender: String
-		race: String
-		languages: [String]
-		dietaryRestrictions: [String]
-		specialAccomodations: [String]
-		shirtSize: String
-		needTravel: Boolean
-		emailOptIn: Boolean
-		acceptCodeOfConduct: Boolean
-		sponsorData: SponsorData
-		sendToSponsors: Boolean
+		studentId: String!
+		dateOfBirth: String!
+		phoneNumber: String!
+		gender: String!
+		race: String!
+		languages: [String!]!
+		dietaryRestrictions: [String!]!
+		specialAccomodations: [String!]!
+		shirtSize: String!
+		needTravel: Boolean!
+		emailOptIn: Boolean!
+		acceptCodeOfConduct: Boolean!
+		sponsorData: SponsorData!
+		sendToSponsors: Boolean!
 	}
 
 	type SponsorData {
-		major: String
-		educationLevel: String
-		school: String
-		interests: [String]
-		experience: Int
-		hackathonAwards: [String]
-		skills: [String]
-		gpa: String
-		aboutYou: String
-		biggestChallenge: String
-		resume: String
+		major: String!
+		educationLevel: String!
+		school: String!
+		interests: [String!]!
+		experience: Int!
+		hackathonAwards: [String!]!
+		skills: [String!]!
+		gpa: String!
+		aboutYou: String!
+		biggestChallenge: String!
+		resume: String!
 	}
 
 	input ApplicationForm {

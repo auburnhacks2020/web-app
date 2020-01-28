@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import {
 	Text,
 	withTheme,
@@ -66,7 +66,7 @@ const ProfileScreen = props => {
 			</View>
 		);
 	if (error) {
-		console.log(error)
+		console.log(error);
 		return (
 			<View
 				style={StyleSheet.flatten([
@@ -79,46 +79,53 @@ const ProfileScreen = props => {
 	}
 
 	const { firstName, lastName, appComplete, application } = data.currentUser;
-	console.log(application);
 
 	return (
-			<View
-				style={StyleSheet.flatten([
-					styles.container,
-					{ backgroundColor: colors.background }
-				])}>
-				<Headline style={styles.headline}>
-					Welcome {firstName} {lastName}!{'\n'}
-					Thanks for creating an account with AuburnHacks!{'\n'}
-					Follow us on social media for news and updates about the event!
-				</Headline>
-				<View style={{ flexDirection: 'row' }}>
+		<View
+			style={StyleSheet.flatten([
+				styles.container,
+				{ backgroundColor: colors.background }
+			])}>
+			<Headline style={styles.headline}>
+				Welcome {firstName} {lastName}!{'\n'}
+				Thanks for creating an account with AuburnHacks!{'\n'}
+				Follow us on social media for news and updates about the event!
+			</Headline>
+			<View style={Platform.OS === 'web' ? { flexDirection: 'row' } : undefined}>
+				<Button
+					style={stylesheet.btn2}
+					onPress={() => {
+						navigate('SocialStack');
+					}}>
+					Follow Us!
+				</Button>
+				<Button
+					onPress={() => {
+						WebBrowser.openBrowserAsync('http://mlh.io/code-of-conduct');
+					}}
+					style={stylesheet.btn2}>
+					MLH Code of Conduct
+				</Button>
+				{console.log(data)}
+				{application ? (
 					<Button
 						style={stylesheet.btn2}
 						onPress={() => {
-							navigate('SocialStack');
+							navigate('application');
 						}}>
-						Follow Us!
+						Update Application Here!
 					</Button>
+				) : (
 					<Button
+						style={stylesheet.btn2}
 						onPress={() => {
-							WebBrowser.openBrowserAsync('http://mlh.io/code-of-conduct');
-						}}
-						style={stylesheet.btn2}>
-						MLH Code of Conduct
+							navigate('application');
+						}}>
+						Apply Here!
 					</Button>
-					{console.log(data)}
-					{!data.currentUser.appComplete ? (
-						<Button
-							style={stylesheet.btn2}
-							onPress={() => {
-								navigate('application');
-							}}>
-							Apply Here!
-						</Button>
-					) : null }
-				</View>
+				)}
 			</View>
+		</View>
 	);
 };
 

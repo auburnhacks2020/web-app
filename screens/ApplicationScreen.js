@@ -8,15 +8,53 @@ import {
 	withTheme,
 	Subheading,
 	Provider,
-	Headline
+	Headline,
+	ActivityIndicator
 } from 'react-native-paper';
 import { gql } from 'apollo-boost';
-import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { getToken } from '../auth';
 import { Select } from '../components';
 import { Colors } from '../constants';
 import * as WebBrowser from 'expo-web-browser';
 import { TextInputMask } from 'react-native-masked-text';
+const _ = require('lodash/core');
+
+const CURRENT_USER = gql`
+	{
+		currentUser {
+			application {
+				id
+				studentId
+				dateOfBirth
+				phoneNumber
+				gender
+				race
+				languages
+				dietaryRestrictions
+				specialAccomodations
+				shirtSize
+				needTravel
+				emailOptIn
+				acceptCodeOfConduct
+				sendToSponsors
+				sponsorData {
+					major
+					educationLevel
+					school
+					interests
+					experience
+					hackathonAwards
+					skills
+					gpa
+					aboutYou
+					biggestChallenge
+					resume
+				}
+			}
+		}
+	}
+`;
 
 const SUBMIT_APPLICATION = gql`
 	mutation submitApplication($applicationForm: ApplicationForm!) {
@@ -48,7 +86,6 @@ const useWindowDimensions = () => {
 const ApplicationScreen = props => {
 	const { colors } = props.theme;
 	const { width } = useWindowDimensions();
-	const [token, setToken] = useState('');
 	const [pageIndex, setPageIndex] = useState(0);
 	const [app, setApp] = useState({
 		studentId: '',
@@ -80,25 +117,55 @@ const ApplicationScreen = props => {
 	});
 	const [title, setTitle] = useState('');
 
-	useEffect(() => {
-		if (token === '') retrieveToken();
-	}, [token]);
+	const [token, setToken] = useState('');
 
-	const retrieveToken = async () => {
+	const getUserToken = async () => {
 		try {
-			const newToken = await getToken();
-			setToken(newToken);
+			const userToken = await getToken();
+			if (userToken === null) navigate('login');
+			setToken(userToken);
 		} catch (err) {
 			console.log(err);
 		}
 	};
 
+	const [getCurrentUser, { called, loading, error, data }] = useLazyQuery(
+		CURRENT_USER,
+		{
+			context: { headers: { authorization: 'Bearer ' + token } }
+		}
+	);
 	const [submitApplication, submitApplicationResult] = useMutation(
 		SUBMIT_APPLICATION,
 		{
 			context: { headers: { authorization: 'Bearer ' + token } }
 		}
 	);
+
+	useEffect(() => {
+		if (data && token !== '') getCurrentUser();
+		else if (token === '') getUserToken();
+		else getCurrentUser();
+	}, [token, data]);
+
+	
+
+	useEffect(() => {
+		if (data && !_.isEqual(app, data.currentUser.application)) {
+			const newApp = app;
+			const currentApp = data.currentUser.application;
+			for (const [key, val] of Object.entries(app)) {
+				if (key === 'sponsorData') {
+					for (const [subkey, subval] of Object.entries(newApp.sponsorData)) {
+						newApp[key][subkey] = currentApp[key][subkey];
+					}
+				} else {
+					newApp[key] = currentApp[key];
+				}
+			}
+			setApp({ ...app, ...newApp });
+		}
+	}, [data]);
 
 	const submitApp = async () => {
 		try {
@@ -107,6 +174,7 @@ const ApplicationScreen = props => {
 			});
 			console.log(res.data);
 			if (res.data.submitApplication.submitted)
+				getCurrentUser();
 				props.navigation.navigate('home');
 		} catch (err) {
 			console.log(err);
@@ -134,6 +202,29 @@ const ApplicationScreen = props => {
 		// TODO: check for errors after submission
 		console.log(err);
 	};
+
+	if (!called || loading)
+		return (
+			<View
+				style={StyleSheet.flatten([
+					styles.container,
+					{ backgroundColor: colors.background }
+				])}>
+				<ActivityIndicator />
+			</View>
+		);
+	if (error) {
+		console.log(error);
+		return (
+			<View
+				style={StyleSheet.flatten([
+					styles.container,
+					{ backgroundColor: colors.background }
+				])}>
+				<Text>Uh oh! An Error has occurred!</Text>
+			</View>
+		);
+	}
 
 	let dobInput,
 		phoneNumInput,
@@ -165,6 +256,7 @@ const ApplicationScreen = props => {
 			title: 'Almost There!'
 		}
 	];
+
 	const pages = [
 		<View style={styles.appPage}>
 			<TextInput
@@ -185,6 +277,7 @@ const ApplicationScreen = props => {
 					dobInput = input;
 				}}
 				label='Date of Birth MM/DD/YYYY'
+				value={app.dateOfBirth}
 				render={props => (
 					<TextInputMask
 						{...props}
@@ -214,6 +307,7 @@ const ApplicationScreen = props => {
 				ref={input => {
 					phoneNumInput = input;
 				}}
+				value={app.phoneNumber}
 				render={props => (
 					<TextInputMask
 						{...props}

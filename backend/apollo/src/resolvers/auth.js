@@ -21,7 +21,7 @@ module.exports = {
 					.user({ id: user.id })
 					.application()
 					.sponsorData();
-				currentUser.sponsorData = sponsorData;
+				currentUser.application.sponsorData = sponsorData;
 			} catch (err) {
 				console.log(err);
 			}

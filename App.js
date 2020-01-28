@@ -76,23 +76,25 @@ export default function App(props) {
 async function loadResourcesAsync() {
 	await Promise.all([
 		Font.loadAsync({
-			// This is the font that we are using for our tab bar
 			...Ionicons.font,
-			// We include SpaceMono because we use it in HomeScreen.js. Feel free to
-			// remove this if you are not using it in your app
 			'roboto-mono': require('./assets/fonts/Roboto_Mono/RobotoMono-Regular.ttf'),
 			'roboto-mono-bold': require('./assets/fonts/Roboto_Mono/RobotoMono-Bold.ttf'),
 			montserrat: require('./assets/fonts/Montserrat/Montserrat-Regular.ttf')
 		}),
-		Asset.fromModule(
-			require('./assets/logos/AuburnHacks-1.png')
-		).downloadAsync()
+		Asset.loadAsync([
+			require('./assets/logos/AuburnHacks-1.png'),
+			require('./assets/sponsors/ASCcolorlogos.png'),
+			require('./assets/sponsors/Brooksourcelogo-color.png'),
+			require('./assets/sponsors/IPLogo_White.png'),
+			require('./assets/sponsors/Logo_360_Horizontal_White.png'),
+			require('./assets/sponsors/SiteOne_2c_LS_R_web.png'),
+			require('./assets/sponsors/sticker-mule-logo-light.png'),
+			require('./assets/sponsors/voiceflow-logo-white-full.png')
+		])
 	]);
 }
 
 function handleLoadingError(error) {
-	// In this case, you might want to report the error to your error reporting
-	// service, for example Sentry
 	console.warn(error);
 }
 

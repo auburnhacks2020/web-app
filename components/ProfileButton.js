@@ -78,16 +78,15 @@ const ProfileButton = props => {
 					<View>
 						<Menu.Item
 							onPress={() => {
-								props.navigation.navigate('home');
 								setVisible(false);
+								props.navigation.navigate('home');
 							}}
 							title='Profile'
 						/>
 						<Menu.Item
 							onPress={() => {
-								onSignOut();
-								props.navigation.navigate('countdown');
 								setVisible(false);
+								onSignOut().then(() => props.navigation.navigate('signIn'));
 							}}
 							title='Logout'
 						/>
@@ -96,8 +95,8 @@ const ProfileButton = props => {
 					<View>
 						<Menu.Item
 							onPress={() => {
-								props.navigation.navigate('countdown');
 								setVisible(false);
+								props.navigation.navigate('signIn');
 							}}
 							title='Login'
 						/>
