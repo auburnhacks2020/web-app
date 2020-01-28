@@ -4,12 +4,29 @@ const { sendVerifyEmail } = require('../utils');
 
 module.exports = {
 	Query: {
-		currentUser: (parent, args, { user, prisma }) => {
+		currentUser: async (parent, args, { user, prisma }) => {
 			// this if statement is our authentication check
 			if (!user) {
 				throw new Error('Not Authenticated');
 			}
-			return prisma.user({ id: user.id });
+
+			let currentUser = null;
+			try {
+				currentUser = await prisma.user({ id: user.id });
+
+				const application = await prisma.user({ id: user.id }).application();
+				currentUser.application = application;
+
+				const sponsorData = await prisma
+					.user({ id: user.id })
+					.application()
+					.sponsorData();
+				currentUser.application.sponsorData = sponsorData;
+			} catch (err) {
+				console.log(err);
+			}
+
+			return currentUser;
 		}
 	},
 	Mutation: {
