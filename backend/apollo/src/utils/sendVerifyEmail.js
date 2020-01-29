@@ -56,7 +56,7 @@ const sendVerifyEmail = (toEmail, name) => {
 				url
 			}
 		})
-		.then(console.log)
+		.then(res => console.log(res.response, res.rejected, res.accepted))
 		.catch(console.error);
 };
 

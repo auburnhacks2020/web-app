@@ -83,38 +83,40 @@ const useWindowDimensions = () => {
 	};
 };
 
+const defaultApp = {
+	studentId: '',
+	dateOfBirth: '',
+	phoneNumber: '',
+	gender: '',
+	race: '',
+	languages: [],
+	dietaryRestrictions: [],
+	specialAccomodations: [],
+	shirtSize: '',
+	needTravel: false,
+	emailOptIn: true,
+	acceptCodeOfConduct: false,
+	sponsorData: {
+		major: '',
+		educationLevel: '',
+		school: '',
+		interests: [],
+		experience: 0,
+		hackathonAwards: [],
+		skills: [],
+		gpa: '',
+		aboutYou: '',
+		biggestChallenge: '',
+		resume: ''
+	},
+	sendToSponsors: false
+}
+
 const ApplicationScreen = props => {
 	const { colors } = props.theme;
 	const { width } = useWindowDimensions();
 	const [pageIndex, setPageIndex] = useState(0);
-	const [app, setApp] = useState({
-		studentId: '',
-		dateOfBirth: '',
-		phoneNumber: '',
-		gender: '',
-		race: '',
-		languages: [],
-		dietaryRestrictions: [],
-		specialAccomodations: [],
-		shirtSize: '',
-		needTravel: false,
-		emailOptIn: true,
-		acceptCodeOfConduct: false,
-		sponsorData: {
-			major: '',
-			educationLevel: '',
-			school: '',
-			interests: [],
-			experience: 0,
-			hackathonAwards: [],
-			skills: [],
-			gpa: '',
-			aboutYou: '',
-			biggestChallenge: '',
-			resume: ''
-		},
-		sendToSponsors: false
-	});
+	const [app, setApp] = useState(defaultApp);
 	const [title, setTitle] = useState('');
 
 	const [token, setToken] = useState('');
@@ -151,16 +153,16 @@ const ApplicationScreen = props => {
 	
 
 	useEffect(() => {
-		if (data && !_.isEqual(app, data.currentUser.application)) {
+		const incomingApp = data ? data.currentUser.application : null;
+		if (incomingApp && !_.isEqual(app, incomingApp)) {
 			const newApp = app;
-			const currentApp = data.currentUser.application;
 			for (const [key, val] of Object.entries(app)) {
 				if (key === 'sponsorData') {
 					for (const [subkey, subval] of Object.entries(newApp.sponsorData)) {
-						newApp[key][subkey] = currentApp[key][subkey];
+						newApp[key][subkey] = incomingApp[key][subkey];
 					}
 				} else {
-					newApp[key] = currentApp[key];
+					newApp[key] = incomingApp[key];
 				}
 			}
 			setApp({ ...app, ...newApp });

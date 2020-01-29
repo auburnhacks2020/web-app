@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import PropTypes from 'prop-types';
+import { View, StyleSheet, ScrollView, FlatList } from 'react-native';
 
 import {
 	Text,
@@ -17,7 +16,7 @@ import { ApplicationData } from '../constants';
 import SelectedItem from '../components/SelectedItem';
 
 const Select = props => {
-	const [type, setType] = useState('')
+	const [type, setType] = useState('');
 	const { colors } = props.theme;
 	const [searchText, setSearchText] = useState('');
 	const [data, setData] = useState([]);
@@ -25,10 +24,28 @@ const Select = props => {
 
 	useEffect(() => {
 		if (ApplicationData[props.type] && props.type !== type) {
-			setType(props.type)
+			setType(props.type);
 			setData(ApplicationData[props.type]);
 		}
 	}, [props.type]);
+
+	// useEffect(() => {
+	// 	if (data.length > 0 && (data.length !== ApplicationData[type].length)) {
+	// 		console.log('loading');
+	// 		loadData();
+	// 	}
+	// });
+
+	// const loadData = () => {
+	// 	setTimeout(() => {
+	// 		let hasMore = data.length + 1 < ApplicationData[type].length;
+	// 		setData(oldData => [
+	// 			...oldData,
+	// 			ApplicationData[type].slice(data.length, data.length + 1)
+	// 		]);
+	// 		if (hasMore) loadData();
+	// 	}, 0);
+	// };
 
 	const removeItem = val => {
 		if (props.multiple) {
@@ -105,6 +122,27 @@ const Select = props => {
 					visible={modalVisible}
 					onDismiss={() => setModalVisible(false)}>
 					{props.multiple ? (
+						// <FlatList
+						// 	data={data}
+						// 	keyExtractor={item => item}
+						// 	renderItem={(item, idx) => {
+						// 		return (
+						// 			<View style={styles.item} key={idx}>
+						// 				<RadioButton
+						// 					onPress={() => {
+						// 						let newItems = props.selected;
+						// 						newItems.push(item);
+						// 						props.setSelected(newItems);
+						// 					}}
+						// 					color={colors.primary}
+						// 					value={item}
+						// 					status={isSelected(item) ? 'checked' : 'unchecked'}
+						// 				/>
+						// 				<Text>{item}</Text>
+						// 			</View>
+						// 		);
+						// 	}}
+						// />
 						<ScrollView
 							nestedScrollEnable
 							showsHorizontalScrollIndicator={false}
@@ -126,6 +164,21 @@ const Select = props => {
 							))}
 						</ScrollView>
 					) : (
+						// <FlatList
+						// 	data={data}
+						// 	keyExtractor={item => item}
+						// 	renderItem={item => {
+						// 		<View style={styles.item}>
+						// 			<RadioButton
+						// 				onPress={() => props.setSelected(item)}
+						// 				color={colors.primary}
+						// 				value={item}
+						// 				status={props.selected === item ? 'checked' : 'unchecked'}
+						// 			/>
+						// 			<Text>{item}</Text>
+						// 		</View>;
+						// 	}}
+						// />
 						<ScrollView
 							nestedScrollEnabled
 							showsHorizontalScrollIndicator={false}
@@ -148,8 +201,7 @@ const Select = props => {
 							style={StyleSheet.flatten([
 								styles.searchInput,
 								{
-									backgroundColor: colors.surface,
-									outline: 'none'
+									backgroundColor: colors.surface
 								}
 							])}
 							mode='outlined'
@@ -222,7 +274,7 @@ const styles = StyleSheet.create({
 	},
 	customInput: { flexDirection: 'row', margin: 5, alignItems: 'center' },
 	closeModalButton: {
-		alignSelf: "flex-end",
+		alignSelf: 'flex-end',
 		margin: 10
 	}
 });
