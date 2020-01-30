@@ -16,8 +16,6 @@ module.exports = {
 				throw new Error('Not Authenticated');
 			}
 
-			console.log(user);
-
 			let newApp = applicationForm;
 
 			for (const [key, val] of Object.entries(applicationForm)) {

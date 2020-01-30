@@ -45,7 +45,8 @@ module.exports = {
 				firstName,
 				lastName,
 				email,
-				password: hashedPassword
+				password: hashedPassword,
+				emailVerified: true
 			});
 
 			return user;
