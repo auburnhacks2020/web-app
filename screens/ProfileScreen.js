@@ -5,13 +5,16 @@ import {
 	withTheme,
 	Headline,
 	Button,
-	ActivityIndicator
+	ActivityIndicator,
+	Subheading,
+	Surface
 } from 'react-native-paper';
 import { stylesheet } from '../constants';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { getToken } from '../auth';
 import { gql } from 'apollo-boost';
 import * as WebBrowser from 'expo-web-browser';
+import QRCode from 'react-native-qrcode-svg';
 
 const CURRENT_USER = gql`
 	{
@@ -91,7 +94,8 @@ const ProfileScreen = props => {
 				Thanks for creating an account with AuburnHacks!{'\n'}
 				Follow us on social media for news and updates about the event!
 			</Headline>
-			<View style={Platform.OS === 'web' ? { flexDirection: 'row' } : undefined}>
+			<View
+				style={Platform.OS === 'web' ? { flexDirection: 'row' } : undefined}>
 				<Button
 					style={stylesheet.btn2}
 					onPress={() => {
@@ -125,6 +129,33 @@ const ProfileScreen = props => {
 					</Button>
 				)}
 			</View>
+			{application ? (
+				<View
+					style={{
+						justifyContent: 'center',
+						alignItems: 'center',
+						marginTop: 20
+					}}>
+					<Headline>
+						Bring this QR code along with your ID to check-in!
+					</Headline>
+					<View style={styles.qrSurface}>
+						<QRCode
+							value={application.id}
+							color={colors.primary}
+							backgroundColor={colors.background}
+							size={300}
+						/>
+					</View>
+				</View>
+			) : (
+				<View>
+					<Headline>
+						once you submit your application, your QR code for check-in will
+						appear here!
+					</Headline>
+				</View>
+			)}
 		</View>
 	);
 };
@@ -143,6 +174,12 @@ const styles = StyleSheet.create({
 	},
 	headline: {
 		textAlign: 'center'
+	},
+	qrSurface: {
+		elevation: 10,
+		margin: 20,
+		shadowRadius: 10,
+		shadowColor: 'white'
 	}
 });
 
