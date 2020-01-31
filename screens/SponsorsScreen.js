@@ -21,6 +21,7 @@ import NouLogo from '../assets/sponsors/logo_nousystems_bluebg.svg';
 import JBHuntLogo from '../assets/sponsors/Logo_360_Horizontal.svg';
 import LinodeLogo from '../assets/sponsors/linodeLogo-CYMK-FC.svg';
 import CokeLogo from '../assets/sponsors/coke-logo.svg';
+import MaxLogo from '../assets/sponsors/MAX_SMMS_4c.svg';
 
 const SponsorsScreen = props => {
 	const { colors } = props.theme;
@@ -98,6 +99,11 @@ const SponsorsScreen = props => {
 		{
 			logo: CokeLogo,
 			level: 'bronze',
+			svg: true
+		},
+		{
+			logo: MaxLogo,
+			level: 'silver',
 			svg: true
 		}
 	];

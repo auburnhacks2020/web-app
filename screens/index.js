@@ -7,6 +7,7 @@ import LoginScreen from './LoginScreen';
 import ProfileScreen from './ProfileScreen';
 import AuthLoadingScreen from './AuthLoadingScreen';
 import ApplicationScreen from './ApplicationScreen';
+import ScheduleScreen from './ScheduleScreen'
 
 export {
 	AboutScreen,
@@ -17,5 +18,6 @@ export {
 	LoginScreen,
 	ProfileScreen,
 	AuthLoadingScreen,
-	ApplicationScreen
+	ApplicationScreen,
+	ScheduleScreen
 };
