@@ -93,7 +93,7 @@ export default function SocialScreen() {
 					<DataTable.Row>
 						<DataTable.Cell><Paragraph>Saturday</Paragraph></DataTable.Cell>
 						<DataTable.Cell><Paragraph>6:00 PM</Paragraph></DataTable.Cell>
-						<DataTable.Cell><Paragraph>Tech Talk Jeriel: Kotlin for Java</Paragraph></DataTable.Cell>
+						<DataTable.Cell><Paragraph>Tech Talk: Kotlin for Java</Paragraph></DataTable.Cell>
 						<DataTable.Cell><Paragraph>Workshoop Room 1</Paragraph></DataTable.Cell>
 					</DataTable.Row>
 					<DataTable.Row>
@@ -148,7 +148,7 @@ export default function SocialScreen() {
 						<DataTable.Cell><Paragraph>Sunday</Paragraph></DataTable.Cell>
 						<DataTable.Cell><Paragraph>10:00 AM</Paragraph></DataTable.Cell>
 						<DataTable.Cell><Paragraph>
-							Code Art Processing Workshop: Loading Screen
+							Workshop: Make Art With Code
 						</Paragraph></DataTable.Cell>
 						<DataTable.Cell><Paragraph>Workshop Room 1</Paragraph></DataTable.Cell>
 					</DataTable.Row>
@@ -174,18 +174,6 @@ export default function SocialScreen() {
 						<DataTable.Cell><Paragraph>Sunday</Paragraph></DataTable.Cell>
 						<DataTable.Cell><Paragraph>1:00 PM</Paragraph></DataTable.Cell>
 						<DataTable.Cell><Paragraph>Expo Begins</Paragraph></DataTable.Cell>
-						<DataTable.Cell><Paragraph>Ballroom</Paragraph></DataTable.Cell>
-					</DataTable.Row>
-					<DataTable.Row>
-						<DataTable.Cell><Paragraph>Sunday</Paragraph></DataTable.Cell>
-						<DataTable.Cell><Paragraph>1:00 PM</Paragraph></DataTable.Cell>
-						<DataTable.Cell><Paragraph>Judging Begins</Paragraph></DataTable.Cell>
-						<DataTable.Cell><Paragraph>Ballroom</Paragraph></DataTable.Cell>
-					</DataTable.Row>
-					<DataTable.Row>
-						<DataTable.Cell><Paragraph>Sunday</Paragraph></DataTable.Cell>
-						<DataTable.Cell><Paragraph>2:30 PM</Paragraph></DataTable.Cell>
-						<DataTable.Cell><Paragraph>Judging Ends</Paragraph></DataTable.Cell>
 						<DataTable.Cell><Paragraph>Ballroom</Paragraph></DataTable.Cell>
 					</DataTable.Row>
 					<DataTable.Row>
