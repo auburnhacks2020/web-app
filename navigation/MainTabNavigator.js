@@ -16,7 +16,8 @@ import {
 	LoginScreen,
 	ProfileScreen,
 	AuthLoadingScreen,
-	ApplicationScreen
+	ApplicationScreen,
+	ScheduleScreen
 } from '../screens';
 
 import { ProfileButton } from '../components';
@@ -171,6 +172,9 @@ const createProfileStack = () => {
 					{
 						home: {
 							screen: ProfileScreen
+						},
+						schedule: {
+							screen: ScheduleScreen
 						},
 						application: {
 							screen: ApplicationScreen

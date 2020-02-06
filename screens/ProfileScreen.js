@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, ScrollView, StyleSheet, Platform, Dimensions } from 'react-native';
 import {
 	Text,
 	withTheme,
 	Headline,
 	Button,
-	ActivityIndicator
+	ActivityIndicator,
+	Subheading,
+	Surface
 } from 'react-native-paper';
 import { stylesheet } from '../constants';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { getToken } from '../auth';
 import { gql } from 'apollo-boost';
 import * as WebBrowser from 'expo-web-browser';
+import QRCode from 'react-native-qrcode-svg';
+import { Header, ClearBottomTabsView } from '../components'
 
 const CURRENT_USER = gql`
 	{
@@ -81,23 +85,32 @@ const ProfileScreen = props => {
 	const { firstName, lastName, appComplete, application } = data.currentUser;
 
 	return (
-		<View
-			style={StyleSheet.flatten([
-				styles.container,
-				{ backgroundColor: colors.background }
-			])}>
+		<ScrollView style={stylesheet.container}>
+			<Header showDate={false}/>
 			<Headline style={styles.headline}>
 				Welcome {firstName} {lastName}!{'\n'}
 				Thanks for creating an account with AuburnHacks!{'\n'}
 				Follow us on social media for news and updates about the event!
 			</Headline>
-			<View style={Platform.OS === 'web' ? { flexDirection: 'row' } : undefined}>
+			<View
+				style={
+					Platform.OS === 'web' && (Dimensions.get('window').width > 865)
+						? {
+								justifyContent: 'center',
+								alignItems: 'center',
+								flexDirection: 'row'
+						  }
+						: {
+								justifyContent: 'center',
+								alignItems: 'center'
+						  }
+				}>
 				<Button
 					style={stylesheet.btn2}
 					onPress={() => {
-						navigate('SocialStack');
+						navigate('schedule');
 					}}>
-					Follow Us!
+					Event Schedule
 				</Button>
 				<Button
 					onPress={() => {
@@ -105,6 +118,13 @@ const ProfileScreen = props => {
 					}}
 					style={stylesheet.btn2}>
 					MLH Code of Conduct
+				</Button>
+				<Button
+					style={stylesheet.btn2}
+					onPress={() => {
+						navigate('SocialStack');
+					}}>
+					Follow Us!
 				</Button>
 				{console.log(data)}
 				{application ? (
@@ -125,7 +145,35 @@ const ProfileScreen = props => {
 					</Button>
 				)}
 			</View>
-		</View>
+			{application ? (
+				<View
+					style={{
+						justifyContent: 'center',
+						alignItems: 'center',
+						marginTop: 20
+					}}>
+					<Headline  style={styles.headline}>
+						Bring this QR code along with your ID to check-in!
+					</Headline>
+					<View style={styles.qrSurface}>
+						<QRCode
+							value={application.id}
+							color={colors.primary}
+							backgroundColor={colors.background}
+							size={300}
+						/>
+					</View>
+				</View>
+			) : (
+				<View>
+					<Headline  style={styles.headline}>
+						once you submit your application, your QR code for check-in will
+						appear here!
+					</Headline>
+				</View>
+			)}
+			<ClearBottomTabsView />
+		</ScrollView>
 	);
 };
 
@@ -142,7 +190,14 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	},
 	headline: {
-		textAlign: 'center'
+		textAlign: 'center',
+		margin: 10
+	},
+	qrSurface: {
+		elevation: 10,
+		margin: 20,
+		shadowRadius: 10,
+		shadowColor: 'white'
 	}
 });
 
