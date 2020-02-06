@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
 		color: '#dd550c',
 		fontSize: 48,
 		fontWeight: '700',
+		lineHeight:'1',
 		alignSelf: 'center',
 		marginTop: 15,
 		marginBottom: 15,

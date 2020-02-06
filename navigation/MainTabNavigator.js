@@ -125,6 +125,7 @@ const SocialStack = createStackNavigator(
 	config
 );
 
+
 SocialStack.navigationOptions = {
 	tabBarLabel: 'Social',
 	tabBarIcon: ({ focused }) => (
@@ -155,6 +156,10 @@ const createProfileStack = () => {
 						login: {
 							screen: LoginScreen,
 							path: 'login/:token'
+						},
+						schedule: {
+							screen: ScheduleScreen,
+							path:'schedule/'
 						}
 					},
 					{
@@ -172,9 +177,6 @@ const createProfileStack = () => {
 					{
 						home: {
 							screen: ProfileScreen
-						},
-						schedule: {
-							screen: ScheduleScreen
 						},
 						application: {
 							screen: ApplicationScreen

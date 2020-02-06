@@ -17,11 +17,19 @@ const CountdownScreen = props => {
 			])}>
 			<View style={styles.countdown}>
 				<Headline>Registration is Open!</Headline>
+			</View>
+			<View style={{flexDirection:'row'}}>
 				<Button
 					style={styles.button}
 					mode='contained'
 					onPress={() => props.navigation.navigate('register')}>
 					sign up or sign in
+				</Button>
+				<Button
+					style={styles.button}
+					mode='contained'
+					onPress={() => props.navigation.navigate('schedule')}>
+					Event Schedule
 				</Button>
 			</View>
 		</View>
@@ -32,7 +40,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		justifyContent: 'space-around'
+		justifyContent: 'center'
 	},
 	countdown: {
 		alignItems: 'center'
