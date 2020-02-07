@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, ScrollView, StyleSheet, Platform, Dimensions } from 'react-native';
+import {
+	View,
+	ScrollView,
+	StyleSheet,
+	Platform,
+	Dimensions
+} from 'react-native';
 import {
 	Text,
 	withTheme,
@@ -15,7 +21,7 @@ import { getToken } from '../auth';
 import { gql } from 'apollo-boost';
 import * as WebBrowser from 'expo-web-browser';
 import QRCode from 'react-native-qrcode-svg';
-import { Header, ClearBottomTabsView } from '../components'
+import { Header, ClearBottomTabsView } from '../components';
 
 const CURRENT_USER = gql`
 	{
@@ -86,7 +92,7 @@ const ProfileScreen = props => {
 
 	return (
 		<ScrollView style={stylesheet.container}>
-			<Header showDate={false}/>
+			<Header showDate={false} />
 			<Headline style={styles.headline}>
 				Welcome {firstName} {lastName}!{'\n'}
 				Thanks for creating an account with AuburnHacks!{'\n'}
@@ -94,7 +100,7 @@ const ProfileScreen = props => {
 			</Headline>
 			<View
 				style={
-					Platform.OS === 'web' && (Dimensions.get('window').width > 865)
+					Platform.OS === 'web' && Dimensions.get('window').width > 865
 						? {
 								justifyContent: 'center',
 								alignItems: 'center',
@@ -102,7 +108,8 @@ const ProfileScreen = props => {
 						  }
 						: {
 								justifyContent: 'center',
-								alignItems: 'center'
+								alignItems: 'center',
+								flexDirection: 'column'
 						  }
 				}>
 				<Button
@@ -146,32 +153,35 @@ const ProfileScreen = props => {
 				)}
 			</View>
 			{application ? (
-				<View
-					style={{
-						justifyContent: 'center',
-						alignItems: 'center',
-						marginTop: 20
-					}}>
-					<Headline  style={styles.headline}>
-						Bring this QR code along with your ID to check-in!
-					</Headline>
-					<View style={styles.qrSurface}>
-						<QRCode
-							value={application.id}
-							color={colors.primary}
-							backgroundColor={colors.background}
-							size={300}
-						/>
+				<ScrollView style={stylesheet.container}>
+					<View
+						style={{
+							justifyContent: 'center',
+							alignItems: 'center',
+							marginTop: 20
+						}}>
+						<Headline style={styles.headline}>
+							Bring this QR code along with your ID to check-in!
+						</Headline>
+						<View style={styles.qrSurface}>
+							<QRCode
+								value={application.id}
+								color={colors.primary}
+								backgroundColor={colors.background}
+								size={300}
+							/>
+						</View>
 					</View>
-				</View>
+				</ScrollView>
 			) : (
 				<View>
-					<Headline  style={styles.headline}>
+					<Headline style={styles.headline}>
 						once you submit your application, your QR code for check-in will
 						appear here!
 					</Headline>
 				</View>
 			)}
+			<View style={{ height: 100 }}></View>
 			<ClearBottomTabsView />
 		</ScrollView>
 	);
@@ -191,13 +201,15 @@ const styles = StyleSheet.create({
 	},
 	headline: {
 		textAlign: 'center',
-		margin: 10
+		margin: 10,
+		marginTop: 150
 	},
 	qrSurface: {
 		elevation: 10,
 		margin: 20,
 		shadowRadius: 10,
-		shadowColor: 'white'
+		shadowColor: 'white',
+		marginBottom: 200
 	}
 });
 
