@@ -149,14 +149,14 @@ const createProfileStack = () => {
 							screen: CountdownScreen,
 							path: 'countdown/'
 						},
-						register: {
-							screen: RegisterScreen,
-							path: 'register/'
-						},
-						login: {
-							screen: LoginScreen,
-							path: 'login/:token'
-						},
+						// register: {
+						// 	screen: RegisterScreen,
+						// 	path: 'register/'
+						// },
+						// login: {
+						// 	screen: LoginScreen,
+						// 	path: 'login/:token'
+						// },
 						schedule: {
 							screen: ScheduleScreen,
 							path:'schedule/'
@@ -172,20 +172,20 @@ const createProfileStack = () => {
 				),
 				path: ''
 			},
-			profile: {
-				screen: createStackNavigator(
-					{
-						home: {
-							screen: ProfileScreen
-						},
-						application: {
-							screen: ApplicationScreen
-						}
-					},
-					config
-				),
-				path: ''
-			}
+			// profile: {
+			// 	screen: createStackNavigator(
+			// 		{
+			// 			home: {
+			// 				screen: ProfileScreen
+			// 			},
+			// 			application: {
+			// 				screen: ApplicationScreen
+			// 			}
+			// 		},
+			// 		config
+			// 	),
+			// 	path: ''
+			// }
 		},
 		{
 			navigationOptions: ({ navigation }) => ({
