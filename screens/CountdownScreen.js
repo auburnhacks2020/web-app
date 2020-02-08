@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { withTheme, Text, Headline, Button } from 'react-native-paper';
 import CountDown from 'react-native-countdown-component';
 import { stylesheet } from '../constants';
+import * as WebBrowser from "expo-web-browser";
 
 const CountdownScreen = props => {
 	const { colors, fonts } = props.theme;
@@ -16,14 +17,23 @@ const CountdownScreen = props => {
 				{ backgroundColor: colors.background }
 			])}>
 			<View style={styles.countdown}>
-				<Headline>Registration is Open!</Headline>
+				<Headline style={{textAlign:'center', lineHeight:50}}>
+					We're excited to see you today at 11:00 AM! {'\n'}Just bring what you
+					need to hack and an ID. No QR code is needed.{'\n'}
+					Check the links below for logistics information (parking, etc.) and the schedule! {'\n'}
+					Happy Hacking!
+				</Headline>
 			</View>
-			<View style={{flexDirection:'row'}}>
+			<View style={{ flexDirection: 'row' }}>
 				<Button
 					style={styles.button}
 					mode='contained'
-					onPress={() => props.navigation.navigate('register')}>
-					sign up or sign in
+					onPress={() =>
+						WebBrowser.openBrowserAsync(
+							'https://docs.google.com/document/d/1EVOaN62QlMAmv2AceFyS-1EjEnJTqTlR32uwRr6D4jk/edit?usp=sharing'
+						)
+					}>
+					Logistics Information
 				</Button>
 				<Button
 					style={styles.button}
