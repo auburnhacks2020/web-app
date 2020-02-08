@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
 	View,
 	Image,
@@ -11,6 +11,7 @@ import { Headline, Subheading, Surface } from 'react-native-paper';
 import { fonts } from '../constants';
 
 export default function Header(props) {
+
 	return (
 		<View>
 			<Surface style={styles.surface}>
@@ -22,7 +23,9 @@ export default function Header(props) {
 							style={{ width: 315, height: 250 }}
 							source={require('../assets/images/binarylogo1.0.png')}
 						/>
-						<Subheading style={styles.sub}>February 8-9, 2020</Subheading>
+						{props.showDate === false  ? (
+							null
+						) : <Subheading style={styles.sub}>February 8-9, 2020</Subheading>}
 					</View>
 				</ImageBackground>
 			</Surface>
@@ -38,6 +41,7 @@ const styles = StyleSheet.create({
 		color: '#dd550c',
 		fontSize: 48,
 		fontWeight: '700',
+		lineHeight:'1',
 		alignSelf: 'center',
 		marginTop: 15,
 		marginBottom: 15,
